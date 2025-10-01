@@ -316,6 +316,7 @@ select {
     <button onclick="document.getElementById('importFile').click()">Import JSON</button>
     <button onclick="exportCombat()">Export JSON</button>
     <button onclick="copyInitiativeText()">Copy Text</button>
+    <button onclick="openTab()">Player View</button>
 </div>
 
 <table id="combatTable">
@@ -896,6 +897,11 @@ function resetCombat() {
         currentTurnIndex = 0;
         renderCombatTable();
     }
+}
+
+function openTab() {
+    // should open the ./player-facing.html page in a new tab
+    window.open('./player-facing.html', '_blank');
 }
 
 function nextTurn() {

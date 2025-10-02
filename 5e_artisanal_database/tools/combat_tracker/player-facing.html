@@ -6,7 +6,28 @@
     <title>Combat Tracker - Player View</title>
     <link rel="stylesheet" href="../../css_js/5eadb.css">
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            min-height: 100vh;
+        }
+        .combat-tracker-container {
+            flex: 0 0 auto;
+            padding: 20px;
+            min-width: 400px;
+        }
+        .reference-container {
+            flex: 1;
+            padding: 20px;
+            border-left: 2px solid #ccc;
+            overflow-y: auto;
+            display: none;
+        }
+        .reference-container.visible {
+            display: block;
+        }
         .header { text-align: center; margin-bottom: 20px; }
         .initiative-list { max-width: 400px; margin: 0 auto; }
         .combatant-row { 
@@ -60,31 +81,39 @@
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1 onclick="clearTracker()" style="cursor: pointer;" title="Click to clear tracker and reset">Combat Tracker</h1>
-        <div style="margin: 10px 0;">
-            <label for="roundCounter" style="font-weight: bold; margin-right: 8px;">Round:</label>
-            <input type="number" id="roundCounter" value="1" min="1" max="999"
-                   style="width: 60px; text-align: center; font-size: 16px; font-weight: bold;
-                          border: 1px solid #ccc; border-radius: 4px; padding: 4px;">
+    <div class="combat-tracker-container">
+        <div class="header">
+            <h1 onclick="clearTracker()" style="cursor: pointer;" title="Click to clear tracker and reset">Combat Tracker</h1>
+            <div style="margin: 10px 0;">
+                <label for="roundCounter" style="font-weight: bold; margin-right: 8px;">Round:</label>
+                <input type="number" id="roundCounter" value="1" min="1" max="999"
+                       style="width: 60px; text-align: center; font-size: 16px; font-weight: bold;
+                              border: 1px solid #ccc; border-radius: 4px; padding: 4px;">
+            </div>
         </div>
-    </div>
-    
-    <div class="initiative-list" id="initiativeList">
-        <!-- Combatants will be populated here -->
+
+        <div class="initiative-list" id="initiativeList">
+            <!-- Combatants will be populated here -->
+        </div>
+
+        <center><p id="connectionStatus">Connecting to DM tracker...</p></center>
     </div>
 
-    <center><p id="connectionStatus">Connecting to DM tracker...</p></center>
+    <div class="reference-container" id="referenceContainer">
+        <!-- Reference HTML will be displayed here -->
+    </div>
     <script>
         let combatants = [];
         let currentTurnIndex = 0;
         let previousTurnIndex = -1;
         
-        // Listen for changes from DM tracker
+        // Listen for changes from DM tracker and reference HTML
         window.addEventListener('storage', function(e) {
             if (e.key === 'combatTrackerSync') {
                 const data = JSON.parse(e.newValue || '{}');
                 updateFromDMTracker(data);
+            } else if (e.key === 'playerReferenceHTML') {
+                updateReferenceDisplay(e.newValue);
             }
         });
         
@@ -210,6 +239,19 @@
             statusEl.style.color = status === 'Connected' ? '#4caf50' : '#666';
         }
         
+        // Update reference display
+        function updateReferenceDisplay(htmlContent) {
+            const container = document.getElementById('referenceContainer');
+
+            if (htmlContent && htmlContent.trim() !== '') {
+                container.innerHTML = htmlContent;
+                container.classList.add('visible');
+            } else {
+                container.innerHTML = '';
+                container.classList.remove('visible');
+            }
+        }
+
         // Initial load - check if DM tracker data exists
         function initializePlayerView() {
             const existingData = localStorage.getItem('combatTrackerSync');
@@ -217,6 +259,12 @@
                 updateFromDMTracker(JSON.parse(existingData));
             } else {
                 updateConnectionStatus('Waiting');
+            }
+
+            // Check for existing reference HTML
+            const existingReference = localStorage.getItem('playerReferenceHTML');
+            if (existingReference) {
+                updateReferenceDisplay(existingReference);
             }
         }
         

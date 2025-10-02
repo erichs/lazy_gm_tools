@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player Reference Bookmarklet - Combat Tracker</title>
+    <link rel="stylesheet" href="../../css_js/5eadb.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        .bookmarklet-link {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 18px;
+            margin: 20px 0;
+            cursor: move;
+        }
+        .bookmarklet-link:hover {
+            background-color: #45a049;
+        }
+        .instructions {
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .instructions h3 {
+            margin-top: 0;
+        }
+        .instructions ol {
+            margin: 10px 0;
+            padding-left: 25px;
+        }
+        .instructions li {
+            margin: 8px 0;
+        }
+        code {
+            background-color: #e0e0e0;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        .warning {
+            background-color: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 4px;
+            padding: 12px;
+            margin: 15px 0;
+        }
+        .example {
+            background-color: #e8f5e9;
+            border: 1px solid #4caf50;
+            border-radius: 4px;
+            padding: 12px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div><a href="../../index.html">5e Artisanal Database</a> → <a href="index.html">Combat Tracker</a> → Player Reference Bookmarklet</div>
+    
+    <h1>Player Reference Bookmarklet</h1>
+    
+    <p>This bookmarklet allows you to quickly share rules references from the 5e Artisanal Database with all players at the table by displaying them on the player-facing combat tracker page.</p>
+    
+    <div class="instructions">
+        <h3>How to Install the Bookmarklet:</h3>
+        <ol>
+            <li>Drag the button below to your browser's bookmarks bar:</li>
+        </ol>
+        <center>
+            <a href="javascript:(function(){const body=document.body;if(!body){alert('No body element found on this page.');return;}const bodyClone=body.cloneNode(true);const firstDiv=bodyClone.querySelector('div');if(firstDiv){firstDiv.remove();}const firstP=bodyClone.querySelector('p');if(firstP){firstP.remove();}const filteredHTML=bodyClone.innerHTML;localStorage.setItem('playerReferenceHTML',filteredHTML);alert('Reference content sent to player view!');})();" class="bookmarklet-link">📖 Send to Player View</a>
+        </center>
+        <ol start="2">
+            <li>If your bookmarks bar is not visible, enable it in your browser settings</li>
+            <li>The bookmarklet is now ready to use!</li>
+        </ol>
+    </div>
+    
+    <div class="instructions">
+        <h3>How to Use the Bookmarklet:</h3>
+        <ol>
+            <li>Open the <a href="index.html">Combat Tracker</a> in one browser tab</li>
+            <li>Click the "Player View" button to open the player-facing page in a new tab/window (or on a separate screen)</li>
+            <li>Navigate to any page in the 5e Artisanal Database that you want to share (e.g., a condition, spell, or rule)</li>
+            <li>Click the "📖 Send to Player View" bookmarklet in your bookmarks bar</li>
+            <li>The content will immediately appear on the player-facing page to the right of the combat tracker</li>
+            <li>To clear the reference from the player view, click the "Clear Player Ref" button on the DM-facing Combat Tracker page</li>
+        </ol>
+    </div>
+    
+    <div class="example">
+        <h3>Example Use Case:</h3>
+        <p><strong>Scenario:</strong> A player's character becomes Restrained during combat.</p>
+        <ol>
+            <li>Navigate to the <a href="../../html/5.2 SRD (D&D 2024)/Rules Glossary/restrained.html" target="_blank">Restrained Condition page</a></li>
+            <li>Click the "📖 Send to Player View" bookmarklet</li>
+            <li>All players can now see the Restrained condition effects on the player-facing screen</li>
+            <li>When no longer needed, click "Clear Player Ref" on the DM tracker</li>
+        </ol>
+    </div>
+    
+    <div class="warning">
+        <h3>⚠️ Important Notes:</h3>
+        <ul>
+            <li>The bookmarklet uses localStorage, so the DM tracker and player view must be in the same browser (but can be in different tabs/windows)</li>
+            <li>Each new bookmarklet activation replaces the previous content (only one reference can be displayed at a time)</li>
+            <li>The bookmarklet automatically filters out navigation breadcrumbs and the "Markdown" link</li>
+            <li>This feature works best with pages from the 5e Artisanal Database, but can be used on any webpage</li>
+        </ul>
+    </div>
+    
+    <div class="instructions">
+        <h3>Technical Details:</h3>
+        <p>The bookmarklet performs the following actions:</p>
+        <ol>
+            <li>Clones the current page's <code>&lt;body&gt;</code> element</li>
+            <li>Removes the first <code>&lt;div&gt;</code> element (navigation breadcrumbs)</li>
+            <li>Removes the first <code>&lt;p&gt;</code> element if present (Markdown link)</li>
+            <li>Stores the remaining HTML in localStorage under the key <code>playerReferenceHTML</code></li>
+            <li>The player-facing page listens for changes to this localStorage key and displays the content</li>
+        </ol>
+    </div>
+    
+    <hr>
+    
+    <h2>Alternative: Manual JavaScript Code</h2>
+    <p>If you prefer not to use a bookmarklet, you can manually run this code in the browser console on any page you want to share:</p>
+    
+    <pre style="background-color: #f5f5f5; padding: 15px; border-radius: 4px; overflow-x: auto;"><code>const body = document.body;
+if (!body) {
+    alert('No body element found on this page.');
+} else {
+    const bodyClone = body.cloneNode(true);
+    const firstDiv = bodyClone.querySelector('div');
+    if (firstDiv) {
+        firstDiv.remove();
+    }
+    const firstP = bodyClone.querySelector('p');
+    if (firstP) {
+        firstP.remove();
+    }
+    const filteredHTML = bodyClone.innerHTML;
+    localStorage.setItem('playerReferenceHTML', filteredHTML);
+    alert('Reference content sent to player view!');
+}</code></pre>
+    
+    <hr>
+    
+    <p><a href="index.html">← Back to Combat Tracker</a></p>
+</body>
+</html>
+

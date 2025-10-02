@@ -282,7 +282,7 @@ select {
 <script src="../../monsters/custom/custom_monster_index.js"></script>
 </head>
 <body>
-<div><a href="../../index.html">5e Artisanal Database</a> → Combat Tracker</div>
+<div><a href="../../index.html">5e Artisanal Database</a> → Combat Tracker | <a href="bookmarklet.html">📖 Get Bookmarklet</a></div>
 
 <h1>Combat Tracker</h1>
 
@@ -317,6 +317,7 @@ select {
     <button onclick="exportCombat()">Export JSON</button>
     <button onclick="copyInitiativeText()">Copy Text</button>
     <button onclick="openTab()">Player View</button>
+    <button onclick="clearPlayerReference()">Clear Player Ref</button>
 </div>
 
 <table id="combatTable">
@@ -902,6 +903,11 @@ function resetCombat() {
 function openTab() {
     // should open the ./player-facing.html page in a new tab
     window.open('./player-facing.html', '_blank');
+}
+
+function clearPlayerReference() {
+    localStorage.removeItem('playerReferenceHTML');
+    console.log('Player reference HTML cleared');
 }
 
 function nextTurn() {

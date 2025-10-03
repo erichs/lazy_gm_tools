@@ -361,6 +361,25 @@ const CONDITIONS = {
     'Unconscious': '😴'
 };
 
+// Mapping from condition names to their URL slugs in the 5.2 SRD Rules Glossary
+const CONDITION_URLS = {
+    'Blinded': 'blinded.html',
+    'Charmed': 'charmed.html',
+    'Deafened': 'deafened.html',
+    'Exhaustion': 'exhaustion.html',
+    'Frightened': 'frightened.html',
+    'Grappled': 'grappled.html',
+    'Incapacitated': 'incapacitated.html',
+    'Invisible': 'invisible.html',
+    'Paralyzed': 'paralyzed.html',
+    'Petrified': 'petrified.html',
+    'Poisoned': 'poisoned.html',
+    'Prone': 'prone.html',
+    'Restrained': 'restrained.html',
+    'Stunned': 'stunned.html',
+    'Unconscious': 'unconscious.html'
+};
+
 // Function to sync data to player view
 function syncToPlayerView() {
     const syncData = {
@@ -403,6 +422,21 @@ function removeCondition(combatantId, condition) {
     }
 }
 
+// Handle condition click - shift-click opens reference, normal click removes
+function handleConditionClick(event, combatantId, condition) {
+    if (event.shiftKey) {
+        // Shift-click: open condition reference in new tab
+        const conditionUrl = CONDITION_URLS[condition];
+        if (conditionUrl) {
+            const fullUrl = `../../rules/html/5.2 SRD (D&D 2024)/Rules Glossary/${conditionUrl}`;
+            window.open(fullUrl, '_blank');
+        }
+    } else {
+        // Normal click: remove condition
+        removeCondition(combatantId, condition);
+    }
+}
+
 // Generate conditions display HTML
 function getConditionsDisplay(combatant) {
     if (!combatant.conditions || combatant.conditions.length === 0) {
@@ -410,9 +444,9 @@ function getConditionsDisplay(combatant) {
     }
 
     return combatant.conditions.map(condition =>
-        `<span onclick="removeCondition(${combatant.id}, '${condition}')"
+        `<span onclick="handleConditionClick(event, ${combatant.id}, '${condition}')"
                style="cursor: pointer; margin-right: 4px; font-size: 16px;"
-               title="Click to remove ${condition}">${CONDITIONS[condition]}</span>`
+               title="Click to remove ${condition}, Shift+Click to view reference">${CONDITIONS[condition]}</span>`
     ).join('');
 }
 

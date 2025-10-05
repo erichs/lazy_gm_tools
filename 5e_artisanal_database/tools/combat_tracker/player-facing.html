@@ -283,7 +283,7 @@
                 const conditionsDisplay = getConditionsDisplay(combatant);
 
                 return `
-                    <div class="combatant-row ${isCurrentTurn ? 'current-turn' : ''}">
+                    <div class="combatant-row ${isCurrentTurn ? 'current-turn' : ''}" data-combatant-index="${index}">
                         <div class="combatant-name">
                             <span>${combatant.name}</span>
                             ${healthEmoji ? `<span class="health-status">${healthEmoji}</span>` : ''}
@@ -296,6 +296,75 @@
                     </div>
                 `;
             }).join('');
+
+            // Auto-scroll to ensure active and on-deck combatants are visible
+            scrollToActiveCombatants();
+        }
+
+        function scrollToActiveCombatants() {
+            if (combatants.length === 0) return;
+
+            // Use setTimeout to ensure DOM has updated
+            setTimeout(() => {
+                const container = document.getElementById('initiativeList');
+                const nextTurnIndex = (currentTurnIndex + 1) % combatants.length;
+
+                // Get the active combatant element
+                const activeElement = container.querySelector(`[data-combatant-index="${currentTurnIndex}"]`);
+
+                // Get the on-deck combatant element
+                const onDeckElement = container.querySelector(`[data-combatant-index="${nextTurnIndex}"]`);
+
+                if (!activeElement) return;
+
+                // Special case: Round increment (turn went from last to first)
+                // Scroll to top of page
+                if (currentTurnIndex === 0 && previousTurnIndex === combatants.length - 1) {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    return;
+                }
+
+                // Check if both active and on-deck elements are visible in viewport
+                const viewportHeight = window.innerHeight;
+                const activeRect = activeElement.getBoundingClientRect();
+                const activeVisible = activeRect.top >= 0 && activeRect.bottom <= viewportHeight;
+
+                let onDeckVisible = true; // Default to true if no on-deck element
+                if (onDeckElement) {
+                    const onDeckRect = onDeckElement.getBoundingClientRect();
+                    onDeckVisible = onDeckRect.top >= 0 && onDeckRect.bottom <= viewportHeight;
+                }
+
+                // Only scroll if active or on-deck element is not visible
+                if (!activeVisible || !onDeckVisible) {
+                    // Determine which elements need to be visible
+                    let topElement, bottomElement;
+
+                    if (currentTurnIndex < nextTurnIndex) {
+                        // Normal case: active comes before on-deck
+                        topElement = activeElement;
+                        bottomElement = onDeckElement || activeElement;
+                    } else {
+                        // Wrapped case: on-deck is at top of list, active is at bottom
+                        topElement = onDeckElement || activeElement;
+                        bottomElement = activeElement;
+                    }
+
+                    // Get positions relative to viewport
+                    const topRect = topElement.getBoundingClientRect();
+                    const bottomRect = bottomElement.getBoundingClientRect();
+
+                    const topVisible = topRect.top >= 0 && topRect.bottom <= viewportHeight;
+                    const bottomVisible = bottomRect.top >= 0 && bottomRect.bottom <= viewportHeight;
+
+                    // Scroll to show both elements if possible
+                    if (!bottomVisible) {
+                        bottomElement.scrollIntoView({ behavior: 'smooth', block: 'end' });
+                    } else if (!topVisible) {
+                        topElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            }, 100);
         }
         
         function updateConnectionStatus(status) {

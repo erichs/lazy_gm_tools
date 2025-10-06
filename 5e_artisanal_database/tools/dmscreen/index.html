@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DM Screen</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        #container {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+        }
+
+        .row {
+            display: flex;
+            flex: 1;
+            position: relative;
+        }
+
+        .pane {
+            flex: 1;
+            position: relative;
+            border: 1px solid #333;
+            overflow: hidden;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+
+        .resizer {
+            position: absolute;
+            background: #333;
+            z-index: 10;
+        }
+
+        .resizer:hover {
+            background: #666;
+        }
+
+        .resizer.horizontal {
+            width: 100%;
+            height: 5px;
+            cursor: row-resize;
+            top: -2px;
+        }
+
+        .resizer.vertical {
+            width: 5px;
+            height: 100%;
+            cursor: col-resize;
+            left: -2px;
+        }
+
+        .resizer.active {
+            background: #999;
+        }
+
+        /* Prevent iframe from capturing mouse events during resize */
+        body.resizing iframe {
+            pointer-events: none;
+        }
+
+        /* Fallback message styling */
+        .fallback {
+            display: none;
+            width: 100%;
+            height: 100%;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #1a1a1a;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .fallback h3 {
+            margin-bottom: 10px;
+            color: #4a9eff;
+        }
+
+        .fallback a {
+            color: #4a9eff;
+            text-decoration: none;
+            padding: 8px 16px;
+            border: 1px solid #4a9eff;
+            border-radius: 4px;
+            margin-top: 10px;
+            display: inline-block;
+        }
+
+        .fallback a:hover {
+            background: #4a9eff;
+            color: #1a1a1a;
+        }
+
+        .fallback p {
+            color: #999;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div class="row" id="topRow">
+            <div class="pane" id="topLeft">
+                <iframe src="https://docs.google.com/document/d/1RxPwL7UJ6ChUQ_nb_sc9QlFxjxLXikoUdbW7PEHNQXA/edit?tab=t.0" title="Google Docs"></iframe>
+                <div class="fallback" id="fallback-topLeft">
+                    <h3>Google Docs</h3>
+                    <p>This site cannot be embedded due to security restrictions.</p>
+                    <a href="https://docs.google.com" target="_blank">Open in New Tab</a>
+                    <p style="margin-top: 20px; font-size: 12px;">
+                        Alternative: Use a specific Google Doc URL (e.g., docs.google.com/document/d/YOUR_DOC_ID)
+                    </p>
+                </div>
+            </div>
+            <div class="pane" id="topRight">
+                <div class="resizer vertical" data-direction="vertical" data-pane="topRight"></div>
+                <iframe src="https://open.spotify.com/embed/playlist/0c5uK8JYG37W8usZv0d3ak?utm_source=generator" title="Spotify" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                <div class="fallback" id="fallback-topRight">
+                    <h3>Spotify</h3>
+                    <p>This site cannot be embedded due to security restrictions.</p>
+                    <a href="https://open.spotify.com" target="_blank">Open in New Tab</a>
+                    <p style="margin-top: 20px; font-size: 12px;">
+                        Alternative: Use Spotify embed URLs (e.g., open.spotify.com/embed/playlist/YOUR_PLAYLIST_ID)
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="bottomRow">
+            <div class="resizer horizontal" data-direction="horizontal" data-row="bottomRow"></div>
+            <div class="pane" id="bottomLeft">
+                <iframe src="http://localhost:3000" title="Local Server"></iframe>
+                <div class="fallback" id="fallback-bottomLeft">
+                    <h3>Local Server</h3>
+                    <p>Unable to connect to localhost:3000</p>
+                    <p style="margin-top: 10px; font-size: 12px;">Make sure your local server is running.</p>
+                </div>
+            </div>
+            <div class="pane" id="bottomRight">
+                <div class="resizer vertical" data-direction="vertical" data-pane="bottomRight"></div>
+                <iframe src="../../index.html" title="Database"></iframe>
+                <div class="fallback" id="fallback-bottomRight">
+                    <h3>Database</h3>
+                    <p>Unable to load ../../index.html</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Resizer functionality
+        let isResizing = false;
+        let currentResizer = null;
+        let startX = 0;
+        let startY = 0;
+        let startWidth = 0;
+        let startHeight = 0;
+        let startFlexBasis = 0;
+
+        const resizers = document.querySelectorAll('.resizer');
+
+        resizers.forEach(resizer => {
+            resizer.addEventListener('mousedown', initResize);
+        });
+
+        function initResize(e) {
+            e.preventDefault();
+            isResizing = true;
+            currentResizer = e.target;
+            currentResizer.classList.add('active');
+            document.body.classList.add('resizing');
+
+            startX = e.clientX;
+            startY = e.clientY;
+
+            const direction = currentResizer.dataset.direction;
+
+            if (direction === 'vertical') {
+                const paneId = currentResizer.dataset.pane;
+                const pane = document.getElementById(paneId);
+                startWidth = pane.offsetWidth;
+                const computedStyle = window.getComputedStyle(pane);
+                startFlexBasis = parseFloat(computedStyle.flexBasis) || pane.offsetWidth;
+            } else if (direction === 'horizontal') {
+                const rowId = currentResizer.dataset.row;
+                const row = document.getElementById(rowId);
+                startHeight = row.offsetHeight;
+                const computedStyle = window.getComputedStyle(row);
+                startFlexBasis = parseFloat(computedStyle.flexBasis) || row.offsetHeight;
+            }
+
+            document.addEventListener('mousemove', resize);
+            document.addEventListener('mouseup', stopResize);
+        }
+
+        function resize(e) {
+            if (!isResizing) return;
+
+            const direction = currentResizer.dataset.direction;
+
+            if (direction === 'vertical') {
+                const paneId = currentResizer.dataset.pane;
+                const pane = document.getElementById(paneId);
+                const row = pane.parentElement;
+                
+                const deltaX = e.clientX - startX;
+                const rowWidth = row.offsetWidth;
+                const newWidth = startWidth - deltaX;
+                const newFlexGrow = newWidth / rowWidth;
+                
+                if (newWidth > 100 && newWidth < rowWidth - 100) {
+                    pane.style.flex = `${newFlexGrow} 1 0`;
+                    
+                    // Adjust the sibling pane
+                    const sibling = pane.previousElementSibling || pane.nextElementSibling;
+                    if (sibling && sibling.classList.contains('pane')) {
+                        const siblingWidth = rowWidth - newWidth;
+                        const siblingFlexGrow = siblingWidth / rowWidth;
+                        sibling.style.flex = `${siblingFlexGrow} 1 0`;
+                    }
+                }
+            } else if (direction === 'horizontal') {
+                const rowId = currentResizer.dataset.row;
+                const row = document.getElementById(rowId);
+                const container = row.parentElement;
+                
+                const deltaY = e.clientY - startY;
+                const containerHeight = container.offsetHeight;
+                const newHeight = startHeight - deltaY;
+                const newFlexGrow = newHeight / containerHeight;
+                
+                if (newHeight > 100 && newHeight < containerHeight - 100) {
+                    row.style.flex = `${newFlexGrow} 1 0`;
+                    
+                    // Adjust the sibling row
+                    const sibling = row.previousElementSibling || row.nextElementSibling;
+                    if (sibling && sibling.classList.contains('row')) {
+                        const siblingHeight = containerHeight - newHeight;
+                        const siblingFlexGrow = siblingHeight / containerHeight;
+                        sibling.style.flex = `${siblingFlexGrow} 1 0`;
+                    }
+                }
+            }
+        }
+
+        function stopResize() {
+            if (isResizing) {
+                isResizing = false;
+                currentResizer.classList.remove('active');
+                document.body.classList.remove('resizing');
+                currentResizer = null;
+                document.removeEventListener('mousemove', resize);
+                document.removeEventListener('mouseup', stopResize);
+            }
+        }
+
+        // Prevent text selection during resize
+        document.addEventListener('selectstart', (e) => {
+            if (isResizing) {
+                e.preventDefault();
+            }
+        });
+
+        // Detect iframe load errors and show fallback
+        const iframes = document.querySelectorAll('iframe');
+
+        iframes.forEach((iframe, index) => {
+            const paneId = iframe.parentElement.id;
+            const fallback = document.getElementById(`fallback-${paneId}`);
+
+            // Show fallback after timeout if iframe doesn't load
+            const timeout = setTimeout(() => {
+                // Check if iframe is accessible
+                try {
+                    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                    // If we can access it, it loaded successfully
+                } catch (e) {
+                    // Cross-origin or load error - show fallback
+                    if (fallback) {
+                        iframe.style.display = 'none';
+                        fallback.style.display = 'flex';
+                    }
+                }
+            }, 3000);
+
+            iframe.addEventListener('load', () => {
+                clearTimeout(timeout);
+                // Try to access the iframe content
+                try {
+                    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                    // Successfully loaded
+                } catch (e) {
+                    // Cross-origin restriction - might still be loaded
+                    // Only show fallback if src is blocked
+                    if (e.name === 'SecurityError' && fallback) {
+                        // For known blocked sites, show fallback
+                        const src = iframe.src.toLowerCase();
+                        if (src.includes('docs.google.com') && !src.includes('/document/d/') ||
+                            src.includes('open.spotify.com') && !src.includes('/embed/')) {
+                            iframe.style.display = 'none';
+                            fallback.style.display = 'flex';
+                        }
+                    }
+                }
+            });
+
+            iframe.addEventListener('error', () => {
+                clearTimeout(timeout);
+                if (fallback) {
+                    iframe.style.display = 'none';
+                    fallback.style.display = 'flex';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+

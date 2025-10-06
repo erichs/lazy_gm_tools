@@ -59,13 +59,8 @@
             box-sizing: border-box;
         }
 
-        /* Combat tracker visible by default */
-        .combat-tracker-container {
-            flex: 1 1 0%;
-            display: block;
-        }
-
-        /* Reference and image hidden by default - take NO space */
+        /* All containers hidden by default - take NO space */
+        .combat-tracker-container,
         .reference-container,
         .image-gallery-container {
             flex: 0 0 0%;
@@ -76,18 +71,13 @@
             box-shadow: none;
         }
 
-        /* When visible, panels take equal flex space */
+        /* When visible, panels take equal flex space and restore styling */
         .combat-tracker-container.visible,
         .reference-container.visible,
         .image-gallery-container.visible {
             flex: 1 1 0%;
             min-width: 300px;
             display: block;
-        }
-
-        /* Restore styling for visible reference and image containers */
-        .reference-container.visible,
-        .image-gallery-container.visible {
             padding: 25px;
             border: 1px solid #c8b796;
             box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
@@ -465,22 +455,14 @@
             const imageContainer = document.getElementById('imageGalleryContainer');
             const iframe = document.getElementById('imageGalleryFrame');
 
-            // Check if image gallery should be visible
-            // For Phase 1, we'll always show it if localhost:8080 is available
-            // In later phases, this can be controlled by localStorage preference
-            const shouldShow = true; // Always attempt to show
+            // Image gallery is always visible
+            imageContainer.classList.add('visible');
 
-            if (shouldShow) {
-                imageContainer.classList.add('visible');
-
-                // Add error handler for iframe
-                iframe.onerror = function() {
-                    console.warn('Image gallery iframe failed to load from localhost:8080');
-                    // Could show error message in container instead
-                };
-            } else {
-                imageContainer.classList.remove('visible');
-            }
+            // Add error handler for iframe
+            iframe.onerror = function() {
+                console.warn('Image gallery iframe failed to load from localhost:8080');
+                // Could show error message in container instead
+            };
 
             updateLayout();
         }
@@ -492,12 +474,20 @@
             const referenceContainer = document.getElementById('referenceContainer');
             const imageContainer = document.getElementById('imageGalleryContainer');
 
-            // Combat tracker is always visible (shows "No active combat" when empty)
-            combatContainer.classList.add('visible');
+            // Combat tracker visible only when there are combatants
+            if (combatants.length > 0) {
+                combatContainer.classList.add('visible');
+            } else {
+                combatContainer.classList.remove('visible');
+            }
+
+            // Image gallery is always visible
+            imageContainer.classList.add('visible');
 
             // Debug logging
             console.log('Layout updated:', {
                 combat: combatContainer.classList.contains('visible'),
+                combatants: combatants.length,
                 reference: referenceContainer.classList.contains('visible'),
                 image: imageContainer.classList.contains('visible')
             });

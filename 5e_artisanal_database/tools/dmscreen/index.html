@@ -123,7 +123,7 @@
     <div id="container">
         <div class="row" id="topRow">
             <div class="pane" id="topLeft">
-                <iframe src="https://docs.google.com/document/d/1RxPwL7UJ6ChUQ_nb_sc9QlFxjxLXikoUdbW7PEHNQXA/edit?tab=t.0" title="Google Docs"></iframe>
+                <iframe src="https://docs.google.com/document/d/1RxPwL7UJ6ChUQ_nb_sc9QlFxjxLXikoUdbW7PEHNQXA/edit?tab=t.0" title="Google Docs" allow="clipboard-write"></iframe>
                 <div class="fallback" id="fallback-topLeft">
                     <h3>Google Docs</h3>
                     <p>This site cannot be embedded due to security restrictions.</p>
@@ -177,7 +177,64 @@
         let startHeight = 0;
         let startFlexBasis = 0;
 
+        const STORAGE_KEY = 'dmscreen-layout';
+
         const resizers = document.querySelectorAll('.resizer');
+
+        // Load saved layout on page load
+        function loadLayout() {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (saved) {
+                try {
+                    const layout = JSON.parse(saved);
+
+                    // Restore row sizes
+                    if (layout.topRow) {
+                        document.getElementById('topRow').style.flex = layout.topRow;
+                    }
+                    if (layout.bottomRow) {
+                        document.getElementById('bottomRow').style.flex = layout.bottomRow;
+                    }
+
+                    // Restore pane sizes
+                    if (layout.topLeft) {
+                        document.getElementById('topLeft').style.flex = layout.topLeft;
+                    }
+                    if (layout.topRight) {
+                        document.getElementById('topRight').style.flex = layout.topRight;
+                    }
+                    if (layout.bottomLeft) {
+                        document.getElementById('bottomLeft').style.flex = layout.bottomLeft;
+                    }
+                    if (layout.bottomRight) {
+                        document.getElementById('bottomRight').style.flex = layout.bottomRight;
+                    }
+                } catch (e) {
+                    console.error('Failed to load layout:', e);
+                }
+            }
+        }
+
+        // Save current layout to localStorage
+        function saveLayout() {
+            const layout = {
+                topRow: document.getElementById('topRow').style.flex || '1 1 0',
+                bottomRow: document.getElementById('bottomRow').style.flex || '1 1 0',
+                topLeft: document.getElementById('topLeft').style.flex || '1 1 0',
+                topRight: document.getElementById('topRight').style.flex || '1 1 0',
+                bottomLeft: document.getElementById('bottomLeft').style.flex || '1 1 0',
+                bottomRight: document.getElementById('bottomRight').style.flex || '1 1 0'
+            };
+
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(layout));
+            } catch (e) {
+                console.error('Failed to save layout:', e);
+            }
+        }
+
+        // Load layout when page loads
+        loadLayout();
 
         resizers.forEach(resizer => {
             resizer.addEventListener('mousedown', initResize);
@@ -271,6 +328,9 @@
                 currentResizer = null;
                 document.removeEventListener('mousemove', resize);
                 document.removeEventListener('mouseup', stopResize);
+
+                // Save layout after resize is complete
+                saveLayout();
             }
         }
 

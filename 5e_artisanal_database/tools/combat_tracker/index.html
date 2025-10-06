@@ -301,7 +301,7 @@ select {
             </select>
         </div>
     </div>
-    <input type="number" id="initiativeInput" placeholder="Init" min="0" max="30">
+    <input type="number" id="initiativeInput" placeholder="Init (e.g., 15.5)" min="0" max="30" step="0.1">
     <input type="number" id="maxHpInput" placeholder="Max HP" min="1">
     <input type="number" id="acInput" placeholder="AC" min="1" max="30">
     <input type="number" id="quantityInput" placeholder="Qty" min="1" max="20" value="1" style="width: 50px;">
@@ -683,7 +683,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function addCombatant() {
     const name = document.getElementById('nameInput').value.trim();
-    const initiative = parseInt(document.getElementById('initiativeInput').value) || 0;
+    const initiative = parseFloat(document.getElementById('initiativeInput').value) || 0;
     const maxHp = parseInt(document.getElementById('maxHpInput').value) || null;
     const ac = parseInt(document.getElementById('acInput').value) || null;
     const quantity = parseInt(document.getElementById('quantityInput').value) || 1;
@@ -795,7 +795,7 @@ function renderCombatTable() {
 
         row.innerHTML = `
             <td style="width: 110px; padding: 4px;">${conditionsDropdown}</td>
-            <td><input type="number" value="${combatant.initiative}" onchange="updateInitiative(${combatant.id}, this.value)" class="transparent-input" min="1" max="30"></td>
+            <td><input type="number" value="${combatant.initiative}" onchange="updateInitiative(${combatant.id}, this.value)" class="transparent-input" min="0" max="30" step="0.1"></td>
             <td style="position: relative; padding-right: 100px;">
                 <div style="display: flex; align-items: center; height: 100%;">
                     <input type="text" value="${combatant.name}" onchange="updateName(${combatant.id}, this.value)" class="transparent-input" style="flex: 1;">
@@ -871,22 +871,22 @@ function updateName(id, newName) {
 function updateInitiative(id, newInitiative) {
     const combatant = combatants.find(c => c.id === id);
     if (combatant) {
-        const initiative = parseInt(newInitiative);
-        if (!isNaN(initiative) && initiative >= 1 && initiative <= 30) {
+        const initiative = parseFloat(newInitiative);
+        if (!isNaN(initiative) && initiative >= 0 && initiative <= 30) {
             combatant.initiative = initiative;
-            
+
             // Find the current combatant before resorting
             const currentCombatant = combatants[currentTurnIndex];
-            
+
             // Resort the list
             sortCombatantsByInitiative();
-            
+
             // Find where the current combatant ended up after resorting
             if (currentCombatant) {
                 currentTurnIndex = combatants.findIndex(c => c.id === currentCombatant.id);
                 if (currentTurnIndex === -1) currentTurnIndex = 0;
             }
-            
+
             renderCombatTable();
         }
     }

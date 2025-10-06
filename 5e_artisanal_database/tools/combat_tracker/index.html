@@ -687,30 +687,33 @@ function addCombatant() {
     const maxHp = parseInt(document.getElementById('maxHpInput').value) || null;
     const ac = parseInt(document.getElementById('acInput').value) || null;
     const quantity = parseInt(document.getElementById('quantityInput').value) || 1;
-    
+
     if (!name) {
         alert('Please fill in Name.');
         return;
     }
-    
+
     if (quantity < 1 || quantity > 20) {
         alert('Quantity must be between 1 and 20.');
         return;
     }
-    
+
+    // Store reference to current combatant before adding new ones
+    const currentCombatant = combatants.length > 0 ? combatants[currentTurnIndex] : null;
+
     // Get existing count for this monster type
     const existingCount = combatants.filter(c => c.name.startsWith(name)).length;
-    
+
     // Add multiple combatants
     for (let i = 0; i < quantity; i++) {
         let finalName = name;
-        
+
         // If adding multiple, or if name already exists, add suffix
         if (quantity > 1 || existingCount > 0) {
             const suffix = String.fromCharCode(65 + existingCount + i);
             finalName = `${name} ${suffix}`;
         }
-        
+
         const combatant = {
             id: Date.now() + i,
             name: finalName,
@@ -721,14 +724,21 @@ function addCombatant() {
             originalMonsterName: window.selectedMonsterInfo ? window.selectedMonsterInfo.originalName : name,
             monsterSource: window.selectedMonsterInfo ? window.selectedMonsterInfo.source : null
         };
-        
+
         combatants.push(combatant);
     }
-    
+
     sortCombatantsByInitiative();
+
+    // Find where the current combatant ended up after sorting
+    if (currentCombatant) {
+        currentTurnIndex = combatants.findIndex(c => c.id === currentCombatant.id);
+        if (currentTurnIndex === -1) currentTurnIndex = 0;
+    }
+
     renderCombatTable();
     clearInputs();
-    
+
     // Clear the selected monster info after adding
     window.selectedMonsterInfo = null;
 }
@@ -915,13 +925,28 @@ function setMaxHp(id, value) {
 function removeCombatant(id) {
     const index = combatants.findIndex(c => c.id === id);
     if (index !== -1) {
+        // Store current combatant before removal
+        const currentCombatant = combatants[currentTurnIndex];
+
+        // Check if we're removing the active combatant
+        const removingActiveCombatant = (index === currentTurnIndex);
+
         combatants.splice(index, 1);
-        
-        // Adjust current turn index if necessary
-        if (currentTurnIndex >= combatants.length) {
+
+        if (combatants.length === 0) {
             currentTurnIndex = 0;
+        } else if (removingActiveCombatant) {
+            // If we removed the active combatant, keep the same index
+            // (next person in line takes their turn)
+            if (currentTurnIndex >= combatants.length) {
+                currentTurnIndex = 0; // Wrap around if needed
+            }
+        } else {
+            // Find where the current combatant ended up after removal
+            currentTurnIndex = combatants.findIndex(c => c.id === currentCombatant.id);
+            if (currentTurnIndex === -1) currentTurnIndex = 0;
         }
-        
+
         renderCombatTable();
     }
 }
@@ -1042,13 +1067,13 @@ document.addEventListener('keypress', function(event) {
 function importCombatFromJSON(jsonString) {
     try {
         const combatData = JSON.parse(jsonString);
-        
+
         // Validate the data structure
         if (!combatData.combatants || !Array.isArray(combatData.combatants)) {
             console.error('Invalid combat file format.');
             return false;
         }
-        
+
         // Validate each combatant has required fields
         for (const combatant of combatData.combatants) {
             if (!combatant.name || typeof combatant.initiative !== 'number' || !combatant.id) {
@@ -1056,29 +1081,35 @@ function importCombatFromJSON(jsonString) {
                 return false;
             }
         }
-        
+
+        // Store reference to current combatant before import
+        const currentCombatant = combatants.length > 0 ? combatants[currentTurnIndex] : null;
+
         // Import the data - append to existing combatants instead of replacing
         const newCombatants = combatData.combatants;
-        
+
         // Generate new IDs for imported combatants to avoid conflicts
         newCombatants.forEach(combatant => {
             combatant.id = Date.now() + Math.random();
         });
-        
+
         // Add new combatants to existing list
         combatants.push(...newCombatants);
-        
+
         // Resort by initiative
         sortCombatantsByInitiative();
-        
-        // Keep current turn index if we had combatants, otherwise start fresh
-        if (combatants.length > 0 && currentTurnIndex >= combatants.length) {
+
+        // Find where the current combatant ended up after sorting
+        if (currentCombatant) {
+            currentTurnIndex = combatants.findIndex(c => c.id === currentCombatant.id);
+            if (currentTurnIndex === -1) currentTurnIndex = 0;
+        } else if (combatants.length > 0 && currentTurnIndex >= combatants.length) {
             currentTurnIndex = 0;
         }
-        
+
         renderCombatTable();
         return true;
-        
+
     } catch (error) {
         console.error('Error parsing combat JSON:', error);
         return false;

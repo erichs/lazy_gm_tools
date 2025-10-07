@@ -117,6 +117,63 @@
             font-size: 14px;
             margin-top: 10px;
         }
+
+        /* Toolbar styling */
+        .toolbar {
+            height: 25px;
+            background: #2a2a2a;
+            border-bottom: 1px solid #444;
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+            gap: 15px;
+            flex-shrink: 0;
+            font-size: 12px;
+            color: #fff;
+        }
+
+        .toolbar label {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .toolbar input[type="checkbox"] {
+            cursor: pointer;
+        }
+
+        .toolbar button {
+            background: #4a9eff;
+            color: #fff;
+            border: none;
+            padding: 2px 8px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 11px;
+            height: 20px;
+            line-height: 1;
+        }
+
+        .toolbar button:hover {
+            background: #6bb0ff;
+        }
+
+        .toolbar button:active {
+            background: #3a8eef;
+        }
+
+        /* Make pane use flexbox to accommodate toolbar */
+        .pane {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pane iframe {
+            flex: 1;
+            min-height: 0;
+        }
     </style>
 </head>
 <body>
@@ -158,10 +215,18 @@
             </div>
             <div class="pane" id="bottomRight">
                 <div class="resizer vertical" data-direction="vertical" data-pane="bottomRight"></div>
-                <iframe src="../../index.html" title="Database"></iframe>
+                <div class="toolbar">
+                    <label>
+                        <input type="checkbox" id="openInNewTab" checked>
+                        <span>Open in new tab</span>
+                    </label>
+                    <button id="addToPlayerDashboard">Add to Player Dashboard</button>
+                </div>
+                <iframe src="http://localhost:3000/a5edb" title="Database" id="databaseIframe"></iframe>
                 <div class="fallback" id="fallback-bottomRight">
                     <h3>Database</h3>
-                    <p>Unable to load ../../index.html</p>
+                    <p>Unable to load database from localhost:3000/a5edb</p>
+                    <p style="margin-top: 10px; font-size: 12px;">Make sure the lorecat server is running.</p>
                 </div>
             </div>
         </div>
@@ -238,6 +303,131 @@
 
         resizers.forEach(resizer => {
             resizer.addEventListener('mousedown', initResize);
+        });
+
+        // Toolbar functionality for database iframe
+        const databaseIframe = document.getElementById('databaseIframe');
+        const openInNewTabCheckbox = document.getElementById('openInNewTab');
+        const addToPlayerDashboardBtn = document.getElementById('addToPlayerDashboard');
+
+        let iframeAccessible = false;
+
+        // Load saved checkbox state
+        const savedCheckboxState = localStorage.getItem('dmscreen-openInNewTab');
+        if (savedCheckboxState !== null) {
+            openInNewTabCheckbox.checked = savedCheckboxState === 'true';
+        }
+
+        // Check if iframe is accessible (same-origin)
+        function checkIframeAccess() {
+            try {
+                const iframeDoc = databaseIframe.contentDocument || databaseIframe.contentWindow.document;
+                if (iframeDoc) {
+                    iframeAccessible = true;
+                    return true;
+                }
+            } catch (e) {
+                iframeAccessible = false;
+                console.warn('Iframe not accessible. You may need to serve this page via HTTP server (e.g., python -m http.server) instead of opening as file://');
+            }
+            return false;
+        }
+
+        // Handle "Open in new tab" checkbox
+        openInNewTabCheckbox.addEventListener('change', function() {
+            localStorage.setItem('dmscreen-openInNewTab', this.checked);
+            if (iframeAccessible) {
+                updateIframeLinks();
+            }
+        });
+
+        // Update iframe links based on checkbox state
+        function updateIframeLinks() {
+            if (!checkIframeAccess()) return;
+
+            try {
+                const iframeDoc = databaseIframe.contentDocument || databaseIframe.contentWindow.document;
+                const links = iframeDoc.querySelectorAll('a');
+
+                links.forEach(link => {
+                    if (openInNewTabCheckbox.checked) {
+                        link.setAttribute('target', '_blank');
+                    } else {
+                        // Remove target attribute to open in same frame
+                        link.removeAttribute('target');
+                        // Also ensure it opens in the iframe, not parent
+                        link.setAttribute('target', '_self');
+                    }
+                });
+            } catch (e) {
+                // Silently fail if we can't access iframe
+                iframeAccessible = false;
+            }
+        }
+
+        // Apply link settings when iframe loads
+        databaseIframe.addEventListener('load', function() {
+            // Check if we can access the iframe
+            if (!checkIframeAccess()) {
+                console.warn('⚠️ DM Screen Toolbar: Cannot control iframe links due to cross-origin restrictions.');
+                console.warn('💡 Solution: Run a local HTTP server instead of opening file:// directly');
+                console.warn('   Example: cd to the repo root and run: python3 -m http.server 8000');
+                console.warn('   Then open: http://localhost:8000/5e_artisanal_database/tools/dmscreen/');
+                return;
+            }
+
+            updateIframeLinks();
+
+            // Also watch for DOM changes in case links are added dynamically
+            try {
+                const iframeDoc = databaseIframe.contentDocument || databaseIframe.contentWindow.document;
+                const observer = new MutationObserver(function(mutations) {
+                    updateIframeLinks();
+                });
+
+                observer.observe(iframeDoc.body, {
+                    childList: true,
+                    subtree: true
+                });
+            } catch (e) {
+                // Silently fail
+            }
+        });
+
+        // Handle "Add to Player Dashboard" button
+        addToPlayerDashboardBtn.addEventListener('click', function() {
+            if (!checkIframeAccess()) {
+                alert('⚠️ Cannot access iframe content due to cross-origin restrictions.\n\n💡 Solution: Run a local HTTP server:\n\n1. Open terminal in repo root\n2. Run: python3 -m http.server 8000\n3. Open: http://localhost:8000/5e_artisanal_database/tools/dmscreen/');
+                return;
+            }
+
+            try {
+                const iframeWindow = databaseIframe.contentWindow;
+                const iframeDoc = databaseIframe.contentDocument || iframeWindow.document;
+
+                // Execute the bookmarklet code in the iframe context
+                const body = iframeDoc.body;
+                if (!body) {
+                    alert('No body element found on this page.');
+                    return;
+                }
+
+                const bodyClone = body.cloneNode(true);
+                const firstDiv = bodyClone.querySelector('div');
+                if (firstDiv) {
+                    firstDiv.remove();
+                }
+                const firstP = bodyClone.querySelector('p');
+                if (firstP) {
+                    firstP.remove();
+                }
+                const filteredHTML = bodyClone.innerHTML;
+                localStorage.setItem('playerReferenceHTML', filteredHTML);
+                alert('Reference content sent to player view!');
+            } catch (e) {
+                console.error('Cannot execute bookmarklet in iframe:', e);
+                alert('Error: Cannot access iframe content. Make sure the database is loaded.');
+            }
         });
 
         function initResize(e) {

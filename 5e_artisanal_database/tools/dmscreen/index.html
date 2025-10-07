@@ -221,6 +221,8 @@
                         <span>Open in new tab</span>
                     </label>
                     <button id="addToPlayerDashboard">Add to Player Dashboard</button>
+                    <button id="combatTrackerBtn">Combat Tracker</button>
+                    <button id="playerViewBtn">Player View</button>
                 </div>
                 <iframe src="http://localhost:3000/a5edb" title="Database" id="databaseIframe"></iframe>
                 <div class="fallback" id="fallback-bottomRight">
@@ -309,6 +311,8 @@
         const databaseIframe = document.getElementById('databaseIframe');
         const openInNewTabCheckbox = document.getElementById('openInNewTab');
         const addToPlayerDashboardBtn = document.getElementById('addToPlayerDashboard');
+        const combatTrackerBtn = document.getElementById('combatTrackerBtn');
+        const playerViewBtn = document.getElementById('playerViewBtn');
 
         let iframeAccessible = false;
 
@@ -370,9 +374,7 @@
             // Check if we can access the iframe
             if (!checkIframeAccess()) {
                 console.warn('⚠️ DM Screen Toolbar: Cannot control iframe links due to cross-origin restrictions.');
-                console.warn('💡 Solution: Run a local HTTP server instead of opening file:// directly');
-                console.warn('   Example: cd to the repo root and run: python3 -m http.server 8000');
-                console.warn('   Then open: http://localhost:8000/5e_artisanal_database/tools/dmscreen/');
+                console.warn('💡 Solution: Load DM Screen via lorecat server at http://localhost:3000/a5edb/tools/dmscreen/');
                 return;
             }
 
@@ -381,16 +383,20 @@
             // Also watch for DOM changes in case links are added dynamically
             try {
                 const iframeDoc = databaseIframe.contentDocument || databaseIframe.contentWindow.document;
-                const observer = new MutationObserver(function(mutations) {
-                    updateIframeLinks();
-                });
 
-                observer.observe(iframeDoc.body, {
-                    childList: true,
-                    subtree: true
-                });
+                // Make sure we have a valid body element before observing
+                if (iframeDoc && iframeDoc.body) {
+                    const observer = new MutationObserver(function(mutations) {
+                        updateIframeLinks();
+                    });
+
+                    observer.observe(iframeDoc.body, {
+                        childList: true,
+                        subtree: true
+                    });
+                }
             } catch (e) {
-                // Silently fail
+                // Silently fail - iframe might not be accessible
             }
         });
 
@@ -428,6 +434,16 @@
                 console.error('Cannot execute bookmarklet in iframe:', e);
                 alert('Error: Cannot access iframe content. Make sure the database is loaded.');
             }
+        });
+
+        // Handle "Combat Tracker" button - navigate iframe to combat tracker
+        combatTrackerBtn.addEventListener('click', function() {
+            databaseIframe.src = 'http://localhost:3000/a5edb/tools/combat_tracker';
+        });
+
+        // Handle "Player View" button - open in new tab with correct URL
+        playerViewBtn.addEventListener('click', function() {
+            window.open('http://localhost:3000/a5edb/tools/combat_tracker/player-facing.html', '_blank');
         });
 
         function initResize(e) {
@@ -537,6 +553,11 @@
         iframes.forEach((iframe, index) => {
             const paneId = iframe.parentElement.id;
             const fallback = document.getElementById(`fallback-${paneId}`);
+
+            // Skip the database iframe - it's handled separately
+            if (iframe.id === 'databaseIframe') {
+                return;
+            }
 
             // Show fallback after timeout if iframe doesn't load
             const timeout = setTimeout(() => {

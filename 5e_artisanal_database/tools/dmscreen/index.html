@@ -438,12 +438,12 @@
 
         // Handle "Combat Tracker" button - navigate iframe to combat tracker
         combatTrackerBtn.addEventListener('click', function() {
-            databaseIframe.src = 'http://localhost:3000/a5edb/tools/combat_tracker';
+            databaseIframe.src = '../../../a5edb/tools/combat_tracker';
         });
 
         // Handle "Player View" button - open in new tab with correct URL
         playerViewBtn.addEventListener('click', function() {
-            window.open('http://localhost:3000/a5edb/tools/combat_tracker/player-facing.html', '_blank');
+            window.open('../../../a5edb/tools/combat_tracker/player-facing.html', '_blank');
         });
 
         function initResize(e) {

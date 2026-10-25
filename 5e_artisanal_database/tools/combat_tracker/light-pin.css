@@ -1,0 +1,126 @@
+/* Pin the DM combat tracker to the light palette.
+   Upstream's 5eadb.css switches to its dark palette when the system is in dark
+   mode; this restores the light values for this page only. They are copied from
+   the first :root block of css_js/5eadb.css; re-copy them if upstream changes it. */
+@media (prefers-color-scheme: dark) {
+:root {
+    /* Opt out of Chrome's Auto Dark Theme (force-dark), which blackens
+       form controls (filter selects/inputs/checkboxes) into unreadable
+       black blocks. The 'only' keyword tells Chrome this page manages its
+       own color scheme and must not be adjusted. In dark scheme the query
+       block below declares 'only dark' and matches the user's OS setting. */
+    color-scheme: only light;
+
+    /* Background colors */
+    --bg-body: #fff;
+    --bg-surface: #f8f8f8;
+    --bg-surface-alt: #f9f9f9;
+    --bg-table-stripe: #ececec;
+    --bg-table-row-hover: #f0f0f0;
+    --bg-input: #fff;
+    --bg-button: #f9f9f9;
+    --bg-button-hover: #e9e9e9;
+    --bg-button-secondary: #444;
+    --bg-button-secondary-hover: #333;
+    --bg-table-header: #f0f0f0;
+    --bg-filter-container: #f8f8f8;
+    --bg-filter-header-hover: #e8e8e8;
+    --bg-filter-item: #fff;
+    --bg-filter-item-hover: #f0f0f0;
+    --bg-filter-count: #f0f0f0;
+    --bg-dropdown: #fff;
+    --bg-dropdown-hover: #f0f0f0;
+    --bg-dropdown-selected: #e0e0e0;
+    --bg-current-turn: #d0d0d0;
+    --bg-ability-card: #f9f9f9;
+    --bg-controls: #f9f9f9;
+    --bg-results: #f8f8f8;
+    --bg-remove-btn: #f44336;
+    --bg-remove-btn-hover: #da190b;
+    --bg-remove-btn-alt: #d9534f;
+    --bg-remove-btn-alt-hover: #c9302c;
+    --bg-search-btn: #f8f9fa;
+    --bg-search-btn-hover: #f1f3f4;
+    --bg-ability-btn: #444;
+    --bg-ability-btn-hover: #222;
+    --bg-ability-btn-disabled: #aaa;
+    --bg-add-btn: #777;
+    --bg-add-btn-hover: #555;
+    --bg-reset-btn: #666;
+    --bg-reset-btn-hover: #444;
+    --bg-dice: #f9f9f9;
+    --bg-dice-hover: #e9e9e9;
+    --bg-history: #fff;
+
+    /* Text colors */
+    --text-body: #000;
+    --text-heading: #000;
+    --text-muted: #666;
+    --text-link: #333;
+    --text-link-hover: #666;
+    --text-button: #3c4043;
+    --text-button-hover: #202124;
+    --text-button-secondary: #fff;
+    --text-filter-section: #555;
+    --text-label: #000;
+    --text-input: #000;
+    --text-placeholder: #888;
+
+    /* Border colors */
+    --border-color: #ccc;
+    --border-color-light: #ddd;
+    --border-color-strong: #000;
+    --border-color-input: #ccc;
+    --border-color-input-focus: #888;
+    --border-color-button: #ccc;
+    --border-color-search-btn: #dadce0;
+    --border-color-table: #000;
+    --border-color-result: #ddd;
+    --border-color-section: #ccc;
+    --border-color-ability: #ccc;
+    --border-color-ability-score: #666;
+    --border-color-controls: #ccc;
+    --border-color-dice: #000;
+
+    /* Accent / highlight */
+    --highlight-bg: #ffff99;
+    --highlight-text: inherit;
+
+    /* Form controls: explicit colors so UAs can't guess a mismatched scheme.
+       (Checkbox accent-color is light-scheme blue; theme files override.) */
+    accent-color: #005a87;
+
+    /* Difficulty colors */
+    --difficulty-easy: green;
+    --difficulty-medium: orange;
+    --difficulty-hard: red;
+    --difficulty-deadly: darkred;
+    --difficulty-warning: #DAA520;
+
+    /* Fonts */
+    --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-heading: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-mono: 'SF Mono', 'Cascadia Code', 'JetBrains Mono', monospace;
+    --font-size-base: 20px;
+    --font-size-small: 14px;
+    --font-size-large: 20px;
+    --font-size-h1: 2em;
+    --line-height: 1.5;
+
+    /* Spacing */
+    --padding-page: 10px;
+    --padding-card: 10px;
+    --padding-input: 8px;
+    --border-radius: 4px;
+    --border-radius-sm: 3px;
+
+    /* Shadows */
+    --shadow-button-hover: 0 1px 1px rgba(0,0,0,.1);
+
+    /* Misc */
+    --bg-texture: none;
+    --heading-decoration: none;
+    --heading-font-variant: normal;
+    --heading-letter-spacing: normal;
+}
+}

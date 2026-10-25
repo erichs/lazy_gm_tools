@@ -1,4 +1,4 @@
-/* Pin the DM combat tracker to the light palette.
+/* Pin the DM combat tracker to the light palette (its default; see ?theme in index.html).
    Upstream's 5eadb.css switches to its dark palette when the system is in dark
    mode; this restores the light values for this page only. They are copied from
    the first :root block of css_js/5eadb.css; re-copy them if upstream changes it. */

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>Combat Tracker - Player View</title>
+    <link rel="stylesheet" href="../../css_js/5eadb.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,700;1,400&family=MedievalSharp&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- Adventurer's Journal Theme --- */
+
+        html {
+            box-sizing: border-box;
+            width: 100%;
+            height: 100%;
+        }
+
+        *, *:before, *:after {
+            box-sizing: inherit;
+        }
+
+        body {
+            background-color: #383025;
+            background-image: url('https://www.transparenttextures.com/patterns/old-paper.png');
+            font-family: 'EB Garamond', serif;
+            color: #3d2b1f;
+            margin: 0;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 20px;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+        }
+
+        /* Combat tracker - 33% width */
+        .combat-tracker-container {
+            background-color: #fdf5e6;
+            padding: 25px;
+            border: 1px solid #c8b796;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
+            border-radius: 3px;
+            overflow-y: auto;
+        }
+
+        /* Owlbear iframe - 66% width */
+        .owlbear-container {
+            background-color: #fdf5e6;
+            border: 1px solid #c8b796;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .owlbear-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Header styling */
+        .header h1 {
+            font-family: 'MedievalSharp', cursive;
+            font-size: 22px;
+            color: #5a2d0c;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .initiative-list {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        /* Individual combatant row styling */
+        .combatant-row {
+            padding: 12px;
+            margin: 0;
+            border: none;
+            border-bottom: 1px dashed #c8b796;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s ease;
+        }
+        .initiative-list > div:last-child {
+             border-bottom: none;
+        }
+
+        /* Burnt Paper Effect for current turn */
+        .current-turn {
+            background-color: #f5eeda;
+            box-shadow: inset 0 0 10px 3px #c78d08;
+            margin: 8px -16px;
+            padding: 12px 16px;
+            font-weight: bold;
+            border-radius: 6px;
+        }
+
+        .current-turn .status-indicator {
+            font-weight: bold;
+            color: #cc1a74;
+            background-color: transparent;
+        }
+
+        /* Initiative number */
+        .initiative-number {
+            font-size: 20px;
+            font-weight: bold;
+            color: #5a2d0c;
+            margin-right: 12px;
+        }
+
+        .combatant-name {
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .health-status, .conditions {
+            font-size: 18px;
+            line-height: 1;
+        }
+
+        .status-indicator {
+            padding: 0;
+            border-radius: 0;
+            font-size: 16px;
+            font-weight: bold;
+            font-style: italic;
+            color: #665a48;
+            background-color: transparent;
+        }
+
+        .current-turn .status-indicator {
+            font-weight: bold;
+            color: #8a2be2;
+            background-color: transparent;
+        }
+
+        .up-next-indicator {
+            font-weight: bold !important;
+            font-style: italic !important;
+            color: #006400 !important;
+            background-color: transparent !important;
+        }
+
+        /* Round counter styling */
+        #roundCounter {
+            width: 60px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            font-family: 'EB Garamond', serif;
+            color: #3d2b1f;
+            background-color: #fdf5e6;
+            border: none;
+            border-bottom: 2px solid #c8b796;
+            padding: 4px;
+        }
+        #roundCounter:focus {
+            outline: none;
+            border-bottom-color: #8a2be2;
+        }
+
+        /* Connection Status */
+        #connectionStatus {
+            font-style: italic;
+            color: #665a48;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="combat-tracker-container" id="combatTrackerContainer">
+        <div class="header">
+            <h1 onclick="clearTracker()" style="cursor: pointer;" title="Click to clear tracker and reset">Combat Tracker</h1>
+            <div style="margin: 10px 0;">
+                <label for="roundCounter" style="font-weight: bold; margin-right: 8px; font-family: 'MedievalSharp', cursive; font-size: 18px;">Round:</label>
+                <input type="number" id="roundCounter" value="1" min="1" max="999">
+            </div>
+        </div>
+
+        <div class="initiative-list" id="initiativeList">
+            </div>
+
+        <center><p id="connectionStatus">Connecting to DM tracker...</p></center>
+    </div>
+
+    <div class="owlbear-container">
+        <iframe
+            src="https://www.owlbear.rodeo/room/iysXTHMcp3ag/The%20Split%20Spit?presentation=true"
+            allow="fullscreen"
+            title="Owlbear Rodeo">
+        </iframe>
+    </div>
+
+    <script>
+        let combatants = [];
+        let currentTurnIndex = 0;
+        let previousTurnIndex = -1;
+
+        // Listen for changes from DM tracker
+        window.addEventListener('storage', function(e) {
+            if (e.key === 'combatTrackerSync') {
+                const data = JSON.parse(e.newValue || '{}');
+                updateFromDMTracker(data);
+            }
+        });
+
+        function updateFromDMTracker(data) {
+            if (data.combatants && Array.isArray(data.combatants)) {
+                combatants = data.combatants;
+
+                const newTurnIndex = data.currentTurnIndex || 0;
+
+                // Check for round transition (turn went from last to first)
+                if (combatants.length > 0 &&
+                    currentTurnIndex === combatants.length - 1 &&
+                    newTurnIndex === 0) {
+                    incrementRound();
+                }
+
+                previousTurnIndex = currentTurnIndex;
+                currentTurnIndex = newTurnIndex;
+
+                renderInitiativeList();
+                updateConnectionStatus('Connected');
+            }
+        }
+
+        function incrementRound() {
+            const roundInput = document.getElementById('roundCounter');
+            const currentRound = parseInt(roundInput.value) || 1;
+            roundInput.value = currentRound + 1;
+        }
+
+        function getHealthStatusEmoji(combatant) {
+            if (!combatant.maxHp || combatant.maxHp <= 0) return '';
+            const hpPercent = (combatant.currentHp / combatant.maxHp) * 100;
+            if (hpPercent >= 100) return '';
+            else if (hpPercent <= 0) return '💀';
+            else if (hpPercent <= 10) return '🚨';
+            else if (hpPercent <= 50) return '🩸';
+            else return '🩹';
+        }
+
+        function getConditionsDisplay(combatant) {
+            if (!combatant.conditions || combatant.conditions.length === 0) return '';
+            const CONDITIONS = {
+                'Blinded': '🙈', 'Charmed': '😍', 'Deafened': '🙉', 'Exhaustion': '🥵',
+                'Frightened': '😱', 'Grappled': '⛓️', 'Incapacitated': '🚫', 'Invisible': '🌫️',
+                'Paralyzed': '🥶', 'Petrified': '🪨', 'Poisoned': '🤢', 'Prone': '🛌',
+                'Restrained': '🕸️', 'Stunned': '💫', 'Unconscious': '😴'
+            };
+            return combatant.conditions.map(c => CONDITIONS[c] || '❓').join(' ');
+        }
+
+        function renderInitiativeList() {
+            const container = document.getElementById('initiativeList');
+            if (combatants.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: #666;">No active combat</p>';
+                return;
+            }
+
+            container.innerHTML = combatants.map((combatant, index) => {
+                const isCurrentTurn = index === currentTurnIndex;
+                const nextTurnIndex = (currentTurnIndex + 1) % combatants.length;
+                const isUpNext = index === nextTurnIndex && !isCurrentTurn;
+
+                let statusText = '';
+                if (isCurrentTurn) {
+                    statusText = 'Active';
+                } else if (isUpNext) {
+                    statusText = 'On Deck';
+                }
+
+                const healthEmoji = getHealthStatusEmoji(combatant);
+                const conditionsDisplay = getConditionsDisplay(combatant);
+
+                return `
+                    <div class="combatant-row ${isCurrentTurn ? 'current-turn' : ''}" data-combatant-index="${index}">
+                        <div class="combatant-name">
+                            <span>${combatant.name}</span>
+                            ${healthEmoji ? `<span class="health-status">${healthEmoji}</span>` : ''}
+                            ${conditionsDisplay ? `<span class="conditions">${conditionsDisplay}</span>` : ''}
+                        </div>
+                        <div>
+                            <span class="initiative-number">${combatant.initiative}</span>
+                            ${statusText ? `<span class="status-indicator ${isUpNext ? 'up-next-indicator' : ''}">${statusText}</span>` : ''}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            scrollToActiveCombatants();
+        }
+
+        function scrollToActiveCombatants() {
+            if (combatants.length === 0) return;
+
+            setTimeout(() => {
+                const container = document.getElementById('initiativeList');
+                const nextTurnIndex = (currentTurnIndex + 1) % combatants.length;
+                const activeElement = container.querySelector(`[data-combatant-index="${currentTurnIndex}"]`);
+                const onDeckElement = container.querySelector(`[data-combatant-index="${nextTurnIndex}"]`);
+
+                if (!activeElement) return;
+
+                // Round increment - scroll to top
+                if (currentTurnIndex === 0 && previousTurnIndex === combatants.length - 1) {
+                    document.getElementById('combatTrackerContainer').scrollTo({ top: 0, behavior: 'smooth' });
+                    return;
+                }
+
+                const containerRect = document.getElementById('combatTrackerContainer').getBoundingClientRect();
+                const activeRect = activeElement.getBoundingClientRect();
+                const activeVisible = activeRect.top >= containerRect.top && activeRect.bottom <= containerRect.bottom;
+
+                let onDeckVisible = true;
+                if (onDeckElement) {
+                    const onDeckRect = onDeckElement.getBoundingClientRect();
+                    onDeckVisible = onDeckRect.top >= containerRect.top && onDeckRect.bottom <= containerRect.bottom;
+                }
+
+                if (!activeVisible || !onDeckVisible) {
+                    activeElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }, 100);
+        }
+
+        function updateConnectionStatus(status) {
+            const statusEl = document.getElementById('connectionStatus');
+            statusEl.textContent = status === 'Connected' ?
+                'Connected to DM tracker' : 'Waiting for DM tracker...';
+            statusEl.style.color = status === 'Connected' ? '#006400' : '#665a48';
+        }
+
+        function initializePlayerView() {
+            const existingData = localStorage.getItem('combatTrackerSync');
+            if (existingData) {
+                updateFromDMTracker(JSON.parse(existingData));
+            } else {
+                updateConnectionStatus('Waiting');
+            }
+        }
+
+        function clearTracker() {
+            if (confirm('Clear combat tracker and reset round counter?')) {
+                combatants = [];
+                currentTurnIndex = 0;
+                previousTurnIndex = -1;
+                localStorage.removeItem('combatTrackerSync');
+                document.getElementById('roundCounter').value = 1;
+                renderInitiativeList();
+                updateConnectionStatus('Waiting');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', initializePlayerView);
+    </script>
+</body>
+</html>

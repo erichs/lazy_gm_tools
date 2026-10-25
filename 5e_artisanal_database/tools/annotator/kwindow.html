@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dungeon Map Keyer (Quick & Dirty)</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #f0f2f5; color: #333; display: flex; flex-direction: column; align-items: center; margin: 0; padding: 2rem; }
+        .container { background-color: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); text-align: center; width: 95%; max-width: 1600px; }
+        .controls { margin: 1rem 0; padding: 1rem; border: 1px solid #ddd; border-radius: 8px; display: flex; justify-content: center; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+        .control-group { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+        label { font-weight: bold; font-size: 0.9em; }
+        .slider-value { font-weight: bold; font-family: monospace; font-size: 1.2em; background-color: #e7f3ff; padding: 0.2rem 0.5rem; border-radius: 4px; }
+        button { padding: 0.5rem 1rem; font-size: 1em; font-weight: bold; color: white; background-color: #1877f2; border: none; border-radius: 6px; cursor: pointer; }
+        button:disabled { background-color: #ccd0d5; cursor: not-allowed; }
+        #status { margin-top: 1rem; font-weight: bold; color: #1877f2; min-height: 1.2em; }
+        .canvas-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-top: 1rem; }
+        .canvas-wrapper { display: flex; flex-direction: column; align-items: center; }
+        h4 { margin: 0.5rem 0; }
+        canvas { border: 1px solid #ccc; max-width: 100%; height: auto; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Dungeon Map Keyer (Quick & Dirty)</h1>
+        <input type="file" id="mapUploader" accept="image/*">
+        <div class="controls">
+            <div class="control-group">
+                <label>Brightness Threshold</label>
+                <div><input type="range" id="brightnessSlider" min="150" max="254" value="175" disabled><span class="slider-value" id="brightnessValue">175</span></div>
+            </div>
+            <div class="control-group">
+                <label>Closing Strength</label>
+                <div><input type="range" id="closingSlider" min="0" max="5" value="1" disabled><span class="slider-value" id="closingValue">1</span></div>
+            </div>
+            <div class="control-group">
+                <label>Room Size (px)</label>
+                <div><input type="range" id="roomSizeSlider" min="50" max="400" value="130" step="10" disabled><span class="slider-value" id="roomSizeValue">130</span></div>
+            </div>
+            <button id="rekeyButton" disabled>Rekey Map</button>
+        </div>
+        <div id="status"></div>
+        <div class="canvas-container">
+            <div class="canvas-wrapper"><h4>1. Cleaned Input</h4><canvas id="canvasCleaned"></canvas></div>
+            <div class="canvas-wrapper"><h4>2. Final Output</h4><canvas id="canvasFinal"></canvas></div>
+        </div>
+    </div>
+
+    <script>
+        // --- DOM Elements & Global State ---
+        const uploader = document.getElementById('mapUploader');
+        const rekeyButton = document.getElementById('rekeyButton');
+        const statusDiv = document.getElementById('status');
+        const sliders = {
+            brightness: document.getElementById('brightnessSlider'),
+            closing: document.getElementById('closingSlider'),
+            roomSize: document.getElementById('roomSizeSlider')
+        };
+        const sliderValues = {
+            brightness: document.getElementById('brightnessValue'),
+            closing: document.getElementById('closingValue'),
+            roomSize: document.getElementById('roomSizeValue')
+        };
+        const canvases = { cleaned: document.getElementById('canvasCleaned'), final: document.getElementById('canvasFinal') };
+        const contexts = { cleaned: canvases.cleaned.getContext('2d'), final: canvases.final.getContext('2d') };
+        let originalImage = null, rawImageData = null, imgWidth = 0, imgHeight = 0;
+        
+        // --- Event Listeners ---
+        uploader.addEventListener('change', handleImageUpload);
+        rekeyButton.addEventListener('click', runAnalysis);
+        Object.keys(sliders).forEach(key => {
+            sliders[key].addEventListener('input', () => sliderValues[key].textContent = sliders[key].value);
+        });
+
+        // --- Core Logic ---
+        function handleImageUpload(event) {
+            const file = event.target.files[0]; if (!file) return;
+            const imageUrl = URL.createObjectURL(file);
+            originalImage = new Image();
+            originalImage.src = imageUrl;
+            statusDiv.textContent = 'Loading image...';
+            originalImage.onload = () => {
+                imgWidth = originalImage.width;
+                imgHeight = originalImage.height;
+                Object.values(canvases).forEach(c => { c.width = imgWidth; c.height = imgHeight; });
+                
+                const tempCtx = document.createElement('canvas').getContext('2d');
+                tempCtx.canvas.width = imgWidth;
+                tempCtx.canvas.height = imgHeight;
+                tempCtx.drawImage(originalImage, 0, 0);
+                rawImageData = tempCtx.getImageData(0, 0, imgWidth, imgHeight);
+
+                URL.revokeObjectURL(imageUrl);
+                Object.values(sliders).forEach(s => s.disabled = false);
+                rekeyButton.disabled = false;
+                runAnalysis();
+            };
+        }
+        
+        function runAnalysis() {
+            if (!rawImageData) return;
+            statusDiv.textContent = 'Processing...';
+            setTimeout(() => {
+                // --- Step 1: Binarize & Clean ---
+                statusDiv.textContent = 'Step 1: Cleaning map...';
+                const brightnessThreshold = parseInt(sliders.brightness.value, 10);
+                const closingStrength = parseInt(sliders.closing.value, 10);
+                let grid = Array.from({ length: imgHeight }, () => Array(imgWidth));
+                for (let y = 0; y < imgHeight; y++) {
+                    for (let x = 0; x < imgWidth; x++) {
+                        const i = (y * imgWidth + x) * 4;
+                        const brightness = (rawImageData.data[i] + rawImageData.data[i+1] + rawImageData.data[i+2]) / 3;
+                        grid[y][x] = (brightness > brightnessThreshold) ? 0 : 1; // 0=walkable, 1=wall
+                    }
+                }
+                for (let i = 0; i < closingStrength; i++) { grid = dilate(grid, imgWidth, imgHeight); }
+                for (let i = 0; i < closingStrength; i++) { grid = erode(grid, imgWidth, imgHeight); }
+                drawGridToCanvas(grid, contexts.cleaned);
+
+                // --- Step 2: Sliding Window Search ---
+                statusDiv.textContent = 'Step 2: Searching for rooms...';
+                const roomSize = parseInt(sliders.roomSize.value, 10);
+                const sat = createSummedAreaTable(grid);
+                const hits = findRoomsBySlidingWindow(sat, roomSize);
+                
+                // --- Step 3: Consolidate Hits & Draw ---
+                statusDiv.textContent = 'Step 3: Labeling rooms...';
+                const finalRoomCenters = mergeNearbyHits(hits, roomSize);
+                
+                contexts.final.drawImage(originalImage, 0, 0);
+                drawRoomLabels(finalRoomCenters, contexts.final);
+                statusDiv.textContent = `✅ Found ${finalRoomCenters.length} potential rooms.`;
+            }, 50);
+        }
+
+        function createSummedAreaTable(grid) {
+            const sat = Array.from({ length: imgHeight }, () => Array(imgWidth).fill(0));
+            for (let y = 0; y < imgHeight; y++) {
+                for (let x = 0; x < imgWidth; x++) {
+                    const val = grid[y][x]; // 1 for wall, 0 for floor
+                    const left = x > 0 ? sat[y][x-1] : 0;
+                    const top = y > 0 ? sat[y-1][x] : 0;
+                    const topLeft = (x > 0 && y > 0) ? sat[y-1][x-1] : 0;
+                    sat[y][x] = val + left + top - topLeft;
+                }
+            }
+            return sat;
+        }
+
+        function findRoomsBySlidingWindow(sat, windowSize) {
+            const hits = [];
+            const step = Math.max(10, Math.floor(windowSize / 4));
+            const area = windowSize * windowSize;
+            const wallThreshold = 0.02; // Allow up to 2% of the area to be walls
+
+            for (let y = 0; y < imgHeight - windowSize; y += step) {
+                for (let x = 0; x < imgWidth - windowSize; x += step) {
+                    const x1 = x, y1 = y;
+                    const x2 = x + windowSize, y2 = y + windowSize;
+                    const C = sat[y2][x2];
+                    const B = x1 > 0 ? sat[y2][x1-1] : 0;
+                    const A = y1 > 0 ? sat[y1-1][x2] : 0;
+                    const D = (x1 > 0 && y1 > 0) ? sat[y1-1][x1-1] : 0;
+                    const sum = C - A - B + D; // Sum of wall pixels in the window
+                    
+                    if ((sum / area) < wallThreshold) {
+                        hits.push({ x: x + windowSize / 2, y: y + windowSize / 2 });
+                    }
+                }
+            }
+            return hits;
+        }
+
+        function mergeNearbyHits(hits, mergeRadius) {
+            const merged = [];
+            const visited = new Array(hits.length).fill(false);
+            for (let i = 0; i < hits.length; i++) {
+                if (visited[i]) continue;
+                visited[i] = true;
+                const cluster = [hits[i]];
+                for (let j = i + 1; j < hits.length; j++) {
+                    if (visited[j]) continue;
+                    const distSq = (hits[i].x - hits[j].x)**2 + (hits[i].y - hits[j].y)**2;
+                    if (distSq < mergeRadius**2) {
+                        visited[j] = true;
+                        cluster.push(hits[j]);
+                    }
+                }
+                const sumX = cluster.reduce((acc, p) => acc + p.x, 0);
+                const sumY = cluster.reduce((acc, p) => acc + p.y, 0);
+                merged.push({ x: sumX / cluster.length, y: sumY / cluster.length });
+            }
+            return merged;
+        }
+
+        // --- Drawing and Utility Functions ---
+        function drawGridToCanvas(grid, ctx) { const imageData = ctx.createImageData(imgWidth, imgHeight); for (let y = 0; y < imgHeight; y++) { for (let x = 0; x < imgWidth; x++) { const i = (y * imgWidth + x) * 4; const val = grid[y][x] === 1 ? 0 : 255; imageData.data[i] = imageData.data[i+1] = imageData.data[i+2] = val; imageData.data[i+3] = 255; } } ctx.putImageData(imageData, 0, 0); };
+        function drawRoomLabels(centers, ctx) {
+            ctx.font = '24px Arial Black';
+            ctx.fillStyle = 'red';
+            ctx.strokeStyle = 'white';
+            ctx.lineWidth = 4;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            centers.forEach((center, i) => {
+                ctx.strokeText(i + 1, center.x, center.y);
+                ctx.fillText(i + 1, center.x, center.y);
+            });
+        }
+        function dilate(grid, width, height) { const newGrid = Array.from({ length: height }, () => Array(width).fill(1)); for (let y = 1; y < height - 1; y++) { for (let x = 1; x < width - 1; x++) { if (grid[y-1][x-1]===0 || grid[y-1][x]===0 || grid[y-1][x+1]===0 || grid[y][x-1]===0 || grid[y][x]===0 || grid[y][x+1]===0 || grid[y+1][x-1]===0 || grid[y+1][x]===0 || grid[y+1][x+1]===0) { newGrid[y][x] = 0; } } } return newGrid; };
+        function erode(grid, width, height) { const newGrid = Array.from({ length: height }, () => Array(width).fill(0)); for (let y = 1; y < height - 1; y++) { for (let x = 1; x < width - 1; x++) { if (grid[y-1][x-1]===1 || grid[y-1][x]===1 || grid[y-1][x+1]===1 || grid[y][x-1]===1 || grid[y][x]===1 || grid[y][x+1]===1 || grid[y+1][x-1]===1 || grid[y+1][x]===1 || grid[y+1][x+1]===1) { newGrid[y][x] = 1; } } } return newGrid; };
+    </script>
+</body>
+</html>

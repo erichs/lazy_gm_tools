@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dungeon Map Keyer (Grid Relaxation)</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #f0f2f5; color: #333; display: flex; flex-direction: column; align-items: center; margin: 0; padding: 2rem; }
+        .container { background-color: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); text-align: center; width: 95%; max-width: 1600px; }
+        .controls { margin: 1rem 0; padding: 1rem; border: 1px solid #ddd; border-radius: 8px; display: flex; justify-content: center; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+        .control-group { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+        label { font-weight: bold; font-size: 0.9em; }
+        .slider-value { font-weight: bold; font-family: monospace; font-size: 1.2em; background-color: #e7f3ff; padding: 0.2rem 0.5rem; border-radius: 4px; }
+        button { padding: 0.5rem 1rem; font-size: 1em; font-weight: bold; color: white; background-color: #1877f2; border: none; border-radius: 6px; cursor: pointer; }
+        button:disabled { background-color: #ccd0d5; cursor: not-allowed; }
+        #status { margin-top: 1rem; font-weight: bold; color: #1877f2; min-height: 1.2em; }
+        .canvas-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-top: 1rem; }
+        .canvas-wrapper { display: flex; flex-direction: column; align-items: center; }
+        h4 { margin: 0.5rem 0; }
+        canvas { border: 1px solid #ccc; max-width: 100%; height: auto; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Dungeon Map Keyer (Grid Relaxation)</h1>
+        <input type="file" id="mapUploader" accept="image/*">
+        <div class="controls">
+            <div class="control-group">
+                <label>Brightness Threshold</label>
+                <div><input type="range" id="brightnessSlider" min="150" max="254" value="175"><span class="slider-value" id="brightnessValue">175</span></div>
+            </div>
+            <div class="control-group">
+                <label>Closing Strength</label>
+                <div><input type="range" id="closingSlider" min="0" max="5" value="1"><span class="slider-value" id="closingValue">1</span></div>
+            </div>
+            <div class="control-group">
+                <label>Number of Labels</label>
+                <div><input type="range" id="labelsSlider" min="10" max="200" value="80" step="5"><span class="slider-value" id="labelsValue">80</span></div>
+            </div>
+            <div class="control-group">
+                <label>Relaxation Steps</label>
+                <div><input type="range" id="stepsSlider" min="5" max="50" value="20" step="1"><span class="slider-value" id="stepsValue">20</span></div>
+            </div>
+            <button id="rekeyButton">Rekey Map</button>
+        </div>
+        <div id="status"></div>
+        <div class="canvas-container">
+            <div class="canvas-wrapper"><h4>1. Cleaned Input</h4><canvas id="canvasCleaned"></canvas></div>
+            <div class="canvas-wrapper"><h4>2. Final Output</h4><canvas id="canvasFinal"></canvas></div>
+        </div>
+    </div>
+
+    <script>
+        // --- DOM Elements & Global State ---
+        const uploader = document.getElementById('mapUploader');
+        const rekeyButton = document.getElementById('rekeyButton');
+        const statusDiv = document.getElementById('status');
+        const sliders = {
+            brightness: document.getElementById('brightnessSlider'),
+            closing: document.getElementById('closingSlider'),
+            labels: document.getElementById('labelsSlider'),
+            steps: document.getElementById('stepsSlider')
+        };
+        const sliderValues = {
+            brightness: document.getElementById('brightnessValue'),
+            closing: document.getElementById('closingValue'),
+            labels: document.getElementById('labelsValue'),
+            steps: document.getElementById('stepsValue')
+        };
+        const canvases = { cleaned: document.getElementById('canvasCleaned'), final: document.getElementById('canvasFinal') };
+        const contexts = { cleaned: canvases.cleaned.getContext('2d'), final: canvases.final.getContext('2d') };
+        let originalImage = null, rawImageData = null, imgWidth = 0, imgHeight = 0;
+        
+        // --- Event Listeners ---
+        uploader.addEventListener('change', handleImageUpload);
+        rekeyButton.addEventListener('click', runAnalysis);
+        Object.keys(sliders).forEach(key => {
+            sliders[key].addEventListener('input', () => sliderValues[key].textContent = sliders[key].value);
+        });
+
+        // --- Core Logic ---
+        function handleImageUpload(event) {
+            const file = event.target.files[0]; if (!file) return;
+            const imageUrl = URL.createObjectURL(file);
+            originalImage = new Image();
+            originalImage.src = imageUrl;
+            statusDiv.textContent = 'Loading image...';
+            originalImage.onload = () => {
+                imgWidth = originalImage.width;
+                imgHeight = originalImage.height;
+                Object.values(canvases).forEach(c => { c.width = imgWidth; c.height = imgHeight; });
+                
+                const tempCtx = document.createElement('canvas').getContext('2d');
+                tempCtx.canvas.width = imgWidth;
+                tempCtx.canvas.height = imgHeight;
+                tempCtx.drawImage(originalImage, 0, 0);
+                rawImageData = tempCtx.getImageData(0, 0, imgWidth, imgHeight);
+
+                URL.revokeObjectURL(imageUrl);
+                runAnalysis();
+            };
+        }
+        
+        function runAnalysis() {
+            if (!rawImageData) {
+                statusDiv.textContent = 'Please upload an image first.';
+                return;
+            }
+            statusDiv.textContent = 'Processing...';
+            setTimeout(() => {
+                // Step 1: Binarize & Clean
+                statusDiv.textContent = 'Step 1: Cleaning map...';
+                const brightnessThreshold = parseInt(sliders.brightness.value, 10);
+                const closingStrength = parseInt(sliders.closing.value, 10);
+                let grid = Array.from({ length: imgHeight }, () => Array(imgWidth));
+                for (let y = 0; y < imgHeight; y++) {
+                    for (let x = 0; x < imgWidth; x++) {
+                        const i = (y * imgWidth + x) * 4;
+                        const bright = (rawImageData.data[i] + rawImageData.data[i+1] + rawImageData.data[i+2]) / 3;
+                        grid[y][x] = bright > brightnessThreshold ? 0 : 1;
+                    }
+                }
+                for (let i = 0; i < closingStrength; i++) { grid = dilate(grid, imgWidth, imgHeight); }
+                for (let i = 0; i < closingStrength; i++) { grid = erode(grid, imgWidth, imgHeight); }
+                drawGridToCanvas(grid, contexts.cleaned);
+
+                // Step 2: Grid Relaxation
+                statusDiv.textContent = 'Step 2: Relaxing grid points...';
+                const numLabels = parseInt(sliders.labels.value, 10);
+                const relaxationSteps = parseInt(sliders.steps.value, 10);
+                let relaxedPoints = relaxGridPoints(grid, numLabels, relaxationSteps);
+
+                // Step 3: Prune & Draw
+                statusDiv.textContent = 'Step 3: Pruning and labeling...';
+                const finalPoints = prunePoints(relaxedPoints);
+                
+                contexts.final.drawImage(originalImage, 0, 0);
+                drawRoomLabels(finalPoints, contexts.final);
+                statusDiv.textContent = `✅ Found ${finalPoints.length} rooms.`;
+            }, 50);
+        }
+        
+        function relaxGridPoints(grid, numPoints, steps) {
+            let points = [];
+            const gridRatio = Math.sqrt(numPoints * (imgWidth / imgHeight));
+            const gridCols = Math.round(gridRatio);
+            const gridRows = Math.round(numPoints / gridCols);
+            const xStep = imgWidth / (gridCols + 1);
+            const yStep = imgHeight / (gridRows + 1);
+
+            for (let i = 1; i <= gridRows; i++) {
+                for (let j = 1; j <= gridCols; j++) {
+                    points.push({ x: j * xStep, y: i * yStep });
+                }
+            }
+
+            const searchRadius = Math.min(xStep, yStep);
+            const moveFactor = 0.4; // How much to move towards the target each step (increased by 20%)
+
+            for (let i = 0; i < steps; i++) {
+                const nextPoints = [];
+                for (const p of points) {
+                    const localCentroid = findLocalCentroid(grid, p.x, p.y, searchRadius);
+                    if (localCentroid) {
+                        const dx = localCentroid.x - p.x;
+                        const dy = localCentroid.y - p.y;
+                        nextPoints.push({ x: p.x + dx * moveFactor, y: p.y + dy * moveFactor });
+                    } else {
+                        nextPoints.push({ x: p.x, y: p.y });
+                    }
+                }
+                points = nextPoints;
+            }
+            return points;
+        }
+        
+        function findLocalCentroid(grid, cx, cy, radius) {
+            let sumX = 0, sumY = 0, count = 0;
+            const startX = Math.max(0, Math.round(cx - radius));
+            const startY = Math.max(0, Math.round(cy - radius));
+            const endX = Math.min(imgWidth, Math.round(cx + radius));
+            const endY = Math.min(imgHeight, Math.round(cy + radius));
+
+            for (let y = startY; y < endY; y++) {
+                for (let x = startX; x < endX; x++) {
+                    if (grid[y][x] === 0) {
+                        sumX += x;
+                        sumY += y;
+                        count++;
+                    }
+                }
+            }
+            return count > 0 ? { x: sumX / count, y: sumY / count } : null;
+        }
+        
+        function prunePoints(points, mergeRadius = 80) {
+            const finalPoints = [];
+            const visited = new Array(points.length).fill(false);
+            for (let i = 0; i < points.length; i++) {
+                if (visited[i]) continue;
+                visited[i] = true;
+                const cluster = [points[i]];
+                for (let j = i + 1; j < points.length; j++) {
+                    if (visited[j]) continue;
+                    const distSq = (points[i].x - points[j].x)**2 + (points[i].y - points[j].y)**2;
+                    if (distSq < mergeRadius**2) {
+                        visited[j] = true;
+                        cluster.push(points[j]);
+                    }
+                }
+                const sumX = cluster.reduce((acc, p) => acc + p.x, 0);
+                const sumY = cluster.reduce((acc, p) => acc + p.y, 0);
+                finalPoints.push({ x: sumX / cluster.length, y: sumY / cluster.length });
+            }
+            return finalPoints;
+        }
+
+        function drawGridToCanvas(grid, ctx) { const imageData = ctx.createImageData(imgWidth, imgHeight); for (let y = 0; y < imgHeight; y++) { for (let x = 0; x < imgWidth; x++) { const i = (y * imgWidth + x) * 4; const val = grid[y][x] === 1 ? 0 : 255; imageData.data[i] = imageData.data[i+1] = imageData.data[i+2] = val; imageData.data[i+3] = 255; } } ctx.putImageData(imageData, 0, 0); };
+        function drawRoomLabels(centers, ctx) { ctx.font = '24px Arial Black'; ctx.fillStyle = 'red'; ctx.strokeStyle = 'white'; ctx.lineWidth = 4; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; centers.forEach((center, i) => { ctx.strokeText(i + 1, center.x, center.y); ctx.fillText(i + 1, center.x, center.y); }); };
+        function dilate(grid, width, height) { const newGrid = Array.from({ length: height }, () => Array(width).fill(1)); for (let y = 1; y < height - 1; y++) { for (let x = 1; x < width - 1; x++) { if (grid[y-1][x-1]===0 || grid[y-1][x]===0 || grid[y-1][x+1]===0 || grid[y][x-1]===0 || grid[y][x]===0 || grid[y][x+1]===0 || grid[y+1][x-1]===0 || grid[y+1][x]===0 || grid[y+1][x+1]===0) { newGrid[y][x] = 0; } } } return newGrid; };
+        function erode(grid, width, height) { const newGrid = Array.from({ length: height }, () => Array(width).fill(0)); for (let y = 1; y < height - 1; y++) { for (let x = 1; x < width - 1; x++) { if (grid[y-1][x-1]===1 || grid[y-1][x]===1 || grid[y-1][x+1]===1 || grid[y][x-1]===1 || grid[y][x]===1 || grid[y][x+1]===1 || grid[y+1][x-1]===1 || grid[y+1][x]===1 || grid[y+1][x+1]===1) { newGrid[y][x] = 1; } } } return newGrid; };
+    </script>
+</body>
+</html>

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dungeon Map Keyer (Debug View)</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #f0f2f5; color: #333; display: flex; flex-direction: column; align-items: center; margin: 0; padding: 2rem; }
+        .container { background-color: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); text-align: center; width: 95%; max-width: 1600px; }
+        .controls { margin: 1rem 0; padding: 1rem; border: 1px solid #ddd; border-radius: 8px; display: flex; justify-content: center; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+        .control-group { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+        label { font-weight: bold; font-size: 0.9em; }
+        .slider-value { font-weight: bold; font-family: monospace; font-size: 1.2em; background-color: #e7f3ff; padding: 0.2rem 0.5rem; border-radius: 4px; }
+        button { padding: 0.5rem 1rem; font-size: 1em; font-weight: bold; color: white; background-color: #1877f2; border: none; border-radius: 6px; cursor: pointer; }
+        button:disabled { background-color: #ccd0d5; cursor: not-allowed; }
+        #status { margin-top: 1rem; font-weight: bold; color: #1877f2; min-height: 1.2em; }
+        .canvas-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-top: 1rem; }
+        .canvas-wrapper { display: flex; flex-direction: column; align-items: center; }
+        h4 { margin: 0.5rem 0; }
+        canvas { border: 1px solid #ccc; max-width: 100%; height: auto; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Dungeon Map Keyer (Debug View)</h1>
+        <input type="file" id="mapUploader" accept="image/*">
+        <div class="controls">
+            <div class="control-group">
+                <label for="brightnessSlider">Brightness Threshold</label>
+                <div><input type="range" id="brightnessSlider" min="150" max="254" value="240" disabled><span class="slider-value" id="brightnessValue">240</span></div>
+            </div>
+            <div class="control-group">
+                <label for="closingSlider">Closing Strength</label>
+                <div><input type="range" id="closingSlider" min="0" max="5" value="1" disabled><span class="slider-value" id="closingValue">1</span></div>
+            </div>
+            <div class="control-group">
+                <label for="wallThicknessSlider">Max Wall Thickness</label>
+                <div><input type="range" id="wallThicknessSlider" min="1" max="15" value="3" disabled><span class="slider-value" id="wallThicknessValue">3</span></div>
+            </div>
+            <button id="rekeyButton" disabled>Rekey Map</button>
+        </div>
+        <div id="status"></div>
+        <div class="canvas-container">
+            <div class="canvas-wrapper"><h4>1. Original Image</h4><canvas id="canvasOriginal"></canvas></div>
+            <div class="canvas-wrapper"><h4>2. Binarized</h4><canvas id="canvasBinarized"></canvas></div>
+            <div class="canvas-wrapper"><h4>3. Cleaned (Closing)</h4><canvas id="canvasCleaned"></canvas></div>
+            <div class="canvas-wrapper"><h4>4. Final Output</h4><canvas id="canvasFinal"></canvas></div>
+        </div>
+    </div>
+
+    <script>
+        // --- DOM Elements & Global State ---
+        const uploader = document.getElementById('mapUploader');
+        const rekeyButton = document.getElementById('rekeyButton');
+        const statusDiv = document.getElementById('status');
+        // Sliders
+        const brightnessSlider = document.getElementById('brightnessSlider');
+        const closingSlider = document.getElementById('closingSlider');
+        const wallThicknessSlider = document.getElementById('wallThicknessSlider');
+        // Slider Value Displays
+        const brightnessValue = document.getElementById('brightnessValue');
+        const closingValue = document.getElementById('closingValue');
+        const wallThicknessValue = document.getElementById('wallThicknessValue');
+        // Canvases
+        const canvases = {
+            original: document.getElementById('canvasOriginal'),
+            binarized: document.getElementById('canvasBinarized'),
+            cleaned: document.getElementById('canvasCleaned'),
+            final: document.getElementById('canvasFinal')
+        };
+        const contexts = {
+            original: canvases.original.getContext('2d'),
+            binarized: canvases.binarized.getContext('2d'),
+            cleaned: canvases.cleaned.getContext('2d'),
+            final: canvases.final.getContext('2d')
+        };
+        let originalImage = null, rawImageData = null, imgWidth = 0, imgHeight = 0;
+        
+        // --- Event Listeners ---
+        uploader.addEventListener('change', handleImageUpload);
+        rekeyButton.addEventListener('click', runAnalysis);
+        brightnessSlider.addEventListener('input', () => brightnessValue.textContent = brightnessSlider.value);
+        closingSlider.addEventListener('input', () => closingValue.textContent = closingSlider.value);
+        wallThicknessSlider.addEventListener('input', () => wallThicknessValue.textContent = wallThicknessSlider.value);
+
+        // --- Core Logic ---
+        function handleImageUpload(event) {
+            const file = event.target.files[0]; if (!file) return;
+            const imageUrl = URL.createObjectURL(file);
+            originalImage = new Image();
+            originalImage.src = imageUrl;
+            statusDiv.textContent = 'Loading image...';
+            originalImage.onload = () => {
+                imgWidth = originalImage.width;
+                imgHeight = originalImage.height;
+                Object.values(canvases).forEach(c => { c.width = imgWidth; c.height = imgHeight; });
+                
+                contexts.original.drawImage(originalImage, 0, 0);
+                rawImageData = contexts.original.getImageData(0, 0, imgWidth, imgHeight);
+
+                URL.revokeObjectURL(imageUrl);
+                [brightnessSlider, closingSlider, wallThicknessSlider, rekeyButton].forEach(el => el.disabled = false);
+                runAnalysis();
+            };
+        }
+        
+        function runAnalysis() {
+            if (!rawImageData) return;
+            statusDiv.textContent = 'Processing...';
+            setTimeout(() => {
+                // --- Step 1: Binarize ---
+                statusDiv.textContent = 'Step 1: Binarizing...';
+                const brightnessThreshold = parseInt(brightnessSlider.value, 10);
+                const binarizedGrid = Array.from({ length: imgHeight }, () => Array(imgWidth));
+                for (let y = 0; y < imgHeight; y++) {
+                    for (let x = 0; x < imgWidth; x++) {
+                        const i = (y * imgWidth + x) * 4;
+                        const brightness = (rawImageData.data[i] + rawImageData.data[i+1] + rawImageData.data[i+2]) / 3;
+                        binarizedGrid[y][x] = (brightness > brightnessThreshold) ? 0 : 1;
+                    }
+                }
+                drawGridToCanvas(binarizedGrid, contexts.binarized);
+
+                // --- Step 2: Pre-Filter (Closing) ---
+                statusDiv.textContent = 'Step 2: Cleaning walls...';
+                const closingStrength = parseInt(closingSlider.value, 10);
+                let cleanedGrid = binarizedGrid;
+                for (let i = 0; i < closingStrength; i++) {
+                    cleanedGrid = dilate(cleanedGrid, imgWidth, imgHeight);
+                }
+                for (let i = 0; i < closingStrength; i++) {
+                    cleanedGrid = erode(cleanedGrid, imgWidth, imgHeight);
+                }
+                drawGridToCanvas(cleanedGrid, contexts.cleaned);
+
+                // --- Step 3: Find & Merge Rooms ---
+                statusDiv.textContent = 'Step 3: Finding & merging rooms...';
+                const fragments = findAllFragments(cleanedGrid);
+                if (fragments.length === 0) { /* ... handle no rooms ... */ }
+
+                const dsu = new UnionFind(fragments.length);
+                const maxWallThickness = parseInt(wallThicknessSlider.value, 10);
+                for (let i = 0; i < fragments.length; i++) {
+                    for (let j = i + 1; j < fragments.length; j++) {
+                        if (areNeighborsToMerge(fragments[i], fragments[j], maxWallThickness, cleanedGrid)) {
+                            dsu.union(i, j);
+                        }
+                    }
+                }
+
+                // --- Step 4: Group, Filter, and Draw ---
+                statusDiv.textContent = 'Step 4: Labeling final rooms...';
+                const finalRooms = groupAndFilterRooms(fragments, dsu);
+                
+                contexts.final.drawImage(originalImage, 0, 0);
+                drawRoomNumbers(finalRooms, cleanedGrid, contexts.final);
+                statusDiv.textContent = `✅ Found ${finalRooms.length} rooms.`;
+            }, 50);
+        }
+
+        function groupAndFilterRooms(fragments, dsu) {
+            const groups = new Map();
+            for (let i = 0; i < fragments.length; i++) {
+                const root = dsu.find(i);
+                if (!groups.has(root)) groups.set(root, []);
+                groups.get(root).push(fragments[i]);
+            }
+            const finalRooms = [];
+            const minRoomPixelCount = 2000, maxAspectRatio = 3.0;
+            for (const group of groups.values()) {
+                const combinedPixels = group.flatMap(f => f.pixels);
+                if (combinedPixels.length < minRoomPixelCount) continue;
+                const bbox = calculateBoundingBox(combinedPixels);
+                const aspectRatio = (bbox.maxX - bbox.minX + 1) / (bbox.maxY - bbox.minY + 1);
+                if (aspectRatio < maxAspectRatio && aspectRatio > (1/maxAspectRatio)) {
+                    finalRooms.push({ pixels: combinedPixels });
+                }
+            }
+            return finalRooms;
+        }
+
+        // --- Helper & Drawing Functions ---
+        function drawGridToCanvas(grid, ctx) {
+            const imageData = ctx.createImageData(imgWidth, imgHeight);
+            for (let y = 0; y < imgHeight; y++) {
+                for (let x = 0; x < imgWidth; x++) {
+                    const i = (y * imgWidth + x) * 4;
+                    const val = grid[y][x] === 1 ? 0 : 255;
+                    imageData.data[i] = imageData.data[i+1] = imageData.data[i+2] = val;
+                    imageData.data[i+3] = 255;
+                }
+            }
+            ctx.putImageData(imageData, 0, 0);
+        }
+
+        function drawRoomNumbers(rooms, grid, ctx) {
+            ctx.font = '24px Arial Black';
+            ctx.fillStyle = 'red';
+            ctx.strokeStyle = 'white';
+            ctx.lineWidth = 4;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            let roomCounter = 1;
+            for (const room of rooms) {
+                let sumX = 0, sumY = 0;
+                for(const p of room.pixels) { sumX += p[0]; sumY += p[1]; }
+                const centroid = { x: sumX / room.pixels.length, y: sumY / room.pixels.length };
+                const labelPos = findOpenPosition(centroid.x, centroid.y, grid);
+                ctx.strokeText(roomCounter, labelPos.x, labelPos.y);
+                ctx.fillText(roomCounter, labelPos.x, labelPos.y);
+                roomCounter++;
+            }
+        }
+        
+        // --- Full function bodies from previous versions ---
+        class UnionFind { constructor(size) { this.parent = Array.from({ length: size }, (_, i) => i); } find(i) { if (this.parent[i] === i) return i; return this.parent[i] = this.find(this.parent[i]); } union(i, j) { const rootI = this.find(i); const rootJ = this.find(j); if (rootI !== rootJ) { this.parent[rootJ] = rootI; } } }
+        function calculateBoundingBox(pixels) { let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity; for(const [x, y] of pixels) { minX = Math.min(minX, x); minY = Math.min(minY, y); maxX = Math.max(maxX, x); maxY = Math.max(maxY, y); } return { minX, minY, maxX, maxY }; }
+        function isRegionBright(cx, cy, grid, boxSize = 50) { const halfBox = Math.floor(boxSize / 2); let totalPixels = 0, walkablePixels = 0; const startX = Math.max(0, cx - halfBox), startY = Math.max(0, cy - halfBox); const endX = Math.min(imgWidth, cx + halfBox), endY = Math.min(imgHeight, cy + halfBox); for (let y = startY; y < endY; y++) { for (let x = startX; x < endX; x++) { if (grid[y]?.[x] === 0) walkablePixels++; totalPixels++; } } return totalPixels > 0 && (walkablePixels / totalPixels) > 0.95; }
+        function findOpenPosition(cx, cy, grid) { cx = Math.round(cx); cy = Math.round(cy); if (isRegionBright(cx, cy, grid)) return { x: cx, y: cy }; const maxSearchRadius = 150, step = 15; for (let r = step; r < maxSearchRadius; r += step) { const checkPoints = [ [cx + r, cy], [cx - r, cy], [cx, cy + r], [cx, cy - r], [cx + r, cy + r], [cx - r, cy - r], [cx + r, cy - r], [cx - r, cy + r] ]; for(const [px, py] of checkPoints) { if (isRegionBright(px, py, grid)) return { x: px, y: py }; } } return { x: cx, y: cy }; }
+        function findAllFragments(grid) { let fragments = []; let visited = Array.from({ length: imgHeight }, () => Array(imgWidth).fill(false)); for (let y = 0; y < imgHeight; y++) { for (let x = 0; x < imgWidth; x++) { if (grid[y][x] === 0 && !visited[y][x]) { let pixels = [], queue = [[x, y]]; visited[y][x] = true; let bbox = { minX: x, minY: y, maxX: x, maxY: y }; while(queue.length > 0) { const [cx, cy] = queue.shift(); pixels.push([cx, cy]); bbox.minX = Math.min(bbox.minX, cx); bbox.minY = Math.min(bbox.minY, cy); bbox.maxX = Math.max(bbox.maxX, cx); bbox.maxY = Math.max(bbox.maxY, cy); const neighbors = [[cx,cy-1], [cx,cy+1], [cx-1,cy], [cx+1,cy]]; for(const [nx, ny] of neighbors) { if(nx>=0 && nx<imgWidth && ny>=0 && ny<imgHeight && !visited[ny][nx] && grid[ny][nx] === 0) { visited[ny][nx] = true; queue.push([nx, ny]); } } } fragments.push({ pixels, bbox }); } } } return fragments; }
+        function areNeighborsToMerge(fragA, fragB, maxWallThickness, grid) { const boxA = fragA.bbox, boxB = fragB.bbox; const proximity = maxWallThickness + 1; if (boxA.minY < boxB.maxY && boxA.maxY > boxB.minY) { if (Math.abs(boxA.maxX - boxB.minX) < proximity || Math.abs(boxB.maxX - boxA.minX) < proximity) { return isSeamWeak(boxA, boxB, 'horizontal', maxWallThickness, grid); } } if (boxA.minX < boxB.maxX && boxA.maxX > boxB.minX) { if (Math.abs(boxA.maxY - boxB.minY) < proximity || Math.abs(boxB.maxY - boxA.minY) < proximity) { return isSeamWeak(boxA, boxB, 'vertical', maxWallThickness, grid); } } return false; }
+        function isSeamWeak(boxA, boxB, orientation, maxWallThickness, grid) { if (orientation === 'horizontal') { const seamX = (boxA.maxX < boxB.minX) ? boxA.maxX : boxB.maxX; const startY = Math.max(boxA.minY, boxB.minY), endY = Math.min(boxA.maxY, boxB.maxY); for (let y = startY; y <= endY; y++) { let wallRun = 0; for (let xOffset = 0; xOffset <= maxWallThickness; xOffset++) { if (grid[y]?.[seamX + xOffset] === 1) wallRun++; else break; } if (wallRun > maxWallThickness) return false; } } else { const seamY = (boxA.maxY < boxB.minY) ? boxA.maxY : boxB.maxY; const startX = Math.max(boxA.minX, boxB.minX), endX = Math.min(boxA.maxX, boxB.maxX); for (let x = startX; x <= endX; x++) { let wallRun = 0; for (let yOffset = 0; yOffset <= maxWallThickness; yOffset++) { if (grid[seamY + yOffset]?.[x] === 1) wallRun++; else break; } if (wallRun > maxWallThickness) return false; } } return true; }
+        function dilate(grid, width, height) { const newGrid = Array.from({ length: height }, () => Array(width).fill(1)); for (let y = 1; y < height - 1; y++) { for (let x = 1; x < width - 1; x++) { if (grid[y-1][x-1]===0 || grid[y-1][x]===0 || grid[y-1][x+1]===0 || grid[y][x-1]===0 || grid[y][x]===0 || grid[y][x+1]===0 || grid[y+1][x-1]===0 || grid[y+1][x]===0 || grid[y+1][x+1]===0) { newGrid[y][x] = 0; } } } return newGrid; }
+        function erode(grid, width, height) { const newGrid = Array.from({ length: height }, () => Array(width).fill(0)); for (let y = 1; y < height - 1; y++) { for (let x = 1; x < width - 1; x++) { if (grid[y-1][x-1]===1 || grid[y-1][x]===1 || grid[y-1][x+1]===1 || grid[y][x-1]===1 || grid[y][x]===1 || grid[y][x+1]===1 || grid[y+1][x-1]===1 || grid[y+1][x]===1 || grid[y+1][x+1]===1) { newGrid[y][x] = 1; } } } return newGrid; }
+    </script>
+</body>
+</html>

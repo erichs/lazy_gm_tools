@@ -1,0 +1,164 @@
+#!/usr/bin/env python3
+"""
+CLI script to search for D&D 5e monsters by Challenge Rating and creature type.
+Returns file:// deep links to markdown files.
+
+Usage:
+    ./monsters 3 fiend          # Find CR 3 fiends
+    ./monsters 5                # Find all CR 5 monsters
+    ./monsters 0 beast          # Find CR 0 beasts
+    ./monsters 1/4 humanoid     # Find CR 1/4 humanoids
+"""
+
+import json
+import sys
+import os
+import argparse
+from pathlib import Path
+from urllib.parse import urljoin
+from urllib.request import pathname2url
+
+
+def load_monsters_data():
+    """Load the monsters JSON data."""
+    script_dir = Path(__file__).parent
+    json_path = script_dir / "5e_monsters" / "monsters.json"
+    
+    if not json_path.exists():
+        print(f"Error: monsters.json not found at {json_path}", file=sys.stderr)
+        sys.exit(1)
+    
+    try:
+        with open(json_path, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    except json.JSONDecodeError as e:
+        print(f"Error parsing monsters.json: {e}", file=sys.stderr)
+        sys.exit(1)
+
+
+def parse_cr(cr_str):
+    """Parse challenge rating string to float."""
+    if not cr_str:
+        return None
+    
+    # Handle fractions like "1/4", "1/2", etc.
+    if '/' in cr_str:
+        try:
+            numerator, denominator = cr_str.split('/')
+            return float(numerator) / float(denominator)
+        except (ValueError, ZeroDivisionError):
+            return None
+    
+    # Handle regular numbers
+    try:
+        return float(cr_str)
+    except ValueError:
+        return None
+
+
+def get_markdown_filename(monster):
+    """Get the markdown filename for a monster."""
+    # Try to use the slug if available, otherwise construct from name
+    if 'slug' in monster and monster['slug']:
+        return f"{monster['slug']}.md"
+    
+    # Fallback: construct filename from name
+    name = monster['name'].lower()
+    # Replace spaces and special characters with hyphens
+    filename = name.replace(' ', '-').replace("'", '').replace('"', '')
+    # Remove other problematic characters
+    filename = ''.join(c for c in filename if c.isalnum() or c in '-_')
+    return f"{filename}.md"
+
+
+def create_file_url(monster, script_dir):
+    """Create a file:// URL for the monster's markdown file."""
+    md_filename = get_markdown_filename(monster)
+    md_path = script_dir / "5e_monsters" / "monsters_md" / md_filename
+    
+    # Convert to absolute path and then to file:// URL
+    abs_path = md_path.resolve()
+    return f"file://{abs_path}"
+
+
+def filter_monsters(monsters, target_cr=None, target_type=None):
+    """Filter monsters by CR and/or type."""
+    filtered = []
+    
+    for monster in monsters:
+        # Filter by CR if specified
+        if target_cr is not None:
+            monster_cr = monster.get('cr')
+            if monster_cr != target_cr:
+                continue
+        
+        # Filter by type if specified
+        if target_type is not None:
+            monster_type = monster.get('type', '').lower()
+            if target_type.lower() not in monster_type:
+                continue
+        
+        filtered.append(monster)
+    
+    return filtered
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description='Search D&D 5e monsters by Challenge Rating and creature type',
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  %(prog)s 3 fiend          # Find CR 3 fiends
+  %(prog)s 5                # Find all CR 5 monsters  
+  %(prog)s 0 beast          # Find CR 0 beasts
+  %(prog)s 1/4 humanoid     # Find CR 1/4 humanoids
+        """
+    )
+    
+    parser.add_argument('cr', nargs='?', help='Challenge Rating (e.g., 3, 1/4, 0.5)')
+    parser.add_argument('type', nargs='?', help='Creature type (e.g., fiend, dragon, beast)')
+    
+    args = parser.parse_args()
+    
+    # Parse CR if provided
+    target_cr = None
+    if args.cr:
+        target_cr = parse_cr(args.cr)
+        if target_cr is None:
+            print(f"Error: Invalid challenge rating '{args.cr}'", file=sys.stderr)
+            sys.exit(1)
+    
+    # Load monsters data
+    monsters = load_monsters_data()
+    
+    # Filter monsters
+    filtered_monsters = filter_monsters(monsters, target_cr, getattr(args, 'type'))
+    
+    if not filtered_monsters:
+        print("No monsters found matching the criteria.")
+        return
+    
+    # Sort by name for consistent output
+    filtered_monsters.sort(key=lambda m: m.get('name', ''))
+    
+    # Get script directory for file paths
+    script_dir = Path(__file__).parent
+    
+    # Output results
+    print(f"Found {len(filtered_monsters)} monster(s):")
+    print()
+    
+    for monster in filtered_monsters:
+        name = monster.get('name', 'Unknown')
+        cr = monster.get('challenge_rating', 'Unknown')
+        monster_type = monster.get('type', 'Unknown')
+        file_url = create_file_url(monster, script_dir)
+        
+        print(f"{name} (CR {cr}, {monster_type})")
+        print(f"  {file_url}")
+        print()
+
+
+if __name__ == '__main__':
+    main()

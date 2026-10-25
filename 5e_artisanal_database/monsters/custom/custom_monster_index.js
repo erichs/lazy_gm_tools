@@ -2,7 +2,7 @@
 // Contains AC, HP, initiative, CR, type, source, and HTML links for custom monsters
 // Format matches monster_combat_stats.js for compatibility
 
-const customMonsterCombatStats = [
+window.customMonsterCombatStats = [
   {
     "name": "Minion",
     "ac": 11,
@@ -112,5 +112,15 @@ const customMonsterCombatStats = [
     "type": "Construct",
     "source": "City of Arches",
     "htmlLink": "./custom/necroforged_warden.html?file=necroforged_warden.js"
+  },
+  {
+    "name": "Ozymandias",
+    "ac": 26,
+    "hp": 561,
+    "init": 12,
+    "cr": 28,
+    "type": "Undead",
+    "source": "City of Arches",
+    "htmlLink": "./custom/index.html?file=ozymandias.js"
   },
 ];

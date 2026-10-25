@@ -8,7 +8,9 @@ No images are saved to any server when using this tool. All file manipulation ha
 <meta name="viewport" content="user-scalable=yes, width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
 <meta charset="UTF-8">
+
 <link rel="stylesheet" href="../../css_js/5eadb.css">
+<link rel="stylesheet" href="../../css_js/theme.css">
 <style>
 /* Token Maker specific overrides */
 
@@ -31,13 +33,13 @@ input[type="color"] {
     width: 50px;
     height: 30px;
     padding: 0;
-    border: 1px solid #ccc;
+    border: 1px solid var(--border-color-input);
     vertical-align: middle;
 }
 
 button, #fileButton {
-    background-color: #d3d3d3;
-    color: #000;
+    background-color: var(--bg-button);
+    color: var(--text-body);
     border-radius: 6px;
     display: inline-block;
     user-select: none;
@@ -52,7 +54,7 @@ button, #fileButton {
 }
 
 button:active, #fileButton:active {
-    background-color: #a9a9a9;
+    background-color: var(--bg-button-hover);
 }
 
 #fileButton {

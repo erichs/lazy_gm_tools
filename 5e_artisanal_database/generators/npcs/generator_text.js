@@ -1,6 +1,6 @@
 const dataText = `
 template
-  <strong>{name} {surname_first}{surname_last}</strong>. A {personality} {species} {npc_type} with {trait} who dresses {dress} and wants to {goal}. They want the characters to {quest}.
+  <strong>{name} {surname_first}{surname_last}</strong>. A {personality} {species} {npc_type} with {trait} who dresses {dress} and wants to {goal}.
 
 species
   human ^10

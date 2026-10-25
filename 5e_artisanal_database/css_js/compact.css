@@ -1,0 +1,126 @@
+/* Compact Theme for 5e Artisanal Database
+   Copy or rename this file to theme.css to activate.
+   Smaller fonts, tighter spacing, more information density.
+*/
+:root {
+    color-scheme: only light;
+    /* Fonts - smaller base size */
+    --font-size-base: 14px;
+    --font-size-small: 11px;
+    --font-size-large: 16px;
+    --font-size-h1: 1.5em;
+
+    /* Line height */
+    --line-height: 1.3;
+
+    /* Spacing */
+    --padding-page: 5px;
+    --padding-card: 5px;
+    --padding-input: 4px;
+    --border-radius: 2px;
+    --border-radius-sm: 2px;
+
+    /* Shadows */
+    --shadow-button-hover: none;
+}
+
+/* Reduce spacing in tables */
+th,
+td {
+    padding: 2px 4px;
+    font-size: var(--font-size-small);
+}
+
+/* Smaller input/button styles */
+button,
+select {
+    min-height: 30px;
+    padding: 6px 10px;
+    margin: 3px;
+    font-size: var(--font-size-base);
+}
+
+input[type="text"],
+input[type="number"],
+input[type="search"],
+textarea {
+    padding: 3px;
+    font-size: var(--font-size-base);
+}
+
+/* Tighter list spacing */
+p,
+li {
+    line-height: var(--line-height);
+}
+
+/* Smaller headings */
+h1 { font-size: 1.4em; margin: 0.3em 0; }
+h2 { font-size: 1.2em; margin: 0.3em 0; }
+h3 { font-size: 1.1em; margin: 0.2em 0; }
+h4 { font-size: 1em; margin: 0.2em 0; }
+
+/* Compact dice roller */
+.dice-roller .dice {
+    margin: 5px;
+    padding: 10px;
+    font-size: 1.2em;
+}
+
+.dice-roller .history {
+    font-size: 1.2em;
+    max-height: 200px;
+}
+
+/* Compact encounter calculator */
+.encounter-calculator .section-base {
+    margin: 8px 0;
+    padding: 5px;
+}
+
+/* Compact filter panels */
+.filter-container {
+    margin: 5px 0;
+}
+
+.filter-header {
+    padding: 5px;
+}
+
+.filter-content {
+    padding: 8px;
+}
+
+/* Compact DataTables */
+.dataTables_wrapper .dataTables_length,
+.dataTables_wrapper .dataTables_filter,
+.dataTables_wrapper .dataTables_info,
+.dataTables_wrapper .dataTables_paginate {
+    font-size: var(--font-size-small);
+}
+
+.dataTables_wrapper .dataTables_filter input {
+    padding: 2px 4px;
+}
+
+/* Compact combat tracker */
+.combat-tracker th,
+.combat-tracker td {
+    padding: 3px;
+    font-size: var(--font-size-small);
+}
+
+.combat-tracker .controls {
+    padding: 5px;
+    margin: 5px 0;
+}
+
+/* Compact point buy calculator */
+.point-buy-calculator .ability-grid {
+    gap: 5px;
+    margin: 10px 0;
+}
+
+.point-buy-calculator .ability-card {
+    padding: 4px;
+}

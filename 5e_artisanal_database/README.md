@@ -72,6 +72,50 @@ The index page, the generators, and the tools are provisioned as a Progressive W
 
 I recommend using [Obsidian](https://obsidian.md) for offline retrieval of spells, monsters, magic items, and rulesets. Add the markdown directories of monsters, magic items, spells, and rulesets you want to have offline to your Obsidian vault and if your vault is shared across platforms, you can access it on each platform even offline. See "Markdown and HTML files" above for details.
 
+## Themes
+
+By default, the 5eADB automatically follows the theme the user chose in their operating system: light for light-system settings, dark for dark-system settings. This is done with a CSS `prefers-color-scheme` media query — no JavaScript, and no server-side logic.
+
+On top of that, six opt-in visual themes are included. To force one theme for all users, copy or rename your preferred theme file to `css_js/theme.css`:
+
+| Theme | File | Description |
+|---|---|---|
+| **Light** (default base) | — | Light palette from `5eadb.css` |
+| **Auto** (default) | *(placeholder `theme.css`, empty)* | Follows the user's system setting: light mode or dark mode |
+| **Dark** (forced) | `css_js/dark.css` | Always dark — dark backgrounds, light text |
+| **Parchment** | `css_js/parchment.css` | Warm paper-like feel with serif fonts |
+| **Terminal** | `css_js/terminal.css` | Green-on-black terminal aesthetic with monospace font |
+| **Compact** | `css_js/compact.css` | Smaller fonts and tighter spacing for higher information density |
+
+### Applying a Theme
+
+```bash
+# From the build scripts directory:
+bash apply_theme.sh dark     # force dark regardless of system setting
+bash apply_theme.sh light    # back to the default: follows the system setting
+
+# Or manually:
+cp css_js/dark.css css_js/theme.css
+
+# Revert to following the system setting (light for light systems, dark for dark):
+rm css_js/theme.css
+```
+
+Pages already link `css_js/theme.css`, so keep it as an empty file (or a comment) when following the system setting — deleting it 404s the link on every page.
+
+Note: every theme file declares `color-scheme: only light` (or `only dark`). This tells Chrome not to force-darken the page — without it, Chrome's Auto Dark Theme renders the filter panels' form controls as unreadable black blocks on light themes.
+
+### Adding a Custom Theme
+
+1. Create a CSS file in `css_js/` (e.g., `css_js/ocean.css`) with a `:root` selector block containing CSS variable overrides. See `css_js/dark.css` for a complete example.
+
+2. Apply it:
+   ```bash
+   cp css_js/ocean.css css_js/theme.css
+   ```
+
+The CSS variable system uses custom properties on `:root` (defined in `css_js/5eadb.css`). Your theme file only needs to override the variables you want to change.
+
 ## Licensing
 
 See the "licensing.html" file in the root directory for licensing information. Outside of lunr.js and datatables.js, all javascript code in this application is released under a [CC0 1.0 Universal license](https://creativecommons.org/publicdomain/zero/1.0/). You can copy, modify, and distribute the code for these tools, even for commercial purposes, all without asking permission. 

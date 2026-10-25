@@ -129006,7 +129006,7 @@
     "type": "Humanoid",
     "ac": 13,
     "hp": 57,
-    "init": 15,
+    "init": 0,
     "source": "Black Flag",
     "slug": "lizardfolk_shaman_bf",
     "document__title": "Black Flag"
@@ -129018,7 +129018,7 @@
     "type": "Beast",
     "ac": 10,
     "hp": 15,
-    "init": 10,
+    "init": 0,
     "source": "Black Flag",
     "slug": "horse_riding_bf",
     "document__title": "Black Flag"
@@ -129030,7 +129030,7 @@
     "type": "Monstrosity",
     "ac": 14,
     "hp": 23,
-    "init": 11,
+    "init": 1,
     "source": "Black Flag",
     "slug": "rust_monster_bf",
     "document__title": "Black Flag"
@@ -129042,7 +129042,7 @@
     "type": "Undead",
     "ac": 17,
     "hp": 314,
-    "init": 19,
+    "init": 3,
     "source": "Black Flag",
     "slug": "lich_bf",
     "document__title": "Black Flag"
@@ -129054,7 +129054,7 @@
     "type": "Beast",
     "ac": 12,
     "hp": 176,
-    "init": 14,
+    "init": 2,
     "source": "Black Flag",
     "slug": "ape_giant_bf",
     "document__title": "Black Flag"
@@ -129066,7 +129066,7 @@
     "type": "Monstrosity",
     "ac": 13,
     "hp": 76,
-    "init": 15,
+    "init": 1,
     "source": "Black Flag",
     "slug": "winter_wolf_bf",
     "document__title": "Black Flag"
@@ -129078,7 +129078,7 @@
     "type": "Monstrosity",
     "ac": 18,
     "hp": 96,
-    "init": 15,
+    "init": 0,
     "source": "Black Flag",
     "slug": "gorgon_bf",
     "document__title": "Black Flag"
@@ -129090,7 +129090,7 @@
     "type": "Elemental",
     "ac": 17,
     "hp": 216,
-    "init": 16,
+    "init": 6,
     "source": "Black Flag",
     "slug": "sila_bf",
     "document__title": "Black Flag"
@@ -129102,7 +129102,7 @@
     "type": "Construct",
     "ac": 20,
     "hp": 201,
-    "init": 15,
+    "init": -1,
     "source": "Black Flag",
     "slug": "iron_golem_bf",
     "document__title": "Black Flag"
@@ -129114,7 +129114,7 @@
     "type": "Construct",
     "ac": 17,
     "hp": 139,
-    "init": 12,
+    "init": -1,
     "source": "Black Flag",
     "slug": "shield_guardian_bf",
     "document__title": "Black Flag"
@@ -129126,7 +129126,7 @@
     "type": "Undead",
     "ac": 17,
     "hp": 185,
-    "init": 15,
+    "init": 7,
     "source": "Black Flag",
     "slug": "virtuoso_lich_bf",
     "document__title": "Black Flag"
@@ -129138,7 +129138,7 @@
     "type": "Fiend",
     "ac": 11,
     "hp": 13,
-    "init": 9,
+    "init": 0,
     "source": "Black Flag",
     "slug": "dretch_bf",
     "document__title": "Black Flag"
@@ -129150,7 +129150,7 @@
     "type": "Beast",
     "ac": 12,
     "hp": 25,
-    "init": 10,
+    "init": 0,
     "source": "Black Flag",
     "slug": "crocodile_bf",
     "document__title": "Black Flag"
@@ -129162,7 +129162,7 @@
     "type": "Humanoid",
     "ac": 17,
     "hp": 72,
-    "init": 10,
+    "init": 2,
     "source": "Black Flag",
     "slug": "hobgoblin_commander_bf",
     "document__title": "Black Flag"
@@ -129174,7 +129174,7 @@
     "type": "Undead",
     "ac": 8,
     "hp": 72,
-    "init": 8,
+    "init": -2,
     "source": "Black Flag",
     "slug": "ogre_zombie_bf",
     "document__title": "Black Flag"
@@ -129186,7 +129186,7 @@
     "type": "Beast",
     "ac": 11,
     "hp": 8,
-    "init": 9,
+    "init": 0,
     "source": "Black Flag",
     "slug": "insect_scorpion_bf",
     "document__title": "Black Flag"
@@ -129198,7 +129198,7 @@
     "type": "Monstrosity",
     "ac": 11,
     "hp": 44,
-    "init": 13,
+    "init": 1,
     "source": "Black Flag",
     "slug": "hippogriff_bf",
     "document__title": "Black Flag"
@@ -129210,7 +129210,7 @@
     "type": "Construct",
     "ac": 9,
     "hp": 129,
-    "init": 13,
+    "init": -1,
     "source": "Black Flag",
     "slug": "flesh_golem_bf",
     "document__title": "Black Flag"
@@ -129222,7 +129222,7 @@
     "type": "Plant",
     "ac": 10,
     "hp": 14,
-    "init": 6,
+    "init": 0,
     "source": "Black Flag",
     "slug": "violet_fungus_bf",
     "document__title": "Black Flag"
@@ -129234,7 +129234,7 @@
     "type": "Fey",
     "ac": 14,
     "hp": 38,
-    "init": 13,
+    "init": 4,
     "source": "Black Flag",
     "slug": "flinderbeast_bf",
     "document__title": "Black Flag"
@@ -129246,7 +129246,7 @@
     "type": "Swarm",
     "ac": 13,
     "hp": 63,
-    "init": 11,
+    "init": 5,
     "source": "Black Flag",
     "slug": "insatiable_brood_bf",
     "document__title": "Black Flag"
@@ -129258,7 +129258,7 @@
     "type": "Beast",
     "ac": 11,
     "hp": 15,
-    "init": 9,
+    "init": 0,
     "source": "Black Flag",
     "slug": "boar_bf",
     "document__title": "Black Flag"
@@ -129270,7 +129270,7 @@
     "type": "Humanoid",
     "ac": 12,
     "hp": 25,
-    "init": 15,
+    "init": 0,
     "source": "Black Flag",
     "slug": "sahuagin_bf",
     "document__title": "Black Flag"
@@ -129282,7 +129282,7 @@
     "type": "Swarm",
     "ac": 12,
     "hp": 24,
-    "init": 8,
+    "init": 1,
     "source": "Black Flag",
     "slug": "insect_swarm_of_insects_bf",
     "document__title": "Black Flag"
@@ -129294,7 +129294,7 @@
     "type": "Construct",
     "ac": 12,
     "hp": 45,
-    "init": 8,
+    "init": 2,
     "source": "Black Flag",
     "slug": "rug_of_smothering_bf",
     "document__title": "Black Flag"
@@ -129306,7 +129306,7 @@
     "type": "Humanoid",
     "ac": 16,
     "hp": 51,
-    "init": 10,
+    "init": 4,
     "source": "Black Flag",
     "slug": "bandit_captain_bf",
     "document__title": "Black Flag"
@@ -129318,7 +129318,7 @@
     "type": "Dragon",
     "ac": 17,
     "hp": 51,
-    "init": 14,
+    "init": 2,
     "source": "Black Flag",
     "slug": "silver_dragon_wyrmling_bf",
     "document__title": "Black Flag"
@@ -129330,7 +129330,7 @@
     "type": "Monstrosity",
     "ac": 13,
     "hp": 60,
-    "init": 12,
+    "init": 0,
     "source": "Black Flag",
     "slug": "merrow_bf",
     "document__title": "Black Flag"
@@ -129342,7 +129342,7 @@
     "type": "Monstrosity",
     "ac": 12,
     "hp": 63,
-    "init": 13,
+    "init": 2,
     "source": "Black Flag",
     "slug": "centaur_bf",
     "document__title": "Black Flag"
@@ -129354,7 +129354,7 @@
     "type": "Dragon",
     "ac": 18,
     "hp": 148,
-    "init": 17,
+    "init": 3,
     "source": "Black Flag",
     "slug": "young_bronze_dragon_bf",
     "document__title": "Black Flag"
@@ -129366,7 +129366,7 @@
     "type": "Dragon",
     "ac": 19,
     "hp": 301,
-    "init": 27,
+    "init": 8,
     "source": "Black Flag",
     "slug": "adult_gold_dragon_bf",
     "document__title": "Black Flag"
@@ -129378,7 +129378,7 @@
     "type": "Beast",
     "ac": 13,
     "hp": 14,
-    "init": 11,
+    "init": 2,
     "source": "Black Flag",
     "slug": "wolf_bf",
     "document__title": "Black Flag"
@@ -129390,7 +129390,7 @@
     "type": "Monstrosity",
     "ac": 13,
     "hp": 25,
-    "init": 14,
+    "init": 1,
     "source": "Black Flag",
     "slug": "worg_bf",
     "document__title": "Black Flag"
@@ -129402,7 +129402,7 @@
     "type": "Undead",
     "ac": 12,
     "hp": 17,
-    "init": 10,
+    "init": 4,
     "source": "Black Flag",
     "slug": "shadow_bf",
     "document__title": "Black Flag"
@@ -129414,7 +129414,7 @@
     "type": "Undead",
     "ac": 13,
     "hp": 14,
-    "init": 9,
+    "init": 2,
     "source": "Black Flag",
     "slug": "skeleton_bf",
     "document__title": "Black Flag"
@@ -129426,7 +129426,7 @@
     "type": "Beast",
     "ac": 11,
     "hp": 8,
-    "init": 12,
+    "init": 1,
     "source": "Black Flag",
     "slug": "octopus_bf",
     "document__title": "Black Flag"
@@ -129438,7 +129438,7 @@
     "type": "Beast",
     "ac": 10,
     "hp": 10,
-    "init": 10,
+    "init": 0,
     "source": "Black Flag",
     "slug": "mule_bf",
     "document__title": "Black Flag"
@@ -129450,7 +129450,7 @@
     "type": "Construct",
     "ac": 16,
     "hp": 11,
-    "init": 7,
+    "init": 3,
     "source": "Black Flag",
     "slug": "flying_sword_bf",
     "document__title": "Black Flag"
@@ -129462,7 +129462,7 @@
     "type": "Fey",
     "ac": 15,
     "hp": 38,
-    "init": 14,
+    "init": 2,
     "source": "Black Flag",
     "slug": "dryad_bf",
     "document__title": "Black Flag"
@@ -129474,7 +129474,7 @@
     "type": "Celestial",
     "ac": 12,
     "hp": 92,
-    "init": 16,
+    "init": 2,
     "source": "Black Flag",
     "slug": "unicorn_bf",
     "document__title": "Black Flag"
@@ -129486,7 +129486,7 @@
     "type": "Humanoid",
     "ac": 12,
     "hp": 57,
-    "init": 12,
+    "init": 4,
     "source": "Black Flag",
     "slug": "wererat_bf",
     "document__title": "Black Flag"
@@ -129498,7 +129498,7 @@
     "type": "Fiend",
     "ac": 15,
     "hp": 82,
-    "init": 13,
+    "init": 5,
     "source": "Black Flag",
     "slug": "husk_demon_bf",
     "document__title": "Black Flag"
@@ -129510,7 +129510,7 @@
     "type": "Monstrosity",
     "ac": 25,
     "hp": 680,
-    "init": 19,
+    "init": 3,
     "source": "Black Flag",
     "slug": "tarrasque_bf",
     "document__title": "Black Flag"
@@ -129522,7 +129522,7 @@
     "type": "Humanoid",
     "ac": 15,
     "hp": 12,
-    "init": 12,
+    "init": 2,
     "source": "Black Flag",
     "slug": "drow_bf",
     "document__title": "Black Flag"
@@ -129534,7 +129534,7 @@
     "type": "Dragon",
     "ac": 18,
     "hp": 252,
-    "init": 22,
+    "init": 6,
     "source": "Black Flag",
     "slug": "adult_copper_dragon_bf",
     "document__title": "Black Flag"
@@ -129546,7 +129546,7 @@
     "type": "Plant",
     "ac": 16,
     "hp": 185,
-    "init": 17,
+    "init": -1,
     "source": "Black Flag",
     "slug": "treant_bf",
     "document__title": "Black Flag"
@@ -129558,7 +129558,7 @@
     "type": "Humanoid",
     "ac": 12,
     "hp": 9,
-    "init": 12,
+    "init": 0,
     "source": "Black Flag",
     "slug": "merfolk_bf",
     "document__title": "Black Flag"
@@ -129570,7 +129570,7 @@
     "type": "Humanoid",
     "ac": 12,
     "hp": 9,
-    "init": 8,
+    "init": 4,
     "source": "Black Flag",
     "slug": "kobold_bf",
     "document__title": "Black Flag"
@@ -129582,7 +129582,7 @@
     "type": "Elemental",
     "ac": 17,
     "hp": 216,
-    "init": 17,
+    "init": 6,
     "source": "Black Flag",
     "slug": "djinni_bf",
     "document__title": "Black Flag"
@@ -129594,7 +129594,7 @@
     "type": "Beast",
     "ac": 10,
     "hp": 8,
-    "init": 13,
+    "init": 0,
     "source": "Black Flag",
     "slug": "vulture_bf",
     "document__title": "Black Flag"
@@ -129606,7 +129606,7 @@
     "type": "Humanoid",
     "ac": 17,
     "hp": 212,
-    "init": 16,
+    "init": 2,
     "source": "Black Flag",
     "slug": "archmage_bf",
     "document__title": "Black Flag"
@@ -129618,7 +129618,7 @@
     "type": "Monstrosity",
     "ac": 18,
     "hp": 255,
-    "init": 14,
+    "init": -2,
     "source": "Black Flag",
     "slug": "purple_worm_bf",
     "document__title": "Black Flag"
@@ -129630,7 +129630,7 @@
     "type": "Beast",
     "ac": 11,
     "hp": 63,
-    "init": 11,
+    "init": -1,
     "source": "Black Flag",
     "slug": "rhinoceros_bf",
     "document__title": "Black Flag"
@@ -129642,7 +129642,7 @@
     "type": "Beast",
     "ac": 12,
     "hp": 8,
-    "init": 14,
+    "init": 2,
     "source": "Black Flag",
     "slug": "hawk_blood_bf",
     "document__title": "Black Flag"
@@ -129654,7 +129654,7 @@
     "type": "Swarm",
     "ac": 14,
     "hp": 48,
-    "init": 10,
+    "init": 4,
     "source": "Black Flag",
     "slug": "snake_swarm_of_poisonous_snakes_bf",
     "document__title": "Black Flag"
@@ -129666,7 +129666,7 @@
     "type": "Dragon",
     "ac": 17,
     "hp": 144,
-    "init": 17,
+    "init": 4,
     "source": "Black Flag",
     "slug": "young_copper_dragon_bf",
     "document__title": "Black Flag"
@@ -129678,7 +129678,7 @@
     "type": "Beast",
     "ac": 12,
     "hp": 42,
-    "init": 13,
+    "init": 2,
     "source": "Black Flag",
     "slug": "lion_bf",
     "document__title": "Black Flag"
@@ -129690,7 +129690,7 @@
     "type": "Humanoid",
     "ac": 13,
     "hp": 25,
-    "init": 12,
+    "init": 1,
     "source": "Black Flag",
     "slug": "orc_bf",
     "document__title": "Black Flag"
@@ -129702,7 +129702,7 @@
     "type": "Dragon",
     "ac": 16,
     "hp": 54,
-    "init": 14,
+    "init": 2,
     "source": "Black Flag",
     "slug": "white_dragon_wyrmling_bf",
     "document__title": "Black Flag"
@@ -129714,7 +129714,7 @@
     "type": "Monstrosity",
     "ac": 17,
     "hp": 216,
-    "init": 10,
+    "init": 1,
     "source": "Black Flag",
     "slug": "remorhaz_bf",
     "document__title": "Black Flag"
@@ -129726,7 +129726,7 @@
     "type": "Humanoid",
     "ac": 17,
     "hp": 210,
-    "init": 19,
+    "init": 2,
     "source": "Black Flag",
     "slug": "archdruid_bf",
     "document__title": "Black Flag"
@@ -129738,7 +129738,7 @@
     "type": "Beast",
     "ac": 12,
     "hp": 14,
-    "init": 10,
+    "init": 2,
     "source": "Black Flag",
     "slug": "snake_giant_poisonous_bf",
     "document__title": "Black Flag"
@@ -129750,7 +129750,7 @@
     "type": "Fiend",
     "ac": 16,
     "hp": 138,
-    "init": 14,
+    "init": 2,
     "source": "Black Flag",
     "slug": "chain_devil_bf",
     "document__title": "Black Flag"
@@ -129762,7 +129762,7 @@
     "type": "Humanoid",
     "ac": 16,
     "hp": 108,
-    "init": 11,
+    "init": 2,
     "source": "Black Flag",
     "slug": "gladiator_bf",
     "document__title": "Black Flag"
@@ -129774,7 +129774,7 @@
     "type": "Beast",
     "ac": 14,
     "hp": 40,
-    "init": 13,
+    "init": 2,
     "source": "Black Flag",
     "slug": "wolf_dire_bf",
     "document__title": "Black Flag"
@@ -129786,7 +129786,7 @@
     "type": "Fey",
     "ac": 16,
     "hp": 156,
-    "init": 16,
+    "init": 8,
     "source": "Black Flag",
     "slug": "ambush_hag_bf",
     "document__title": "Black Flag"
@@ -129798,7 +129798,7 @@
     "type": "Beast",
     "ac": 13,
     "hp": 126,
-    "init": 10,
+    "init": -1,
     "source": "Black Flag",
     "slug": "triceratops_bf",
     "document__title": "Black Flag"
@@ -129810,7 +129810,7 @@
     "type": "Humanoid",
     "ac": 13,
     "hp": 9,
-    "init": 11,
+    "init": 1,
     "source": "Black Flag",
     "slug": "cultist_bf",
     "document__title": "Black Flag"
@@ -129822,7 +129822,7 @@
     "type": "Dragon",
     "ac": 19,
     "hp": 267,
-    "init": 22,
+    "init": 5,
     "source": "Black Flag",
     "slug": "adult_blue_dragon_bf",
     "document__title": "Black Flag"
@@ -129834,7 +129834,7 @@
     "type": "Beast",
     "ac": 10,
     "hp": 9,
-    "init": 11,
+    "init": 0,
     "source": "Black Flag",
     "slug": "frog_bf",
     "document__title": "Black Flag"
@@ -129846,7 +129846,7 @@
     "type": "Swarm",
     "ac": 12,
     "hp": 14,
-    "init": 11,
+    "init": 2,
     "source": "Black Flag",
     "slug": "bat_swarm_of_bats_bf",
     "document__title": "Black Flag"
@@ -129858,7 +129858,7 @@
     "type": "Plant",
     "ac": 14,
     "hp": 68,
-    "init": 14,
+    "init": 2,
     "source": "Black Flag",
     "slug": "mycolid_spore_lord_bf",
     "document__title": "Black Flag"
@@ -129870,7 +129870,7 @@
     "type": "Fey",
     "ac": 14,
     "hp": 83,
-    "init": 14,
+    "init": 3,
     "source": "Black Flag",
     "slug": "feral_hunter_bf",
     "document__title": "Black Flag"
@@ -129882,7 +129882,7 @@
     "type": "Giant",
     "ac": 18,
     "hp": 175,
-    "init": 16,
+    "init": 3,
     "source": "Black Flag",
     "slug": "fire_giant_bf",
     "document__title": "Black Flag"
@@ -129894,7 +129894,7 @@
     "type": "Beast",
     "ac": 11,
     "hp": 10,
-    "init": 11,
+    "init": 1,
     "source": "Black Flag",
     "slug": "baboon_bf",
     "document__title": "Black Flag"
@@ -129906,7 +129906,7 @@
     "type": "Undead",
     "ac": 13,
     "hp": 48,
-    "init": 12,
+    "init": 3,
     "source": "Black Flag",
     "slug": "ghast_bf",
     "document__title": "Black Flag"
@@ -129918,7 +129918,7 @@
     "type": "Undead",
     "ac": 17,
     "hp": 114,
-    "init": 14,
+    "init": 2,
     "source": "Black Flag",
     "slug": "balara_bf",
     "document__title": "Black Flag"
@@ -129930,7 +129930,7 @@
     "type": "Ooze",
     "ac": 12,
     "hp": 20,
-    "init": 10,
+    "init": 4,
     "source": "Black Flag",
     "slug": "crimson_jelly_bf",
     "document__title": "Black Flag"
@@ -129942,7 +129942,7 @@
     "type": "Beast",
     "ac": 14,
     "hp": 60,
-    "init": 14,
+    "init": 3,
     "source": "Black Flag",
     "slug": "elk_giant_bf",
     "document__title": "Black Flag"
@@ -129954,7 +129954,7 @@
     "type": "Fiend",
     "ac": 18,
     "hp": 217,
-    "init": 18,
+    "init": 5,
     "source": "Black Flag",
     "slug": "marilith_bf",
     "document__title": "Black Flag"
@@ -129966,7 +129966,7 @@
     "type": "Fiend",
     "ac": 18,
     "hp": 144,
-    "init": 16,
+    "init": 3,
     "source": "Black Flag",
     "slug": "bone_devil_bf",
     "document__title": "Black Flag"
@@ -129978,7 +129978,7 @@
     "type": "Elemental",
     "ac": 14,
     "hp": 121,
-    "init": 18,
+    "init": 4,
     "source": "Black Flag",
     "slug": "invisible_stalker_bf",
     "document__title": "Black Flag"
@@ -129990,7 +129990,7 @@
     "type": "Aberration",
     "ac": 14,
     "hp": 108,
-    "init": 11,
+    "init": 0,
     "source": "Black Flag",
     "slug": "otyugh_bf",
     "document__title": "Black Flag"
@@ -130002,7 +130002,7 @@
     "type": "Dragon",
     "ac": 16,
     "hp": 36,
-    "init": 14,
+    "init": 3,
     "source": "Black Flag",
     "slug": "copper_dragon_wyrmling_bf",
     "document__title": "Black Flag"
@@ -130014,7 +130014,7 @@
     "type": "Beast",
     "ac": 10,
     "hp": 9,
-    "init": 10,
+    "init": 0,
     "source": "Black Flag",
     "slug": "rat_bf",
     "document__title": "Black Flag"
@@ -130026,7 +130026,7 @@
     "type": "Dragon",
     "ac": 19,
     "hp": 238,
-    "init": 22,
+    "init": 7,
     "source": "Black Flag",
     "slug": "adult_black_dragon_bf",
     "document__title": "Black Flag"
@@ -130038,7 +130038,7 @@
     "type": "Beast",
     "ac": 11,
     "hp": 44,
-    "init": 10,
+    "init": 1,
     "source": "Black Flag",
     "slug": "frog_giant_poisonous_bf",
     "document__title": "Black Flag"
@@ -130050,7 +130050,7 @@
     "type": "Fiend",
     "ac": 17,
     "hp": 154,
-    "init": 17,
+    "init": 2,
     "source": "Black Flag",
     "slug": "glabrezu_bf",
     "document__title": "Black Flag"
@@ -130062,7 +130062,7 @@
     "type": "Dragon",
     "ac": 19,
     "hp": 255,
-    "init": 22,
+    "init": 5,
     "source": "Black Flag",
     "slug": "adult_bronze_dragon_bf",
     "document__title": "Black Flag"
@@ -130074,7 +130074,7 @@
     "type": "Giant",
     "ac": 12,
     "hp": 126,
-    "init": 12,
+    "init": 0,
     "source": "Black Flag",
     "slug": "hill_giant_bf",
     "document__title": "Black Flag"
@@ -130086,7 +130086,7 @@
     "type": "Humanoid",
     "ac": 12,
     "hp": 9,
-    "init": 10,
+    "init": 1,
     "source": "Black Flag",
     "slug": "bandit_bf",
     "document__title": "Black Flag"
@@ -130098,7 +130098,7 @@
     "type": "Beast",
     "ac": 12,
     "hp": 42,
-    "init": 13,
+    "init": 2,
     "source": "Black Flag",
     "slug": "hyena_giant_bf",
     "document__title": "Black Flag"
@@ -130110,7 +130110,7 @@
     "type": "Monstrosity",
     "ac": 11,
     "hp": 25,
-    "init": 11,
+    "init": 1,
     "source": "Black Flag",
     "slug": "cockatrice_bf",
     "document__title": "Black Flag"
@@ -130122,7 +130122,7 @@
     "type": "Dragon",
     "ac": 21,
     "hp": 355,
-    "init": 25,
+    "init": 8,
     "source": "Black Flag",
     "slug": "ancient_black_dragon_bf",
     "document__title": "Black Flag"
@@ -130134,7 +130134,7 @@
     "type": "Fiend",
     "ac": 17,
     "hp": 104,
-    "init": 15,
+    "init": 2,
     "source": "Black Flag",
     "slug": "night_hag_bf",
     "document__title": "Black Flag"
@@ -130146,7 +130146,7 @@
     "type": "Fiend",
     "ac": 17,
     "hp": 88,
-    "init": 10,
+    "init": 2,
     "source": "Black Flag",
     "slug": "unska_bf",
     "document__title": "Black Flag"
@@ -130158,7 +130158,7 @@
     "type": "Plant",
     "ac": 13,
     "hp": 27,
-    "init": 11,
+    "init": 1,
     "source": "Black Flag",
     "slug": "wood_herald_bf",
     "document__title": "Black Flag"
@@ -130170,7 +130170,7 @@
     "type": "Plant",
     "ac": 12,
     "hp": 21,
-    "init": 13,
+    "init": 2,
     "source": "Black Flag",
     "slug": "mycolid_commoner_bf",
     "document__title": "Black Flag"
@@ -130182,7 +130182,7 @@
     "type": "Monstrosity",
     "ac": 14,
     "hp": 80,
-    "init": 13,
+    "init": 1,
     "source": "Black Flag",
     "slug": "owlbear_bf",
     "document__title": "Black Flag"
@@ -130194,7 +130194,7 @@
     "type": "Fiend",
     "ac": 15,
     "hp": 94,
-    "init": 18,
+    "init": 3,
     "source": "Black Flag",
     "slug": "barbed_devil_bf",
     "document__title": "Black Flag"
@@ -130206,7 +130206,7 @@
     "type": "Dragon",
     "ac": 17,
     "hp": 51,
-    "init": 14,
+    "init": 4,
     "source": "Black Flag",
     "slug": "black_dragon_wyrmling_bf",
     "document__title": "Black Flag"
@@ -130218,7 +130218,7 @@
     "type": "Monstrosity",
     "ac": 11,
     "hp": 25,
-    "init": 10,
+    "init": 1,
     "source": "Black Flag",
     "slug": "darkmantle_bf",
     "document__title": "Black Flag"
@@ -130230,7 +130230,7 @@
     "type": "Beast",
     "ac": 13,
     "hp": 8,
-    "init": 12,
+    "init": 3,
     "source": "Black Flag",
     "slug": "deer_bf",
     "document__title": "Black Flag"
@@ -130242,7 +130242,7 @@
     "type": "Monstrosity",
     "ac": 14,
     "hp": 80,
-    "init": 17,
+    "init": 0,
     "source": "Black Flag",
     "slug": "minotaur_bf",
     "document__title": "Black Flag"
@@ -130254,7 +130254,7 @@
     "type": "Beast",
     "ac": 11,
     "hp": 13,
-    "init": 12,
+    "init": 1,
     "source": "Black Flag",
     "slug": "axe_beak_bf",
     "document__title": "Black Flag"
@@ -130266,7 +130266,7 @@
     "type": "Humanoid",
     "ac": 12,
     "hp": 95,
-    "init": 13,
+    "init": 4,
     "source": "Black Flag",
     "slug": "weretiger_bf",
     "document__title": "Black Flag"
@@ -130278,7 +130278,7 @@
     "type": "Beast",
     "ac": 10,
     "hp": 15,
-    "init": 12,
+    "init": 0,
     "source": "Black Flag",
     "slug": "horse_draft_bf",
     "document__title": "Black Flag"
@@ -130290,7 +130290,7 @@
     "type": "Plant",
     "ac": 11,
     "hp": 23,
-    "init": 11,
+    "init": 0,
     "source": "Black Flag",
     "slug": "skullbloom_bf",
     "document__title": "Black Flag"
@@ -130302,7 +130302,7 @@
     "type": "Undead",
     "ac": 14,
     "hp": 85,
-    "init": 12,
+    "init": 4,
     "source": "Black Flag",
     "slug": "wraith_bf",
     "document__title": "Black Flag"
@@ -130314,7 +130314,7 @@
     "type": "Celestial",
     "ac": 17,
     "hp": 165,
-    "init": 19,
+    "init": 4,
     "source": "Black Flag",
     "slug": "deva_bf",
     "document__title": "Black Flag"
@@ -130326,7 +130326,7 @@
     "type": "Dragon",
     "ac": 18,
     "hp": 175,
-    "init": 19,
+    "init": 4,
     "source": "Black Flag",
     "slug": "young_silver_dragon_bf",
     "document__title": "Black Flag"
@@ -130338,7 +130338,7 @@
     "type": "Dragon",
     "ac": 19,
     "hp": 301,
-    "init": 23,
+    "init": 6,
     "source": "Black Flag",
     "slug": "adult_red_dragon_bf",
     "document__title": "Black Flag"
@@ -130350,7 +130350,7 @@
     "type": "Fiend",
     "ac": 15,
     "hp": 79,
-    "init": 15,
+    "init": 3,
     "source": "Black Flag",
     "slug": "succubus_bf",
     "document__title": "Black Flag"
@@ -130362,7 +130362,7 @@
     "type": "Swarm",
     "ac": 10,
     "hp": 14,
-    "init": 10,
+    "init": 0,
     "source": "Black Flag",
     "slug": "rat_swarm_of_rats_bf",
     "document__title": "Black Flag"
@@ -130374,7 +130374,7 @@
     "type": "Monstrosity",
     "ac": 18,
     "hp": 176,
-    "init": 18,
+    "init": 8,
     "source": "Black Flag",
     "slug": "guardian_naga_bf",
     "document__title": "Black Flag"
@@ -130386,7 +130386,7 @@
     "type": "Dragon",
     "ac": 17,
     "hp": 68,
-    "init": 14,
+    "init": 2,
     "source": "Black Flag",
     "slug": "blue_dragon_wyrmling_bf",
     "document__title": "Black Flag"
@@ -130398,7 +130398,7 @@
     "type": "Monstrosity",
     "ac": 13,
     "hp": 73,
-    "init": 10,
+    "init": 3,
     "source": "Black Flag",
     "slug": "phase_spider_bf",
     "document__title": "Black Flag"
@@ -130410,7 +130410,7 @@
     "type": "Dragon",
     "ac": 20,
     "hp": 284,
-    "init": 24,
+    "init": 6,
     "source": "Black Flag",
     "slug": "ancient_brass_dragon_bf",
     "document__title": "Black Flag"
@@ -130422,7 +130422,7 @@
     "type": "Humanoid",
     "ac": 13,
     "hp": 40,
-    "init": 16,
+    "init": 5,
     "source": "Black Flag",
     "slug": "spy_bf",
     "document__title": "Black Flag"
@@ -130434,7 +130434,7 @@
     "type": "Elemental",
     "ac": 15,
     "hp": 94,
-    "init": 13,
+    "init": 5,
     "source": "Black Flag",
     "slug": "air_elemental_bf",
     "document__title": "Black Flag"
@@ -130446,7 +130446,7 @@
     "type": "Swarm",
     "ac": 12,
     "hp": 13,
-    "init": 13,
+    "init": 2,
     "source": "Black Flag",
     "slug": "raven_swarm_of_ravens_bf",
     "document__title": "Black Flag"
@@ -130458,7 +130458,7 @@
     "type": "Monstrosity",
     "ac": 17,
     "hp": 108,
-    "init": 16,
+    "init": 0,
     "source": "Black Flag",
     "slug": "bulette_bf",
     "document__title": "Black Flag"
@@ -130470,7 +130470,7 @@
     "type": "Beast",
     "ac": 12,
     "hp": 105,
-    "init": 12,
+    "init": -1,
     "source": "Black Flag",
     "slug": "elephant_bf",
     "document__title": "Black Flag"
@@ -130482,7 +130482,7 @@
     "type": "Dragon",
     "ac": 18,
     "hp": 225,
-    "init": 21,
+    "init": 5,
     "source": "Black Flag",
     "slug": "adult_brass_dragon_bf",
     "document__title": "Black Flag"
@@ -130494,7 +130494,7 @@
     "type": "Undead",
     "ac": 12,
     "hp": 27,
-    "init": 10,
+    "init": 2,
     "source": "Black Flag",
     "slug": "specter_bf",
     "document__title": "Black Flag"
@@ -130506,7 +130506,7 @@
     "type": "Beast",
     "ac": 10,
     "hp": 9,
-    "init": 11,
+    "init": 0,
     "source": "Black Flag",
     "slug": "badger_bf",
     "document__title": "Black Flag"
@@ -130518,7 +130518,7 @@
     "type": "Giant",
     "ac": 12,
     "hp": 95,
-    "init": 14,
+    "init": -1,
     "source": "Black Flag",
     "slug": "ettin_bf",
     "document__title": "Black Flag"
@@ -130530,7 +130530,7 @@
     "type": "Beast",
     "ac": 14,
     "hp": 120,
-    "init": 10,
+    "init": -1,
     "source": "Black Flag",
     "slug": "crocodile_giant_bf",
     "document__title": "Black Flag"
@@ -130542,7 +130542,7 @@
     "type": "Elemental",
     "ac": 19,
     "hp": 111,
-    "init": 16,
+    "init": 0,
     "source": "Black Flag",
     "slug": "xorn_bf",
     "document__title": "Black Flag"
@@ -130554,7 +130554,7 @@
     "type": "Dragon",
     "ac": 17,
     "hp": 126,
-    "init": 17,
+    "init": 3,
     "source": "Black Flag",
     "slug": "young_white_dragon_bf",
     "document__title": "Black Flag"
@@ -130566,7 +130566,7 @@
     "type": "Fiend",
     "ac": 15,
     "hp": 118,
-    "init": 14,
+    "init": 3,
     "source": "Black Flag",
     "slug": "golmana_bf",
     "document__title": "Black Flag"
@@ -130578,7 +130578,7 @@
     "type": "Beast",
     "ac": 12,
     "hp": 63,
-    "init": 8,
+    "init": 0,
     "source": "Black Flag",
     "slug": "boar_giant_bf",
     "document__title": "Black Flag"
@@ -130590,7 +130590,7 @@
     "type": "Beast",
     "ac": 13,
     "hp": 25,
-    "init": 11,
+    "init": 2,
     "source": "Black Flag",
     "slug": "seahorse_giant_bf",
     "document__title": "Black Flag"
@@ -130602,7 +130602,7 @@
     "type": "Elemental",
     "ac": 15,
     "hp": 114,
-    "init": 10,
+    "init": 2,
     "source": "Black Flag",
     "slug": "salamander_bf",
     "document__title": "Black Flag"
@@ -130614,7 +130614,7 @@
     "type": "Humanoid",
     "ac": 15,
     "hp": 22,
-    "init": 10,
+    "init": 1,
     "source": "Black Flag",
     "slug": "gnoll_bf",
     "document__title": "Black Flag"
@@ -130626,7 +130626,7 @@
     "type": "Dragon",
     "ac": 17,
     "hp": 51,
-    "init": 14,
+    "init": 3,
     "source": "Black Flag",
     "slug": "green_dragon_wyrmling_bf",
     "document__title": "Black Flag"
@@ -130638,7 +130638,7 @@
     "type": "Beast",
     "ac": 11,
     "hp": 8,
-    "init": 13,
+    "init": 1,
     "source": "Black Flag",
     "slug": "owl_bf",
     "document__title": "Black Flag"
@@ -130650,7 +130650,7 @@
     "type": "Beast",
     "ac": 12,
     "hp": 15,
-    "init": 15,
+    "init": 2,
     "source": "Black Flag",
     "slug": "owl_giant_bf",
     "document__title": "Black Flag"
@@ -130662,7 +130662,7 @@
     "type": "Undead",
     "ac": 15,
     "hp": 91,
-    "init": 13,
+    "init": 6,
     "source": "Black Flag",
     "slug": "vampire_spawn_bf",
     "document__title": "Black Flag"
@@ -130674,7 +130674,7 @@
     "type": "Beast",
     "ac": 13,
     "hp": 126,
-    "init": 13,
+    "init": 0,
     "source": "Black Flag",
     "slug": "shark_giant_bf",
     "document__title": "Black Flag"
@@ -130686,7 +130686,7 @@
     "type": "Beast",
     "ac": 11,
     "hp": 44,
-    "init": 13,
+    "init": 0,
     "source": "Black Flag",
     "slug": "bear_brown_bf",
     "document__title": "Black Flag"
@@ -130698,7 +130698,7 @@
     "type": "Fiend",
     "ac": 16,
     "hp": 166,
-    "init": 18,
+    "init": 8,
     "source": "Black Flag",
     "slug": "rakshasa_bf",
     "document__title": "Black Flag"
@@ -130710,7 +130710,7 @@
     "type": "Dragon",
     "ac": 17,
     "hp": 68,
-    "init": 14,
+    "init": 2,
     "source": "Black Flag",
     "slug": "red_dragon_wyrmling_bf",
     "document__title": "Black Flag"
@@ -130722,7 +130722,7 @@
     "type": "Dragon",
     "ac": 18,
     "hp": 148,
-    "init": 17,
+    "init": 4,
     "source": "Black Flag",
     "slug": "young_green_dragon_bf",
     "document__title": "Black Flag"
@@ -130734,7 +130734,7 @@
     "type": "Beast",
     "ac": 10,
     "hp": 10,
-    "init": 10,
+    "init": 0,
     "source": "Black Flag",
     "slug": "pony_bf",
     "document__title": "Black Flag"
@@ -130746,7 +130746,7 @@
     "type": "Humanoid",
     "ac": 10,
     "hp": 40,
-    "init": 11,
+    "init": 1,
     "source": "Black Flag",
     "slug": "mage_apprentice_bf",
     "document__title": "Black Flag"
@@ -130758,7 +130758,7 @@
     "type": "Plant",
     "ac": 13,
     "hp": 60,
-    "init": 10,
+    "init": -2,
     "source": "Black Flag",
     "slug": "awakened_tree_bf",
     "document__title": "Black Flag"
@@ -130770,7 +130770,7 @@
     "type": "Fey",
     "ac": 14,
     "hp": 51,
-    "init": 11,
+    "init": 1,
     "source": "Black Flag",
     "slug": "sea_hag_bf",
     "document__title": "Black Flag"
@@ -130782,7 +130782,7 @@
     "type": "Fiend",
     "ac": 8,
     "hp": 17,
-    "init": 10,
+    "init": -2,
     "source": "Black Flag",
     "slug": "lemure_bf",
     "document__title": "Black Flag"
@@ -130794,7 +130794,7 @@
     "type": "Monstrosity",
     "ac": 12,
     "hp": 58,
-    "init": 11,
+    "init": 1,
     "source": "Black Flag",
     "slug": "mimic_bf",
     "document__title": "Black Flag"
@@ -130806,7 +130806,7 @@
     "type": "Humanoid",
     "ac": 17,
     "hp": 90,
-    "init": 13,
+    "init": 2,
     "source": "Black Flag",
     "slug": "orc_warlord_bf",
     "document__title": "Black Flag"
@@ -130818,7 +130818,7 @@
     "type": "Elemental",
     "ac": 12,
     "hp": 27,
-    "init": 12,
+    "init": 0,
     "source": "Black Flag",
     "slug": "magma_mephit_bf",
     "document__title": "Black Flag"
@@ -130830,7 +130830,7 @@
     "type": "Elemental",
     "ac": 17,
     "hp": 199,
-    "init": 17,
+    "init": 1,
     "source": "Black Flag",
     "slug": "hinn_bf",
     "document__title": "Black Flag"
@@ -130842,7 +130842,7 @@
     "type": "Undead",
     "ac": 17,
     "hp": 31,
-    "init": 13,
+    "init": 4,
     "source": "Black Flag",
     "slug": "willowisp_bf",
     "document__title": "Black Flag"
@@ -130854,7 +130854,7 @@
     "type": "Celestial",
     "ac": 19,
     "hp": 242,
-    "init": 21,
+    "init": 5,
     "source": "Black Flag",
     "slug": "planetar_bf",
     "document__title": "Black Flag"
@@ -130866,7 +130866,7 @@
     "type": "Beast",
     "ac": 13,
     "hp": 14,
-    "init": 13,
+    "init": 2,
     "source": "Black Flag",
     "slug": "spider_giant_wolf_bf",
     "document__title": "Black Flag"
@@ -130878,7 +130878,7 @@
     "type": "Beast",
     "ac": 12,
     "hp": 25,
-    "init": 10,
+    "init": 2,
     "source": "Black Flag",
     "slug": "insect_giant_wasp_bf",
     "document__title": "Black Flag"
@@ -130890,7 +130890,7 @@
     "type": "Beast",
     "ac": 10,
     "hp": 15,
-    "init": 11,
+    "init": 0,
     "source": "Black Flag",
     "slug": "badger_giant_bf",
     "document__title": "Black Flag"
@@ -130902,7 +130902,7 @@
     "type": "Dragon",
     "ac": 18,
     "hp": 193,
-    "init": 18,
+    "init": 4,
     "source": "Black Flag",
     "slug": "young_red_dragon_bf",
     "document__title": "Black Flag"
@@ -130914,7 +130914,7 @@
     "type": "Undead",
     "ac": 17,
     "hp": 270,
-    "init": 19,
+    "init": 0,
     "source": "Black Flag",
     "slug": "mummy_lord_bf",
     "document__title": "Black Flag"
@@ -130926,7 +130926,7 @@
     "type": "Giant",
     "ac": 11,
     "hp": 66,
-    "init": 8,
+    "init": -1,
     "source": "Black Flag",
     "slug": "ogre_bf",
     "document__title": "Black Flag"
@@ -130938,7 +130938,7 @@
     "type": "Beast",
     "ac": 11,
     "hp": 15,
-    "init": 12,
+    "init": 1,
     "source": "Black Flag",
     "slug": "frog_giant_bf",
     "document__title": "Black Flag"
@@ -130950,7 +130950,7 @@
     "type": "Beast",
     "ac": 11,
     "hp": 9,
-    "init": 10,
+    "init": 1,
     "source": "Black Flag",
     "slug": "snake_poisonous_bf",
     "document__title": "Black Flag"
@@ -130962,7 +130962,7 @@
     "type": "Beast",
     "ac": 11,
     "hp": 25,
-    "init": 11,
+    "init": 0,
     "source": "Black Flag",
     "slug": "goat_giant_bf",
     "document__title": "Black Flag"
@@ -130974,7 +130974,7 @@
     "type": "Celestial",
     "ac": 12,
     "hp": 57,
-    "init": 12,
+    "init": 2,
     "source": "Black Flag",
     "slug": "pegasus_bf",
     "document__title": "Black Flag"
@@ -130986,7 +130986,7 @@
     "type": "Fiend",
     "ac": 16,
     "hp": 94,
-    "init": 15,
+    "init": 6,
     "source": "Black Flag",
     "slug": "mire_fiend_bf",
     "document__title": "Black Flag"
@@ -130998,7 +130998,7 @@
     "type": "Aberration",
     "ac": 11,
     "hp": 9,
-    "init": 10,
+    "init": 1,
     "source": "Black Flag",
     "slug": "lantern_hagfish_bf",
     "document__title": "Black Flag"
@@ -131010,7 +131010,7 @@
     "type": "Plant",
     "ac": 5,
     "hp": 7,
-    "init": 6,
+    "init": -5,
     "source": "Black Flag",
     "slug": "shrieker_bf",
     "document__title": "Black Flag"
@@ -131022,7 +131022,7 @@
     "type": "Humanoid",
     "ac": 12,
     "hp": 9,
-    "init": 12,
+    "init": 0,
     "source": "Black Flag",
     "slug": "wild_warrior_bf",
     "document__title": "Black Flag"
@@ -131034,7 +131034,7 @@
     "type": "Beast",
     "ac": 10,
     "hp": 8,
-    "init": 8,
+    "init": 0,
     "source": "Black Flag",
     "slug": "quipper_bf",
     "document__title": "Black Flag"
@@ -131046,7 +131046,7 @@
     "type": "Dragon",
     "ac": 17,
     "hp": 68,
-    "init": 17,
+    "init": 4,
     "source": "Black Flag",
     "slug": "gold_dragon_wyrmling_bf",
     "document__title": "Black Flag"
@@ -131058,7 +131058,7 @@
     "type": "Beast",
     "ac": 12,
     "hp": 15,
-    "init": 11,
+    "init": 2,
     "source": "Black Flag",
     "slug": "bat_giant_bf",
     "document__title": "Black Flag"
@@ -131070,7 +131070,7 @@
     "type": "Beast",
     "ac": 13,
     "hp": 25,
-    "init": 13,
+    "init": 4,
     "source": "Black Flag",
     "slug": "velociraptor_bf",
     "document__title": "Black Flag"
@@ -131082,7 +131082,7 @@
     "type": "Humanoid",
     "ac": 15,
     "hp": 100,
-    "init": 12,
+    "init": 1,
     "source": "Black Flag",
     "slug": "lizardfolk_ruler_bf",
     "document__title": "Black Flag"
@@ -131094,7 +131094,7 @@
     "type": "Monstrosity",
     "ac": 12,
     "hp": 40,
-    "init": 15,
+    "init": 2,
     "source": "Black Flag",
     "slug": "death_dog_bf",
     "document__title": "Black Flag"
@@ -131106,7 +131106,7 @@
     "type": "Dragon",
     "ac": 19,
     "hp": 267,
-    "init": 22,
+    "init": 5,
     "source": "Black Flag",
     "slug": "adult_silver_dragon_bf",
     "document__title": "Black Flag"
@@ -131118,7 +131118,7 @@
     "type": "Beast",
     "ac": 13,
     "hp": 60,
-    "init": 13,
+    "init": 2,
     "source": "Black Flag",
     "slug": "plesiosaurus_bf",
     "document__title": "Black Flag"
@@ -131130,7 +131130,7 @@
     "type": "Dragon",
     "ac": 13,
     "hp": 147,
-    "init": 14,
+    "init": 0,
     "source": "Black Flag",
     "slug": "wyvern_bf",
     "document__title": "Black Flag"
@@ -131142,7 +131142,7 @@
     "type": "Elemental",
     "ac": 15,
     "hp": 52,
-    "init": 10,
+    "init": 0,
     "source": "Black Flag",
     "slug": "gargoyle_bf",
     "document__title": "Black Flag"
@@ -131154,7 +131154,7 @@
     "type": "Beast",
     "ac": 12,
     "hp": 27,
-    "init": 12,
+    "init": 1,
     "source": "Black Flag",
     "slug": "shark_reef_bf",
     "document__title": "Black Flag"
@@ -131166,7 +131166,7 @@
     "type": "Monstrosity",
     "ac": 18,
     "hp": 112,
-    "init": 15,
+    "init": 6,
     "source": "Black Flag",
     "slug": "drider_bf",
     "document__title": "Black Flag"
@@ -131178,7 +131178,7 @@
     "type": "Monstrosity",
     "ac": 15,
     "hp": 68,
-    "init": 9,
+    "init": -1,
     "source": "Black Flag",
     "slug": "basilisk_bf",
     "document__title": "Black Flag"
@@ -131190,7 +131190,7 @@
     "type": "Elemental",
     "ac": 14,
     "hp": 22,
-    "init": 10,
+    "init": 2,
     "source": "Black Flag",
     "slug": "magmin_bf",
     "document__title": "Black Flag"
@@ -131202,7 +131202,7 @@
     "type": "Fiend",
     "ac": 16,
     "hp": 138,
-    "init": 14,
+    "init": 3,
     "source": "Black Flag",
     "slug": "hezrou_bf",
     "document__title": "Black Flag"
@@ -131214,7 +131214,7 @@
     "type": "Beast",
     "ac": 12,
     "hp": 8,
-    "init": 10,
+    "init": 0,
     "source": "Black Flag",
     "slug": "spider_bf",
     "document__title": "Black Flag"
@@ -131226,7 +131226,7 @@
     "type": "Monstrosity",
     "ac": 15,
     "hp": 166,
-    "init": 15,
+    "init": 6,
     "source": "Black Flag",
     "slug": "spirit_naga_bf",
     "document__title": "Black Flag"
@@ -131238,7 +131238,7 @@
     "type": "Aberration",
     "ac": 15,
     "hp": 12,
-    "init": 13,
+    "init": 3,
     "source": "Black Flag",
     "slug": "star_crow_bf",
     "document__title": "Black Flag"
@@ -131250,7 +131250,7 @@
     "type": "Beast",
     "ac": 13,
     "hp": 14,
-    "init": 10,
+    "init": 3,
     "source": "Black Flag",
     "slug": "rat_giant_bf",
     "document__title": "Black Flag"
@@ -131262,7 +131262,7 @@
     "type": "Fiend",
     "ac": 13,
     "hp": 31,
-    "init": 11,
+    "init": 3,
     "source": "Black Flag",
     "slug": "imp_bf",
     "document__title": "Black Flag"
@@ -131274,7 +131274,7 @@
     "type": "Beast",
     "ac": 10,
     "hp": 8,
-    "init": 13,
+    "init": 0,
     "source": "Black Flag",
     "slug": "hyena_bf",
     "document__title": "Black Flag"
@@ -131286,7 +131286,7 @@
     "type": "Humanoid",
     "ac": 13,
     "hp": 40,
-    "init": 13,
+    "init": 5,
     "source": "Black Flag",
     "slug": "vampire_thrall_bf",
     "document__title": "Black Flag"
@@ -131298,7 +131298,7 @@
     "type": "Beast",
     "ac": 15,
     "hp": 13,
-    "init": 9,
+    "init": 2,
     "source": "Black Flag",
     "slug": "crab_giant_bf",
     "document__title": "Black Flag"
@@ -131310,7 +131310,7 @@
     "type": "Beast",
     "ac": 11,
     "hp": 9,
-    "init": 10,
+    "init": 0,
     "source": "Black Flag",
     "slug": "seahorse_bf",
     "document__title": "Black Flag"
@@ -131322,7 +131322,7 @@
     "type": "Humanoid",
     "ac": 18,
     "hp": 68,
-    "init": 13,
+    "init": 0,
     "source": "Black Flag",
     "slug": "knight_bf",
     "document__title": "Black Flag"
@@ -131334,7 +131334,7 @@
     "type": "Humanoid",
     "ac": 18,
     "hp": 18,
-    "init": 10,
+    "init": 1,
     "source": "Black Flag",
     "slug": "hobgoblin_bf",
     "document__title": "Black Flag"
@@ -131346,7 +131346,7 @@
     "type": "Beast",
     "ac": 12,
     "hp": 63,
-    "init": 13,
+    "init": 2,
     "source": "Black Flag",
     "slug": "tiger_sabertoothed_bf",
     "document__title": "Black Flag"
@@ -131358,7 +131358,7 @@
     "type": "Monstrosity",
     "ac": 20,
     "hp": 111,
-    "init": 16,
+    "init": -1,
     "source": "Black Flag",
     "slug": "roper_bf",
     "document__title": "Black Flag"
@@ -131370,7 +131370,7 @@
     "type": "Plant",
     "ac": 10,
     "hp": 9,
-    "init": 10,
+    "init": 0,
     "source": "Black Flag",
     "slug": "awakened_shrub_bf",
     "document__title": "Black Flag"
@@ -131382,7 +131382,7 @@
     "type": "Dragon",
     "ac": 22,
     "hp": 382,
-    "init": 30,
+    "init": 9,
     "source": "Black Flag",
     "slug": "ancient_gold_dragon_bf",
     "document__title": "Black Flag"
@@ -131394,7 +131394,7 @@
     "type": "Dragon",
     "ac": 18,
     "hp": 238,
-    "init": 22,
+    "init": 5,
     "source": "Black Flag",
     "slug": "adult_white_dragon_bf",
     "document__title": "Black Flag"
@@ -131406,7 +131406,7 @@
     "type": "Beast",
     "ac": 13,
     "hp": 14,
-    "init": 13,
+    "init": 3,
     "source": "Black Flag",
     "slug": "weasel_giant_bf",
     "document__title": "Black Flag"
@@ -131418,7 +131418,7 @@
     "type": "Beast",
     "ac": 15,
     "hp": 22,
-    "init": 11,
+    "init": 1,
     "source": "Black Flag",
     "slug": "horse_war_bf",
     "document__title": "Black Flag"
@@ -131430,7 +131430,7 @@
     "type": "Dragon",
     "ac": 17,
     "hp": 119,
-    "init": 16,
+    "init": 3,
     "source": "Black Flag",
     "slug": "young_brass_dragon_bf",
     "document__title": "Black Flag"
@@ -131442,7 +131442,7 @@
     "type": "Beast",
     "ac": 12,
     "hp": 63,
-    "init": 12,
+    "init": 2,
     "source": "Black Flag",
     "slug": "snake_giant_constrictor_bf",
     "document__title": "Black Flag"
@@ -131454,7 +131454,7 @@
     "type": "Beast",
     "ac": 11,
     "hp": 8,
-    "init": 13,
+    "init": 1,
     "source": "Black Flag",
     "slug": "raven_bf",
     "document__title": "Black Flag"
@@ -131466,7 +131466,7 @@
     "type": "Undead",
     "ac": 13,
     "hp": 25,
-    "init": 11,
+    "init": 1,
     "source": "Black Flag",
     "slug": "war_horse_skeleton_bf",
     "document__title": "Black Flag"
@@ -131478,7 +131478,7 @@
     "type": "Humanoid",
     "ac": 11,
     "hp": 66,
-    "init": 13,
+    "init": 1,
     "source": "Black Flag",
     "slug": "druid_bf",
     "document__title": "Black Flag"
@@ -131490,7 +131490,7 @@
     "type": "Beast",
     "ac": 12,
     "hp": 60,
-    "init": 13,
+    "init": 0,
     "source": "Black Flag",
     "slug": "bear_polar_bf",
     "document__title": "Black Flag"
@@ -131502,7 +131502,7 @@
     "type": "Dragon",
     "ac": 22,
     "hp": 382,
-    "init": 26,
+    "init": 7,
     "source": "Black Flag",
     "slug": "ancient_red_dragon_bf",
     "document__title": "Black Flag"
@@ -131514,7 +131514,7 @@
     "type": "Dragon",
     "ac": 15,
     "hp": 145,
-    "init": 15,
+    "init": 1,
     "source": "Black Flag",
     "slug": "scorch_drake_bf",
     "document__title": "Black Flag"
@@ -131526,7 +131526,7 @@
     "type": "Dragon",
     "ac": 21,
     "hp": 355,
-    "init": 25,
+    "init": 6,
     "source": "Black Flag",
     "slug": "ancient_silver_dragon_bf",
     "document__title": "Black Flag"
@@ -131538,7 +131538,7 @@
     "type": "Plant",
     "ac": 15,
     "hp": 60,
-    "init": 11,
+    "init": 0,
     "source": "Black Flag",
     "slug": "bloatblossom_bf",
     "document__title": "Black Flag"
@@ -131550,7 +131550,7 @@
     "type": "Beast",
     "ac": 12,
     "hp": 63,
-    "init": 12,
+    "init": 1,
     "source": "Black Flag",
     "slug": "shark_hunter_bf",
     "document__title": "Black Flag"
@@ -131562,7 +131562,7 @@
     "type": "Monstrosity",
     "ac": 13,
     "hp": 95,
-    "init": 12,
+    "init": 1,
     "source": "Black Flag",
     "slug": "lamia_bf",
     "document__title": "Black Flag"
@@ -131574,7 +131574,7 @@
     "type": "Humanoid",
     "ac": 15,
     "hp": 23,
-    "init": 12,
+    "init": 2,
     "source": "Black Flag",
     "slug": "deep_gnome_bf",
     "document__title": "Black Flag"
@@ -131586,7 +131586,7 @@
     "type": "Dragon",
     "ac": 20,
     "hp": 301,
-    "init": 25,
+    "init": 6,
     "source": "Black Flag",
     "slug": "ancient_white_dragon_bf",
     "document__title": "Black Flag"
@@ -131598,7 +131598,7 @@
     "type": "Giant",
     "ac": 16,
     "hp": 134,
-    "init": 14,
+    "init": 3,
     "source": "Black Flag",
     "slug": "oni_bf",
     "document__title": "Black Flag"
@@ -131610,7 +131610,7 @@
     "type": "Beast",
     "ac": 15,
     "hp": 76,
-    "init": 11,
+    "init": 1,
     "source": "Black Flag",
     "slug": "insect_giant_scorpion_bf",
     "document__title": "Black Flag"
@@ -131622,7 +131622,7 @@
     "type": "Humanoid",
     "ac": 15,
     "hp": 22,
-    "init": 13,
+    "init": 0,
     "source": "Black Flag",
     "slug": "lizardfolk_bf",
     "document__title": "Black Flag"
@@ -131634,7 +131634,7 @@
     "type": "Elemental",
     "ac": 13,
     "hp": 110,
-    "init": 10,
+    "init": 3,
     "source": "Black Flag",
     "slug": "fire_elemental_bf",
     "document__title": "Black Flag"
@@ -131646,7 +131646,7 @@
     "type": "Monstrosity",
     "ac": 14,
     "hp": 57,
-    "init": 12,
+    "init": 2,
     "source": "Black Flag",
     "slug": "grick_bf",
     "document__title": "Black Flag"
@@ -131658,7 +131658,7 @@
     "type": "Fiend",
     "ac": 18,
     "hp": 147,
-    "init": 16,
+    "init": 7,
     "source": "Black Flag",
     "slug": "erinyes_bf",
     "document__title": "Black Flag"
@@ -131670,7 +131670,7 @@
     "type": "Monstrosity",
     "ac": 13,
     "hp": 38,
-    "init": 10,
+    "init": 3,
     "source": "Black Flag",
     "slug": "harpy_bf",
     "document__title": "Black Flag"
@@ -131682,7 +131682,7 @@
     "type": "Dragon",
     "ac": 21,
     "hp": 333,
-    "init": 25,
+    "init": 7,
     "source": "Black Flag",
     "slug": "ancient_green_dragon_bf",
     "document__title": "Black Flag"
@@ -131694,7 +131694,7 @@
     "type": "Humanoid",
     "ac": 14,
     "hp": 7,
-    "init": 12,
+    "init": 1,
     "source": "Black Flag",
     "slug": "noble_bf",
     "document__title": "Black Flag"
@@ -131706,7 +131706,7 @@
     "type": "Swarm",
     "ac": 13,
     "hp": 34,
-    "init": 10,
+    "init": 3,
     "source": "Black Flag",
     "slug": "quipper_swarm_of_quippers_bf",
     "document__title": "Black Flag"
@@ -131718,7 +131718,7 @@
     "type": "Beast",
     "ac": 11,
     "hp": 8,
-    "init": 14,
+    "init": 1,
     "source": "Black Flag",
     "slug": "eagle_bf",
     "document__title": "Black Flag"
@@ -131730,7 +131730,7 @@
     "type": "Humanoid",
     "ac": 12,
     "hp": 40,
-    "init": 13,
+    "init": 2,
     "source": "Black Flag",
     "slug": "wyrdling_bf",
     "document__title": "Black Flag"
@@ -131742,7 +131742,7 @@
     "type": "Beast",
     "ac": 11,
     "hp": 9,
-    "init": 9,
+    "init": 0,
     "source": "Black Flag",
     "slug": "crab_bf",
     "document__title": "Black Flag"
@@ -131754,7 +131754,7 @@
     "type": "Beast",
     "ac": 12,
     "hp": 38,
-    "init": 13,
+    "init": 2,
     "source": "Black Flag",
     "slug": "tiger_bf",
     "document__title": "Black Flag"
@@ -131766,7 +131766,7 @@
     "type": "Fiend",
     "ac": 15,
     "hp": 110,
-    "init": 16,
+    "init": 5,
     "source": "Black Flag",
     "slug": "vrock_bf",
     "document__title": "Black Flag"
@@ -131778,7 +131778,7 @@
     "type": "Giant",
     "ac": 16,
     "hp": 243,
-    "init": 19,
+    "init": 2,
     "source": "Black Flag",
     "slug": "storm_giant_bf",
     "document__title": "Black Flag"
@@ -131790,7 +131790,7 @@
     "type": "Dragon",
     "ac": 17,
     "hp": 51,
-    "init": 14,
+    "init": 2,
     "source": "Black Flag",
     "slug": "bronze_dragon_wyrmling_bf",
     "document__title": "Black Flag"
@@ -131802,7 +131802,7 @@
     "type": "Monstrosity",
     "ac": 17,
     "hp": 284,
-    "init": 20,
+    "init": 5,
     "source": "Black Flag",
     "slug": "androsphinx_bf",
     "document__title": "Black Flag"
@@ -131814,7 +131814,7 @@
     "type": "Fey",
     "ac": 13,
     "hp": 23,
-    "init": 12,
+    "init": 3,
     "source": "Black Flag",
     "slug": "satyr_bf",
     "document__title": "Black Flag"
@@ -131826,7 +131826,7 @@
     "type": "Elemental",
     "ac": 12,
     "hp": 27,
-    "init": 12,
+    "init": 2,
     "source": "Black Flag",
     "slug": "ice_mephit_bf",
     "document__title": "Black Flag"
@@ -131838,7 +131838,7 @@
     "type": "Monstrosity",
     "ac": 15,
     "hp": 108,
-    "init": 12,
+    "init": 3,
     "source": "Black Flag",
     "slug": "hivebound_bf",
     "document__title": "Black Flag"
@@ -131850,7 +131850,7 @@
     "type": "Dragon",
     "ac": 19,
     "hp": 255,
-    "init": 22,
+    "init": 6,
     "source": "Black Flag",
     "slug": "adult_green_dragon_bf",
     "document__title": "Black Flag"
@@ -131862,7 +131862,7 @@
     "type": "Humanoid",
     "ac": 17,
     "hp": 85,
-    "init": 11,
+    "init": 2,
     "source": "Black Flag",
     "slug": "bugbear_champion_bf",
     "document__title": "Black Flag"
@@ -131874,7 +131874,7 @@
     "type": "Monstrosity",
     "ac": 17,
     "hp": 223,
-    "init": 16,
+    "init": 3,
     "source": "Black Flag",
     "slug": "behir_bf",
     "document__title": "Black Flag"
@@ -131886,7 +131886,7 @@
     "type": "Undead",
     "ac": 13,
     "hp": 34,
-    "init": 12,
+    "init": 3,
     "source": "Black Flag",
     "slug": "ghoul_bf",
     "document__title": "Black Flag"
@@ -131898,7 +131898,7 @@
     "type": "Construct",
     "ac": 15,
     "hp": 21,
-    "init": 15,
+    "init": 3,
     "source": "Black Flag",
     "slug": "robot_drone_bf",
     "document__title": "Black Flag"
@@ -131910,7 +131910,7 @@
     "type": "Aberration",
     "ac": 17,
     "hp": 165,
-    "init": 20,
+    "init": -1,
     "source": "Black Flag",
     "slug": "aboleth_bf",
     "document__title": "Black Flag"
@@ -131922,7 +131922,7 @@
     "type": "Humanoid",
     "ac": 14,
     "hp": 8,
-    "init": 13,
+    "init": 1,
     "source": "Black Flag",
     "slug": "guard_bf",
     "document__title": "Black Flag"
@@ -131934,7 +131934,7 @@
     "type": "Beast",
     "ac": 12,
     "hp": 80,
-    "init": 13,
+    "init": 0,
     "source": "Black Flag",
     "slug": "orca_bf",
     "document__title": "Black Flag"
@@ -131946,7 +131946,7 @@
     "type": "Construct",
     "ac": 13,
     "hp": 34,
-    "init": 12,
+    "init": 3,
     "source": "Black Flag",
     "slug": "homunculus_bf",
     "document__title": "Black Flag"
@@ -131958,7 +131958,7 @@
     "type": "Humanoid",
     "ac": 14,
     "hp": 40,
-    "init": 10,
+    "init": 2,
     "source": "Black Flag",
     "slug": "bugbear_bf",
     "document__title": "Black Flag"
@@ -131970,7 +131970,7 @@
     "type": "Beast",
     "ac": 11,
     "hp": 42,
-    "init": 13,
+    "init": 1,
     "source": "Black Flag",
     "slug": "hippocampus_bf",
     "document__title": "Black Flag"
@@ -131982,7 +131982,7 @@
     "type": "Beast",
     "ac": 10,
     "hp": 10,
-    "init": 9,
+    "init": 0,
     "source": "Black Flag",
     "slug": "camel_bf",
     "document__title": "Black Flag"
@@ -131994,7 +131994,7 @@
     "type": "Beast",
     "ac": 13,
     "hp": 133,
-    "init": 13,
+    "init": -1,
     "source": "Black Flag",
     "slug": "mammoth_bf",
     "document__title": "Black Flag"
@@ -132006,7 +132006,7 @@
     "type": "Dragon",
     "ac": 13,
     "hp": 12,
-    "init": 13,
+    "init": 2,
     "source": "Black Flag",
     "slug": "pseudodragon_bf",
     "document__title": "Black Flag"
@@ -132018,7 +132018,7 @@
     "type": "Beast",
     "ac": 11,
     "hp": 8,
-    "init": 13,
+    "init": 1,
     "source": "Black Flag",
     "slug": "weasel_bf",
     "document__title": "Black Flag"
@@ -132030,7 +132030,7 @@
     "type": "Dragon",
     "ac": 16,
     "hp": 36,
-    "init": 14,
+    "init": 2,
     "source": "Black Flag",
     "slug": "brass_dragon_wyrmling_bf",
     "document__title": "Black Flag"
@@ -132042,7 +132042,7 @@
     "type": "Elemental",
     "ac": 14,
     "hp": 104,
-    "init": 13,
+    "init": 2,
     "source": "Black Flag",
     "slug": "water_elemental_bf",
     "document__title": "Black Flag"
@@ -132054,7 +132054,7 @@
     "type": "Monstrosity",
     "ac": 18,
     "hp": 475,
-    "init": 21,
+    "init": 7,
     "source": "Black Flag",
     "slug": "kraken_bf",
     "document__title": "Black Flag"
@@ -132066,7 +132066,7 @@
     "type": "Humanoid",
     "ac": 11,
     "hp": 76,
-    "init": 12,
+    "init": 1,
     "source": "Black Flag",
     "slug": "werewolf_bf",
     "document__title": "Black Flag"
@@ -132078,7 +132078,7 @@
     "type": "Beast",
     "ac": 12,
     "hp": 15,
-    "init": 10,
+    "init": 2,
     "source": "Black Flag",
     "slug": "snake_constrictor_bf",
     "document__title": "Black Flag"
@@ -132090,7 +132090,7 @@
     "type": "Construct",
     "ac": 17,
     "hp": 176,
-    "init": 10,
+    "init": -1,
     "source": "Black Flag",
     "slug": "stone_golem_bf",
     "document__title": "Black Flag"
@@ -132102,7 +132102,7 @@
     "type": "Monstrosity",
     "ac": 14,
     "hp": 57,
-    "init": 11,
+    "init": 0,
     "source": "Black Flag",
     "slug": "ankheg_bf",
     "document__title": "Black Flag"
@@ -132114,7 +132114,7 @@
     "type": "Humanoid",
     "ac": 10,
     "hp": 15,
-    "init": 13,
+    "init": 0,
     "source": "Black Flag",
     "slug": "acolyte_bf",
     "document__title": "Black Flag"
@@ -132126,7 +132126,7 @@
     "type": "Fiend",
     "ac": 18,
     "hp": 193,
-    "init": 17,
+    "init": 7,
     "source": "Black Flag",
     "slug": "ice_devil_bf",
     "document__title": "Black Flag"
@@ -132138,7 +132138,7 @@
     "type": "Monstrosity",
     "ac": 14,
     "hp": 80,
-    "init": 11,
+    "init": 3,
     "source": "Black Flag",
     "slug": "manticore_bf",
     "document__title": "Black Flag"
@@ -132150,7 +132150,7 @@
     "type": "Dragon",
     "ac": 21,
     "hp": 355,
-    "init": 27,
+    "init": 6,
     "source": "Black Flag",
     "slug": "ancient_blue_dragon_bf",
     "document__title": "Black Flag"
@@ -132162,7 +132162,7 @@
     "type": "Fey",
     "ac": 14,
     "hp": 13,
-    "init": 11,
+    "init": 3,
     "source": "Black Flag",
     "slug": "sprite_bf",
     "document__title": "Black Flag"
@@ -132174,7 +132174,7 @@
     "type": "Celestial",
     "ac": 21,
     "hp": 306,
-    "init": 24,
+    "init": 6,
     "source": "Black Flag",
     "slug": "solar_bf",
     "document__title": "Black Flag"
@@ -132186,7 +132186,7 @@
     "type": "Beast",
     "ac": 11,
     "hp": 7,
-    "init": 14,
+    "init": 1,
     "source": "Black Flag",
     "slug": "hawk_bf",
     "document__title": "Black Flag"
@@ -132198,7 +132198,7 @@
     "type": "Beast",
     "ac": 11,
     "hp": 25,
-    "init": 13,
+    "init": 0,
     "source": "Black Flag",
     "slug": "bear_black_bf",
     "document__title": "Black Flag"
@@ -132210,7 +132210,7 @@
     "type": "Beast",
     "ac": 13,
     "hp": 184,
-    "init": 14,
+    "init": 0,
     "source": "Black Flag",
     "slug": "tyrannosaurus_rex_bf",
     "document__title": "Black Flag"
@@ -132222,7 +132222,7 @@
     "type": "Humanoid",
     "ac": 10,
     "hp": 100,
-    "init": 12,
+    "init": 0,
     "source": "Black Flag",
     "slug": "wereboar_bf",
     "document__title": "Black Flag"
@@ -132234,7 +132234,7 @@
     "type": "Aberration",
     "ac": 15,
     "hp": 80,
-    "init": 14,
+    "init": 0,
     "source": "Black Flag",
     "slug": "chuul_bf",
     "document__title": "Black Flag"
@@ -132246,7 +132246,7 @@
     "type": "Elemental",
     "ac": 17,
     "hp": 114,
-    "init": 13,
+    "init": -1,
     "source": "Black Flag",
     "slug": "earth_elemental_bf",
     "document__title": "Black Flag"
@@ -132258,7 +132258,7 @@
     "type": "Undead",
     "ac": 12,
     "hp": 68,
-    "init": 13,
+    "init": 2,
     "source": "Black Flag",
     "slug": "ghost_bf",
     "document__title": "Black Flag"
@@ -132270,7 +132270,7 @@
     "type": "Aberration",
     "ac": 9,
     "hp": 72,
-    "init": 10,
+    "init": -1,
     "source": "Black Flag",
     "slug": "gibbering_mouther_bf",
     "document__title": "Black Flag"
@@ -132282,7 +132282,7 @@
     "type": "Beast",
     "ac": 12,
     "hp": 25,
-    "init": 13,
+    "init": 2,
     "source": "Black Flag",
     "slug": "ape_bf",
     "document__title": "Black Flag"
@@ -132294,7 +132294,7 @@
     "type": "Humanoid",
     "ac": 13,
     "hp": 126,
-    "init": 12,
+    "init": 3,
     "source": "Black Flag",
     "slug": "kobold_witch_bf",
     "document__title": "Black Flag"
@@ -132306,7 +132306,7 @@
     "type": "Humanoid",
     "ac": 13,
     "hp": 25,
-    "init": 13,
+    "init": 2,
     "source": "Black Flag",
     "slug": "scout_bf",
     "document__title": "Black Flag"
@@ -132318,7 +132318,7 @@
     "type": "Beast",
     "ac": 14,
     "hp": 7,
-    "init": 9,
+    "init": 2,
     "source": "Black Flag",
     "slug": "stirge_bf",
     "document__title": "Black Flag"
@@ -132330,7 +132330,7 @@
     "type": "Monstrosity",
     "ac": 14,
     "hp": 80,
-    "init": 13,
+    "init": 4,
     "source": "Black Flag",
     "slug": "doppelganger_bf",
     "document__title": "Black Flag"
@@ -132342,7 +132342,7 @@
     "type": "Humanoid",
     "ac": 17,
     "hp": 32,
-    "init": 11,
+    "init": 4,
     "source": "Black Flag",
     "slug": "goblin_captain_bf",
     "document__title": "Black Flag"
@@ -132354,7 +132354,7 @@
     "type": "Humanoid",
     "ac": 11,
     "hp": 17,
-    "init": 11,
+    "init": 1,
     "source": "Black Flag",
     "slug": "grimlock_bf",
     "document__title": "Black Flag"
@@ -132366,7 +132366,7 @@
     "type": "Elemental",
     "ac": 17,
     "hp": 223,
-    "init": 16,
+    "init": 1,
     "source": "Black Flag",
     "slug": "efreeti_bf",
     "document__title": "Black Flag"
@@ -132378,7 +132378,7 @@
     "type": "Elemental",
     "ac": 12,
     "hp": 27,
-    "init": 13,
+    "init": 2,
     "source": "Black Flag",
     "slug": "steam_mephit_bf",
     "document__title": "Black Flag"
@@ -132390,7 +132390,7 @@
     "type": "Construct",
     "ac": 18,
     "hp": 261,
-    "init": 17,
+    "init": -1,
     "source": "Black Flag",
     "slug": "living_colossus_bf",
     "document__title": "Black Flag"
@@ -132402,7 +132402,7 @@
     "type": "Ooze",
     "ac": 8,
     "hp": 29,
-    "init": 8,
+    "init": -2,
     "source": "Black Flag",
     "slug": "gray_ooze_bf",
     "document__title": "Black Flag"
@@ -132414,7 +132414,7 @@
     "type": "Beast",
     "ac": 12,
     "hp": 15,
-    "init": 14,
+    "init": 2,
     "source": "Black Flag",
     "slug": "panther_bf",
     "document__title": "Black Flag"
@@ -132426,7 +132426,7 @@
     "type": "Aberration",
     "ac": 14,
     "hp": 105,
-    "init": 11,
+    "init": 5,
     "source": "Black Flag",
     "slug": "cloaker_bf",
     "document__title": "Black Flag"
@@ -132438,7 +132438,7 @@
     "type": "Ooze",
     "ac": 7,
     "hp": 122,
-    "init": 8,
+    "init": -3,
     "source": "Black Flag",
     "slug": "black_pudding_bf",
     "document__title": "Black Flag"
@@ -132450,7 +132450,7 @@
     "type": "Plant",
     "ac": 15,
     "hp": 110,
-    "init": 10,
+    "init": -1,
     "source": "Black Flag",
     "slug": "shambling_mound_bf",
     "document__title": "Black Flag"
@@ -132462,7 +132462,7 @@
     "type": "Fiend",
     "ac": 19,
     "hp": 323,
-    "init": 20,
+    "init": 8,
     "source": "Black Flag",
     "slug": "pit_fiend_bf",
     "document__title": "Black Flag"
@@ -132474,7 +132474,7 @@
     "type": "Monstrosity",
     "ac": 15,
     "hp": 112,
-    "init": 14,
+    "init": 4,
     "source": "Black Flag",
     "slug": "medusa_bf",
     "document__title": "Black Flag"
@@ -132486,7 +132486,7 @@
     "type": "Undead",
     "ac": 12,
     "hp": 63,
-    "init": 9,
+    "init": 0,
     "source": "Black Flag",
     "slug": "minotaur_skeleton_bf",
     "document__title": "Black Flag"
@@ -132498,7 +132498,7 @@
     "type": "Humanoid",
     "ac": 15,
     "hp": 60,
-    "init": 10,
+    "init": 1,
     "source": "Black Flag",
     "slug": "mechanist_bf",
     "document__title": "Black Flag"
@@ -132510,7 +132510,7 @@
     "type": "Fiend",
     "ac": 13,
     "hp": 35,
-    "init": 10,
+    "init": 5,
     "source": "Black Flag",
     "slug": "quasit_bf",
     "document__title": "Black Flag"
@@ -132522,7 +132522,7 @@
     "type": "Beast",
     "ac": 11,
     "hp": 8,
-    "init": 11,
+    "init": 1,
     "source": "Black Flag",
     "slug": "bat_bf",
     "document__title": "Black Flag"
@@ -132534,7 +132534,7 @@
     "type": "Fiend",
     "ac": 18,
     "hp": 185,
-    "init": 17,
+    "init": 7,
     "source": "Black Flag",
     "slug": "horned_devil_bf",
     "document__title": "Black Flag"
@@ -132546,7 +132546,7 @@
     "type": "Humanoid",
     "ac": 14,
     "hp": 60,
-    "init": 13,
+    "init": 2,
     "source": "Black Flag",
     "slug": "cultist_fanatic_bf",
     "document__title": "Black Flag"
@@ -132558,7 +132558,7 @@
     "type": "Beast",
     "ac": 10,
     "hp": 9,
-    "init": 9,
+    "init": 0,
     "source": "Black Flag",
     "slug": "lizard_bf",
     "document__title": "Black Flag"
@@ -132570,7 +132570,7 @@
     "type": "Humanoid",
     "ac": 13,
     "hp": 57,
-    "init": 15,
+    "init": 0,
     "source": "Black Flag",
     "slug": "priest_bf",
     "document__title": "Black Flag"
@@ -132582,7 +132582,7 @@
     "type": "Undead",
     "ac": 18,
     "hp": 140,
-    "init": 15,
+    "init": 0,
     "source": "Black Flag",
     "slug": "death_knight_bf",
     "document__title": "Black Flag"
@@ -132594,7 +132594,7 @@
     "type": "Elemental",
     "ac": 17,
     "hp": 49,
-    "init": 11,
+    "init": 1,
     "source": "Black Flag",
     "slug": "azer_bf",
     "document__title": "Black Flag"
@@ -132606,7 +132606,7 @@
     "type": "Humanoid",
     "ac": 13,
     "hp": 60,
-    "init": 10,
+    "init": 1,
     "source": "Black Flag",
     "slug": "berserker_bf",
     "document__title": "Black Flag"
@@ -132618,7 +132618,7 @@
     "type": "Undead",
     "ac": 14,
     "hp": 69,
-    "init": 13,
+    "init": 2,
     "source": "Black Flag",
     "slug": "wight_bf",
     "document__title": "Black Flag"
@@ -132630,7 +132630,7 @@
     "type": "Beast",
     "ac": 11,
     "hp": 44,
-    "init": 14,
+    "init": 1,
     "source": "Black Flag",
     "slug": "octopus_giant_bf",
     "document__title": "Black Flag"
@@ -132642,7 +132642,7 @@
     "type": "Dragon",
     "ac": 15,
     "hp": 166,
-    "init": 16,
+    "init": 1,
     "source": "Black Flag",
     "slug": "hydra_bf",
     "document__title": "Black Flag"
@@ -132654,7 +132654,7 @@
     "type": "Humanoid",
     "ac": 15,
     "hp": 12,
-    "init": 9,
+    "init": 4,
     "source": "Black Flag",
     "slug": "goblin_bf",
     "document__title": "Black Flag"
@@ -132666,7 +132666,7 @@
     "type": "Humanoid",
     "ac": 16,
     "hp": 68,
-    "init": 12,
+    "init": 2,
     "source": "Black Flag",
     "slug": "veteran_bf",
     "document__title": "Black Flag"
@@ -132678,7 +132678,7 @@
     "type": "Undead",
     "ac": 13,
     "hp": 80,
-    "init": 12,
+    "init": -1,
     "source": "Black Flag",
     "slug": "mummy_bf",
     "document__title": "Black Flag"
@@ -132690,7 +132690,7 @@
     "type": "Fiend",
     "ac": 15,
     "hp": 76,
-    "init": 15,
+    "init": 1,
     "source": "Black Flag",
     "slug": "hell_hound_bf",
     "document__title": "Black Flag"
@@ -132702,7 +132702,7 @@
     "type": "Giant",
     "ac": 17,
     "hp": 156,
-    "init": 14,
+    "init": 5,
     "source": "Black Flag",
     "slug": "stone_giant_bf",
     "document__title": "Black Flag"
@@ -132714,7 +132714,7 @@
     "type": "Beast",
     "ac": 10,
     "hp": 46,
-    "init": 13,
+    "init": 0,
     "source": "Black Flag",
     "slug": "vulture_giant_bf",
     "document__title": "Black Flag"
@@ -132726,7 +132726,7 @@
     "type": "Beast",
     "ac": 12,
     "hp": 9,
-    "init": 11,
+    "init": 2,
     "source": "Black Flag",
     "slug": "mastiff_bf",
     "document__title": "Black Flag"
@@ -132738,7 +132738,7 @@
     "type": "Dragon",
     "ac": 21,
     "hp": 314,
-    "init": 27,
+    "init": 6,
     "source": "Black Flag",
     "slug": "ancient_bronze_dragon_bf",
     "document__title": "Black Flag"
@@ -132750,7 +132750,7 @@
     "type": "Beast",
     "ac": 15,
     "hp": 40,
-    "init": 10,
+    "init": 3,
     "source": "Black Flag",
     "slug": "spider_giant_bf",
     "document__title": "Black Flag"
@@ -132762,7 +132762,7 @@
     "type": "Dragon",
     "ac": 20,
     "hp": 318,
-    "init": 17,
+    "init": 6,
     "source": "Black Flag",
     "slug": "dragon_turtle_bf",
     "document__title": "Black Flag"
@@ -132774,7 +132774,7 @@
     "type": "Dragon",
     "ac": 18,
     "hp": 193,
-    "init": 22,
+    "init": 6,
     "source": "Black Flag",
     "slug": "young_gold_dragon_bf",
     "document__title": "Black Flag"
@@ -132786,7 +132786,7 @@
     "type": "Beast",
     "ac": 13,
     "hp": 7,
-    "init": 8,
+    "init": 0,
     "source": "Black Flag",
     "slug": "insect_giant_fire_beetle_bf",
     "document__title": "Black Flag"
@@ -132798,7 +132798,7 @@
     "type": "Beast",
     "ac": 12,
     "hp": 15,
-    "init": 10,
+    "init": 1,
     "source": "Black Flag",
     "slug": "lizard_giant_bf",
     "document__title": "Black Flag"
@@ -132810,7 +132810,7 @@
     "type": "Monstrosity",
     "ac": 14,
     "hp": 126,
-    "init": 18,
+    "init": 0,
     "source": "Black Flag",
     "slug": "chimera_bf",
     "document__title": "Black Flag"
@@ -132822,7 +132822,7 @@
     "type": "Humanoid",
     "ac": 10,
     "hp": 70,
-    "init": 11,
+    "init": 0,
     "source": "Black Flag",
     "slug": "mage_bf",
     "document__title": "Black Flag"
@@ -132834,7 +132834,7 @@
     "type": "Ooze",
     "ac": 8,
     "hp": 71,
-    "init": 8,
+    "init": -2,
     "source": "Black Flag",
     "slug": "ochre_jelly_bf",
     "document__title": "Black Flag"
@@ -132846,7 +132846,7 @@
     "type": "Celestial",
     "ac": 17,
     "hp": 77,
-    "init": 17,
+    "init": 5,
     "source": "Black Flag",
     "slug": "couatl_bf",
     "document__title": "Black Flag"
@@ -132858,7 +132858,7 @@
     "type": "Humanoid",
     "ac": 15,
     "hp": 114,
-    "init": 14,
+    "init": 6,
     "source": "Black Flag",
     "slug": "bard_bf",
     "document__title": "Black Flag"
@@ -132870,7 +132870,7 @@
     "type": "Humanoid",
     "ac": 11,
     "hp": 25,
-    "init": 10,
+    "init": 0,
     "source": "Black Flag",
     "slug": "thug_bf",
     "document__title": "Black Flag"
@@ -132882,7 +132882,7 @@
     "type": "Ooze",
     "ac": 6,
     "hp": 75,
-    "init": 8,
+    "init": -4,
     "source": "Black Flag",
     "slug": "gelatinous_cube_bf",
     "document__title": "Black Flag"
@@ -132894,7 +132894,7 @@
     "type": "Humanoid",
     "ac": 12,
     "hp": 40,
-    "init": 12,
+    "init": 1,
     "source": "Black Flag",
     "slug": "satarre_bf",
     "document__title": "Black Flag"
@@ -132906,7 +132906,7 @@
     "type": "Construct",
     "ac": 14,
     "hp": 163,
-    "init": 9,
+    "init": -1,
     "source": "Black Flag",
     "slug": "clay_golem_bf",
     "document__title": "Black Flag"
@@ -132918,7 +132918,7 @@
     "type": "Fey",
     "ac": 13,
     "hp": 14,
-    "init": 13,
+    "init": 3,
     "source": "Black Flag",
     "slug": "blink_dog_bf",
     "document__title": "Black Flag"
@@ -132930,7 +132930,7 @@
     "type": "Monstrosity",
     "ac": 13,
     "hp": 54,
-    "init": 13,
+    "init": 3,
     "source": "Black Flag",
     "slug": "ettercap_bf",
     "document__title": "Black Flag"
@@ -132942,7 +132942,7 @@
     "type": "Fiend",
     "ac": 19,
     "hp": 292,
-    "init": 19,
+    "init": 2,
     "source": "Black Flag",
     "slug": "balor_bf",
     "document__title": "Black Flag"
@@ -132954,7 +132954,7 @@
     "type": "Humanoid",
     "ac": 16,
     "hp": 152,
-    "init": 11,
+    "init": 4,
     "source": "Black Flag",
     "slug": "master_alchemist_bf",
     "document__title": "Black Flag"
@@ -132966,7 +132966,7 @@
     "type": "Humanoid",
     "ac": 10,
     "hp": 8,
-    "init": 10,
+    "init": 0,
     "source": "Black Flag",
     "slug": "commoner_bf",
     "document__title": "Black Flag"
@@ -132978,7 +132978,7 @@
     "type": "Construct",
     "ac": 18,
     "hp": 34,
-    "init": 8,
+    "init": 0,
     "source": "Black Flag",
     "slug": "animated_armor_bf",
     "document__title": "Black Flag"
@@ -132990,7 +132990,7 @@
     "type": "Giant",
     "ac": 14,
     "hp": 166,
-    "init": 13,
+    "init": 2,
     "source": "Black Flag",
     "slug": "frost_giant_bf",
     "document__title": "Black Flag"
@@ -133002,7 +133002,7 @@
     "type": "Fey",
     "ac": 16,
     "hp": 76,
-    "init": 14,
+    "init": 1,
     "source": "Black Flag",
     "slug": "green_hag_bf",
     "document__title": "Black Flag"
@@ -133014,7 +133014,7 @@
     "type": "Giant",
     "ac": 14,
     "hp": 175,
-    "init": 17,
+    "init": 0,
     "source": "Black Flag",
     "slug": "cloud_giant_bf",
     "document__title": "Black Flag"
@@ -133026,7 +133026,7 @@
     "type": "Beast",
     "ac": 13,
     "hp": 14,
-    "init": 10,
+    "init": 2,
     "source": "Black Flag",
     "slug": "insect_giant_centipede_bf",
     "document__title": "Black Flag"
@@ -133038,7 +133038,7 @@
     "type": "Aberration",
     "ac": 13,
     "hp": 72,
-    "init": 14,
+    "init": 2,
     "source": "Black Flag",
     "slug": "mordovermis_bf",
     "document__title": "Black Flag"
@@ -133050,7 +133050,7 @@
     "type": "Beast",
     "ac": 10,
     "hp": 15,
-    "init": 10,
+    "init": 0,
     "source": "Black Flag",
     "slug": "elk_bf",
     "document__title": "Black Flag"
@@ -133062,7 +133062,7 @@
     "type": "Dragon",
     "ac": 21,
     "hp": 297,
-    "init": 27,
+    "init": 6,
     "source": "Black Flag",
     "slug": "ancient_copper_dragon_bf",
     "document__title": "Black Flag"
@@ -133074,7 +133074,7 @@
     "type": "Fiend",
     "ac": 18,
     "hp": 196,
-    "init": 16,
+    "init": 0,
     "source": "Black Flag",
     "slug": "nalfeshnee_bf",
     "document__title": "Black Flag"
@@ -133086,7 +133086,7 @@
     "type": "Elemental",
     "ac": 12,
     "hp": 27,
-    "init": 13,
+    "init": 2,
     "source": "Black Flag",
     "slug": "dust_mephit_bf",
     "document__title": "Black Flag"
@@ -133098,7 +133098,7 @@
     "type": "Monstrosity",
     "ac": 17,
     "hp": 204,
-    "init": 18,
+    "init": 2,
     "source": "Black Flag",
     "slug": "gynosphinx_bf",
     "document__title": "Black Flag"
@@ -133110,7 +133110,7 @@
     "type": "Beast",
     "ac": 11,
     "hp": 8,
-    "init": 13,
+    "init": 1,
     "source": "Black Flag",
     "slug": "jackal_bf",
     "document__title": "Black Flag"
@@ -133122,7 +133122,7 @@
     "type": "Undead",
     "ac": 8,
     "hp": 16,
-    "init": 10,
+    "init": -2,
     "source": "Black Flag",
     "slug": "zombie_bf",
     "document__title": "Black Flag"
@@ -133134,7 +133134,7 @@
     "type": "Humanoid",
     "ac": 10,
     "hp": 126,
-    "init": 14,
+    "init": 0,
     "source": "Black Flag",
     "slug": "werebear_bf",
     "document__title": "Black Flag"
@@ -133146,7 +133146,7 @@
     "type": "Humanoid",
     "ac": 16,
     "hp": 32,
-    "init": 10,
+    "init": 0,
     "source": "Black Flag",
     "slug": "duergar_bf",
     "document__title": "Black Flag"
@@ -133158,7 +133158,7 @@
     "type": "Giant",
     "ac": 15,
     "hp": 94,
-    "init": 12,
+    "init": 1,
     "source": "Black Flag",
     "slug": "troll_bf",
     "document__title": "Black Flag"
@@ -133170,7 +133170,7 @@
     "type": "Fiend",
     "ac": 13,
     "hp": 63,
-    "init": 12,
+    "init": 2,
     "source": "Black Flag",
     "slug": "bearded_devil_bf",
     "document__title": "Black Flag"
@@ -133182,7 +133182,7 @@
     "type": "Beast",
     "ac": 11,
     "hp": 8,
-    "init": 13,
+    "init": 1,
     "source": "Black Flag",
     "slug": "cat_bf",
     "document__title": "Black Flag"
@@ -133194,7 +133194,7 @@
     "type": "Monstrosity",
     "ac": 15,
     "hp": 235,
-    "init": 14,
+    "init": 4,
     "source": "Black Flag",
     "slug": "roc_bf",
     "document__title": "Black Flag"
@@ -133206,7 +133206,7 @@
     "type": "Dragon",
     "ac": 18,
     "hp": 175,
-    "init": 19,
+    "init": 4,
     "source": "Black Flag",
     "slug": "young_blue_dragon_bf",
     "document__title": "Black Flag"
@@ -133218,7 +133218,7 @@
     "type": "Fiend",
     "ac": 13,
     "hp": 76,
-    "init": 11,
+    "init": 2,
     "source": "Black Flag",
     "slug": "nightmare_bf",
     "document__title": "Black Flag"
@@ -133230,7 +133230,7 @@
     "type": "Beast",
     "ac": 10,
     "hp": 8,
-    "init": 10,
+    "init": 0,
     "source": "Black Flag",
     "slug": "goat_bf",
     "document__title": "Black Flag"
@@ -133242,7 +133242,7 @@
     "type": "Dragon",
     "ac": 18,
     "hp": 136,
-    "init": 17,
+    "init": 5,
     "source": "Black Flag",
     "slug": "young_black_dragon_bf",
     "document__title": "Black Flag"
@@ -133254,7 +133254,7 @@
     "type": "Monstrosity",
     "ac": 12,
     "hp": 63,
-    "init": 13,
+    "init": 2,
     "source": "Black Flag",
     "slug": "griffon_bf",
     "document__title": "Black Flag"
@@ -133266,7 +133266,7 @@
     "type": "Undead",
     "ac": 16,
     "hp": 177,
-    "init": 17,
+    "init": 9,
     "source": "Black Flag",
     "slug": "vampire_bf",
     "document__title": "Black Flag"
@@ -133278,7 +133278,7 @@
     "type": "Beast",
     "ac": 11,
     "hp": 10,
-    "init": 11,
+    "init": 1,
     "source": "Black Flag",
     "slug": "snake_flying_bf",
     "document__title": "Black Flag"
@@ -133290,7 +133290,7 @@
     "type": "Humanoid",
     "ac": 15,
     "hp": 157,
-    "init": 13,
+    "init": 6,
     "source": "Black Flag",
     "slug": "assassin_bf",
     "document__title": "Black Flag"
@@ -133302,7 +133302,7 @@
     "type": "Humanoid",
     "ac": 15,
     "hp": 80,
-    "init": 12,
+    "init": 6,
     "source": "Black Flag",
     "slug": "kobold_swiftblade_bf",
     "document__title": "Black Flag"
@@ -133314,7 +133314,7 @@
     "type": "Beast",
     "ac": 13,
     "hp": 40,
-    "init": 14,
+    "init": 3,
     "source": "Black Flag",
     "slug": "eagle_giant_bf",
     "document__title": "Black Flag"

@@ -123,4 +123,14 @@ window.customMonsterCombatStats = [
     "source": "City of Arches",
     "htmlLink": "./custom/index.html?file=ozymandias.js"
   },
+  {
+    "name": "Carrion Crawler",
+    "ac": 13,
+    "hp": 51,
+    "init": 1,
+    "cr": 2,
+    "type": "Monstrosity",
+    "source": "Monster Manual (2024)",
+    "htmlLink": "./custom/carrion_crawler.html?file=carrion_crawler.js"
+  },
 ];

@@ -103,4 +103,14 @@ const customMonsterCombatStats = [
     "source": "City of Arches",
     "htmlLink": "./custom/index.html?file=brother_cavel.js"
   },
+  {
+    "name": "Necroforged Warden",
+    "ac": 19,
+    "hp": 85,
+    "init": 0,
+    "cr": 5,
+    "type": "Construct",
+    "source": "City of Arches",
+    "htmlLink": "./custom/necroforged_warden.html?file=necroforged_warden.js"
+  },
 ];

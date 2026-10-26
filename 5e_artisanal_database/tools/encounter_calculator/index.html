@@ -16,6 +16,8 @@ Learn about the licensing of the data of this tool in the license.html file loca
 <title>5e Encounter Calculator</title>
 <script src="../../css_js/monster_combat_stats.js"></script>
 <script src="../../monsters/custom/custom_monster_index.js"></script>
+<!-- Optional, not in git: monsters/private/ is a local symlink to private stat pages (see .gitignore) -->
+<script src="../../monsters/private/private_monster_index.js"></script>
 <script src="../../css_js/monster-lookup.js"></script>
 </head>
 <body class="encounter-calculator">
@@ -189,6 +191,9 @@ function initializeMonsterData() {
             const allMonsterData = [...monsterCombatStats];
             if (typeof customMonsterCombatStats !== 'undefined' && Array.isArray(customMonsterCombatStats)) {
                 allMonsterData.push(...customMonsterCombatStats);
+            }
+            if (typeof privateMonsterCombatStats !== 'undefined' && Array.isArray(privateMonsterCombatStats)) {
+                allMonsterData.push(...privateMonsterCombatStats);
             }
             
             availableMonsters = allMonsterData.map(monster => {

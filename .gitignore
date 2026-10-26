@@ -1,1 +1,3 @@
 .DS_Store
+# Local symlink to private stat pages (e.g. a private campaign repo); never published
+5e_artisanal_database/monsters/private

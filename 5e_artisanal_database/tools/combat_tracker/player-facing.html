@@ -226,6 +226,28 @@
             color: #665a48;
         }
 
+        /* Optional corner badge (a QR code, say), configured by local/player-facing.js */
+        .corner-badge {
+            position: fixed;
+            right: 16px;
+            bottom: 16px;
+            z-index: 1000;
+            width: 196px;
+            padding: 10px 10px 8px;
+            background-color: #fdf5e6;
+            border: 1px solid #c8b796;
+            border-radius: 3px;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            cursor: pointer;
+        }
+        .corner-badge img { display: block; width: 100%; height: auto; }
+        .corner-badge .caption { font-family: 'MedievalSharp', cursive; font-size: 18px; margin-top: 4px; }
+        .corner-badge .url { font-size: 11px; color: #665a48; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .corner-badge.collapsed { width: auto; padding: 4px 10px; }
+        .corner-badge.collapsed img, .corner-badge.collapsed .url { display: none; }
+        .corner-badge.collapsed .caption { margin-top: 0; font-size: 14px; }
+
     </style>
 </head>
 <body>
@@ -523,6 +545,38 @@
         }
 
         document.addEventListener('DOMContentLoaded', initializePlayerView);
+    </script>
+
+    <!-- Optional corner badge. Create local/player-facing.js (local/ is git-ignored) with
+         window.PLAYER_FACING_BADGE = {image: "local/qr.svg", caption: "...", url: "..."}.
+         Click the badge to collapse or expand it. -->
+    <script src="local/player-facing.js" onerror="this.remove()"></script>
+    <script>
+        (function () {
+            var badge = window.PLAYER_FACING_BADGE;
+            if (!badge || !badge.image) return;
+            var box = document.createElement('div');
+            box.className = 'corner-badge';
+            box.title = 'Click to collapse or expand';
+            var img = document.createElement('img');
+            img.src = badge.image;
+            img.alt = badge.caption || 'QR code';
+            box.appendChild(img);
+            [['caption', badge.caption], ['url', badge.url]].forEach(function (pair) {
+                if (!pair[1]) return;
+                var line = document.createElement('div');
+                line.className = pair[0];
+                line.textContent = pair[1];
+                box.appendChild(line);
+            });
+            var key = 'playerFacingBadgeCollapsed';
+            if (localStorage.getItem(key) === '1') box.classList.add('collapsed');
+            box.addEventListener('click', function () {
+                box.classList.toggle('collapsed');
+                localStorage.setItem(key, box.classList.contains('collapsed') ? '1' : '0');
+            });
+            document.body.appendChild(box);
+        })();
     </script>
 </body>
 </html>

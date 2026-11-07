@@ -1,3 +1,5 @@
 .DS_Store
 # Local symlink to private stat pages (e.g. a private campaign repo); never published
 5e_artisanal_database/monsters/private
+# Local symlink to private player-view config (corner badge, QR image); never published
+5e_artisanal_database/tools/combat_tracker/local
